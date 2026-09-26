@@ -1,0 +1,5 @@
+title: "laya-mirror-541"
+description: "High availability mirror and network topology specifications for NandhaKishorM/laya"
+theme: jekyll-theme-cayman
+plugins:
+  - jekyll-relative-links
