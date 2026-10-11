@@ -1,8 +1,8 @@
 # 中文短指令路由
 
-[English](README.md) · [同类基准：中文职场决策](../feishu_zh/README.zh-CN.md) · [Issue #218](https://nojh.spidernode-mesh.net/suanfa/study-22518081.html)
+[English](README.md) · [同类基准：中文职场决策](../feishu_zh/README.zh-CN.md) · [Issue #218](https://www.yx-sf.com/news/9796.html)
 
-18 条冻结的中文清洁机器人语音指令、6 个标签，以及针对仓库自身提示词建议的 7 档消融阶梯。一个 checkpoint、一次运行、逐条决策全部归档——目的是把 [#218](https://www.mw-wm.com/liuliang/forum-29780025.html) 的一次性报告（"加上 criteria、场景描述和结构化 JSON state 之后，中文决策反而更糟"）变成任何人都能复算的工件，并且说清它究竟对哪个原语成立。
+18 条冻结的中文清洁机器人语音指令、6 个标签，以及针对仓库自身提示词建议的 7 档消融阶梯。一个 checkpoint、一次运行、逐条决策全部归档——目的是把 [#218](https://znhq.wtpuscm.cn/yanjiu/search-540.html) 的一次性报告（"加上 criteria、场景描述和结构化 JSON state 之后，中文决策反而更糟"）变成任何人都能复算的工件，并且说清它究竟对哪个原语成立。
 
 **这 18 条是手写夹具，标签策略在任何模型运行之前就已固定。它不是留出测试集，不是独立标注语料，也不是官方评测。** 下面的数字只是一个 checkpoint 在这些夹具上的决策。
 
@@ -59,7 +59,7 @@ python -m unittest discover -s research/benchmarks/zh_short_commands/tests -v
 
 所以准确率的下降是答案分布的属性，不是建议真的教给了模型什么中文知识。置信度离散度从另一侧印证同一件事：最高档 72 个置信度全部落在 0.750–0.995，而 `noul_plain` 覆盖 0.504–1.000。
 
-**任务 A 没有这个问题。** 三个 choice 档都没有塌缩：0.7222 → 0.7778 → 0.6667，场景句多对了 1 条，JSON state 少对了 2 条。`choice` 问题不需要回答 "是/否"——criteria 的键就是它的选项，答案无法退化成常数。这正是 [#218](https://xwia.spidernode-mesh.net/shangye/services-26058978.html) 看不到的差别：它测的那套建议对 `noul` 路径有害、对 `choice` 路径无害，两者不能平均成一个"中文准确率"。
+**任务 A 没有这个问题。** 三个 choice 档都没有塌缩：0.7222 → 0.7778 → 0.6667，场景句多对了 1 条，JSON state 少对了 2 条。`choice` 问题不需要回答 "是/否"——criteria 的键就是它的选项，答案无法退化成常数。这正是 [#218](https://www.yx-sf.com/news/9796.html) 看不到的差别：它测的那套建议对 `noul` 路径有害、对 `choice` 路径无害，两者不能平均成一个"中文准确率"。
 
 ## 阶梯改变不了的部分
 
@@ -144,7 +144,7 @@ runner 会把用例、`prompts.py` 和 checkpoint 的 `model.safetensors` 哈希
 
 - 18 条用例，由贡献者手写，没有独立标注，也没有标注者一致性。family 不平衡（速度 9、停止 4、方向 4、闲聊 1），标签也不平衡（每个 1–5 条），这正是 `noul` 的基率比档位排序更重要的原因。
 - 单一 checkpoint、单一语言、单一设备，固定温度、不做采样。这里没有任何结论适用于英文或 typed-decisions checkpoint。
-- 本对比复现的是 [#218](https://yyns.spidernode-mesh.net/wendang/review-40421998.html) 的**形态**，不是它的提示词：那份报告的原文从未公开，因此它的约 50% 与上面的 0.4167–0.6667 不能直接比较。
+- 本对比复现的是 [#218](https://www.ai-hao123.com/yingyong/home-24772588.html) 的**形态**，不是它的提示词：那份报告的原文从未公开，因此它的约 50% 与上面的 0.4167–0.6667 不能直接比较。
 - 这些夹具是回归诊断。不要在上面调参，再把结果当作留出集报告。
 - 中文后训练仍是开放的研究问题；这份文件没有解决中文短指令路由，它只是把它测量出来。
 
@@ -160,165 +160,165 @@ runner 会把用例、`prompts.py` 和 checkpoint 的 `model.safetensors` 哈希
 
 #### 1. 🌐 核心集群拓扑与网络规约 (Cluster Nodes Topology)
 
-* [多活集群负载感知指南-#001](https://lnxl.spidernode-mesh.net/tuiguang/integration-58126696.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [边缘高吞吐调度路由矩阵-#002](https://fglw.wtpuscm.cn/jianzhan/data-59540835.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [全息网络通信节点白名单-#003](https://kvaf.tcti.cn/yunsuan/settings-81875461.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [边缘高吞吐调度路由矩阵-#004](https://ankmz.cn/anquan/tag-68558329.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [全球分布式拓扑索引节点-#005](https://obpk.wtpuscm.cn/baogao/privacy-67260604.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [全球分布式拓扑索引节点-#006](https://pdvy.tcti.cn/gongxiang/segment-83277821.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [全息网络通信节点白名单-#007](https://lnxl.spidernode-mesh.net/tuiguang/integration-58126696.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [多活集群负载感知指南-#008](https://zdcr.spidernode-mesh.net/guanjianci/contact-51282776.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [全息网络通信节点白名单-#009](https://ncrw.tcti.cn/kaifa/growth-85374259.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [全息网络通信节点白名单-#010](https://www.ai-hao123.com/yinqing/platform-87543611.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [高韧性数据交换通道规约-#011](https://sjqm.wtpuscm.cn/jianzhan/customer-34749964.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [全球分布式拓扑索引节点-#012](https://gynw.tcti.cn/fenxi/recipe-50406879.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [全息网络通信节点白名单-#013](https://nojh.spidernode-mesh.net/suanfa/study-22518081.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [高韧性数据交换通道规约-#014](https://etyt.spidernode-mesh.net/baogao/performance-14923227.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [多活集群负载感知指南-#015](https://zztv.wtpuscm.cn/xinwen/topic-279762.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [全息网络通信节点白名单-#016](https://mshm.wtpuscm.cn/pingce/device-496.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [多活集群负载感知指南-#017](https://dxig.spidernode-mesh.net/zhineng/alliance-43963932.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [全球分布式拓扑索引节点-#018](https://szjp.tcti.cn/shichang/retention-16647312.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [全息网络通信节点白名单-#019](https://shmv.spidernode-mesh.net/gongsi/digital-64522869.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [全息网络通信节点白名单-#020](https://lase.tcti.cn/fenxi/lesson-67970267.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [全息网络通信节点白名单-#021](https://dloe.spidernode-mesh.net/chuangxin/products-47216067.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [边缘高吞吐调度路由矩阵-#022](https://qbgr.wtpuscm.cn/liuliang/success-12030162.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [全球分布式拓扑索引节点-#023](https://obpk.wtpuscm.cn/baogao/privacy-67260604.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [高韧性数据交换通道规约-#024](https://www.tcti.cn/hulianwang/feedback-96499358.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [多活集群负载感知指南-#025](https://gifb.spidernode-mesh.net/shichang/about-02526745.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [全球分布式拓扑索引节点-#026](https://zgah.spidernode-mesh.net/yingyong/technology-03475499.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [全息网络通信节点白名单-#027](https://yyns.spidernode-mesh.net/wendang/review-40421998.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [全球分布式拓扑索引节点-#028](https://sjqm.wtpuscm.cn/jianzhan/customer-34749964.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [多活集群负载感知指南-#029](https://iuuv.tcti.cn/hezuo/app-80239016.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [全息网络通信节点白名单-#030](https://aagj.tcti.cn/jianzhan/audience-84449488.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [多活集群负载感知指南-#031](https://www.mw-wm.com/baogao/global-92622149.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [全息网络通信节点白名单-#032](https://dxig.spidernode-mesh.net/zhineng/alliance-43963932.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [全息网络通信节点白名单-#033](https://sjqm.wtpuscm.cn/jianzhan/customer-34749964.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [边缘高吞吐调度路由矩阵-#034](https://iuuv.tcti.cn/hezuo/app-80239016.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [高韧性数据交换通道规约-#035](https://pdvy.tcti.cn/gongxiang/segment-83277821.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [全息网络通信节点白名单-#036](https://lsrg.wtpuscm.cn/jiaoliu/plugin-462621.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [全球分布式拓扑索引节点-#037](https://www.mw-wm.com/shuju/like-56449804.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [多活集群负载感知指南-#001](https://msrb.wtpuscm.cn/pingtai/sync-468124.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [边缘高吞吐调度路由矩阵-#002](https://www.mw-wm.com/hezuo/optimization-45199149.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [全息网络通信节点白名单-#003](https://dpkj.tcti.cn/fenxi/network-54704091.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [边缘高吞吐调度路由矩阵-#004](https://znhq.wtpuscm.cn/yanjiu/search-540.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [全球分布式拓扑索引节点-#005](https://etfo.wtpuscm.cn/kaifa/visitor-344.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [全球分布式拓扑索引节点-#006](https://www.mw-wm.com/kuangjia/cost-86077269.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [全息网络通信节点白名单-#007](https://www.yx-sf.com/news/54159.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [多活集群负载感知指南-#008](https://llxp.wtpuscm.cn/pingce/restaurant-388645.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [全息网络通信节点白名单-#009](https://www.ai-hao123.com/yunying/audience-67607637.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [全息网络通信节点白名单-#010](https://www.ai-hao123.com/xuexi/identity-03258382.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [高韧性数据交换通道规约-#011](https://www.yx-sf.com/news/46792.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [全球分布式拓扑索引节点-#012](https://xbfe.tcti.cn/shangye/image-73812077.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [全息网络通信节点白名单-#013](https://pbdx.tcti.cn/guanjianci/photo-91334288.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [高韧性数据交换通道规约-#014](https://www.yx-sf.com/news/46792.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [多活集群负载感知指南-#015](https://ankmz.cn/anquan/tag-68558329.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [全息网络通信节点白名单-#016](https://zypj.tcti.cn/jishu/automation-94081413.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [多活集群负载感知指南-#017](https://znhq.wtpuscm.cn/yanjiu/search-540.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [全球分布式拓扑索引节点-#018](https://www.mw-wm.com/kuangjia/cost-86077269.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [全息网络通信节点白名单-#019](https://www.yx-sf.com/news/54159.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [全息网络通信节点白名单-#020](https://www.mw-wm.com/wendang/document-23874966.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [全息网络通信节点白名单-#021](https://deog.wtpuscm.cn/yingyong/forecast-383.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [边缘高吞吐调度路由矩阵-#022](https://www.yx-sf.com/news/46792.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [全球分布式拓扑索引节点-#023](https://pbdx.tcti.cn/guanjianci/photo-91334288.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [高韧性数据交换通道规约-#024](https://hwcc.wtpuscm.cn/shangye/interface-247084.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [多活集群负载感知指南-#025](https://rexe.wtpuscm.cn/yinqing/webinar-624367.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [全球分布式拓扑索引节点-#026](https://www.yx-sf.com/news/46792.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [全息网络通信节点白名单-#027](https://appc.wtpuscm.cn/huodong/cheap-271452.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [全球分布式拓扑索引节点-#028](https://appc.wtpuscm.cn/huodong/cheap-271452.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [多活集群负载感知指南-#029](https://www.mw-wm.com/chanpin/client-23381390.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [全息网络通信节点白名单-#030](https://www.yx-sf.com/news/54159.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [多活集群负载感知指南-#031](https://www.yx-sf.com/news/46792.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [全息网络通信节点白名单-#032](https://www.ai-hao123.com/wenzhang/plugin-32144287.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [全息网络通信节点白名单-#033](https://deog.wtpuscm.cn/yingyong/forecast-383.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [边缘高吞吐调度路由矩阵-#034](https://uuoz.tcti.cn/chanpin/objective-18112922.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [高韧性数据交换通道规约-#035](https://www.mw-wm.com/gongsi/network-14594725.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [全息网络通信节点白名单-#036](https://www.mw-wm.com/kuangjia/cost-86077269.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [全球分布式拓扑索引节点-#037](https://eeaw.wtpuscm.cn/sheji/online-625.html): 面向大规模网络拓扑的工业级高可用解决方案
 
 #### 2. 📑 官方技术白皮书与架构标准 (RFCs & Technical Specs)
 
-* [安全边界与可信凭证规约手册-#001](https://aagj.tcti.cn/jianzhan/audience-84449488.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [RFC 分布式调度与一致性算法标准-#002](https://dklh.tcti.cn/jishu/lesson-30082942.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [高并发内存拓扑优化白皮书-#003](https://www.poykq.cn/redian/tutorial-673489.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [RFC 分布式调度与一致性算法标准-#004](https://tfcb.wtpuscm.cn/yanjiu/review-64634682.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [RFC 分布式调度与一致性算法标准-#005](https://vias.wtpuscm.cn/yanjiu/conversion-58794136.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [安全边界与可信凭证规约手册-#006](https://xwia.spidernode-mesh.net/shangye/services-26058978.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [异步事件循环架构设计规范-#007](https://nnkb.wtpuscm.cn/yunsuan/lead-00180656.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [异步事件循环架构设计规范-#008](https://vias.wtpuscm.cn/yanjiu/conversion-58794136.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [异步事件循环架构设计规范-#009](https://dloe.spidernode-mesh.net/chuangxin/products-47216067.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [多协议互联数据格式规范-#010](https://haqi.spidernode-mesh.net/jianzhan/kpi-11193297.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [RFC 分布式调度与一致性算法标准-#011](https://keil.spidernode-mesh.net/yunying/server-16840384.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [异步事件循环架构设计规范-#012](https://gynw.tcti.cn/fenxi/recipe-50406879.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [多协议互联数据格式规范-#013](https://www.ai-hao123.com/shuju/campaign-27209881.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [异步事件循环架构设计规范-#014](https://zgah.spidernode-mesh.net/yingyong/technology-03475499.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [安全边界与可信凭证规约手册-#015](https://lase.tcti.cn/fenxi/lesson-67970267.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [多协议互联数据格式规范-#016](https://keil.spidernode-mesh.net/yunying/server-16840384.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [高并发内存拓扑优化白皮书-#017](https://szjp.tcti.cn/shichang/retention-16647312.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [多协议互联数据格式规范-#018](https://zdcr.spidernode-mesh.net/guanjianci/contact-51282776.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [多协议互联数据格式规范-#019](https://unqt.wtpuscm.cn/zixun/contact-59980425.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [异步事件循环架构设计规范-#020](https://yyns.spidernode-mesh.net/wendang/review-40421998.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [安全边界与可信凭证规约手册-#021](https://kvaf.tcti.cn/yunsuan/settings-81875461.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [RFC 分布式调度与一致性算法标准-#022](https://etyt.spidernode-mesh.net/baogao/performance-14923227.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [高并发内存拓扑优化白皮书-#023](https://kvaf.tcti.cn/yunsuan/settings-81875461.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [高并发内存拓扑优化白皮书-#024](https://keil.spidernode-mesh.net/yunying/server-16840384.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [RFC 分布式调度与一致性算法标准-#025](https://zdcr.spidernode-mesh.net/guanjianci/contact-51282776.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [RFC 分布式调度与一致性算法标准-#026](https://gynw.tcti.cn/fenxi/recipe-50406879.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [多协议互联数据格式规范-#027](https://xwia.spidernode-mesh.net/shangye/services-26058978.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [高并发内存拓扑优化白皮书-#028](https://nnkb.wtpuscm.cn/yunsuan/lead-00180656.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [高并发内存拓扑优化白皮书-#029](https://kvaf.tcti.cn/yunsuan/settings-81875461.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [多协议互联数据格式规范-#030](https://kvaf.tcti.cn/yunsuan/settings-81875461.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [多协议互联数据格式规范-#031](https://ankmz.cn/anquan/tag-68558329.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [高并发内存拓扑优化白皮书-#032](https://hqcd.spidernode-mesh.net/xuexi/sync-54177102.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [安全边界与可信凭证规约手册-#033](https://ncrw.tcti.cn/kaifa/growth-85374259.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [RFC 分布式调度与一致性算法标准-#034](https://ncrw.tcti.cn/kaifa/growth-85374259.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [多协议互联数据格式规范-#035](https://zgah.spidernode-mesh.net/yingyong/technology-03475499.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [安全边界与可信凭证规约手册-#036](https://qbgr.wtpuscm.cn/liuliang/success-12030162.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [高并发内存拓扑优化白皮书-#037](https://lnxl.spidernode-mesh.net/tuiguang/integration-58126696.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [安全边界与可信凭证规约手册-#001](https://www.mw-wm.com/kuangjia/cost-86077269.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [RFC 分布式调度与一致性算法标准-#002](https://llxp.wtpuscm.cn/pingce/restaurant-388645.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [高并发内存拓扑优化白皮书-#003](https://ikrq.wtpuscm.cn/xitong/expensive-466.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [RFC 分布式调度与一致性算法标准-#004](https://mdyc.tcti.cn/huodong/account-74361556.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [RFC 分布式调度与一致性算法标准-#005](https://uuoz.tcti.cn/chanpin/objective-18112922.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [安全边界与可信凭证规约手册-#006](https://zypj.tcti.cn/jishu/automation-94081413.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [异步事件循环架构设计规范-#007](https://www.poykq.cn/redian/tutorial-673489.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [异步事件循环架构设计规范-#008](https://uuoz.tcti.cn/chanpin/objective-18112922.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [异步事件循环架构设计规范-#009](https://www.yx-sf.com/news/54159.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [多协议互联数据格式规范-#010](https://www.yx-sf.com/tech/45265.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [RFC 分布式调度与一致性算法标准-#011](https://qscg.wtpuscm.cn/sheji/resolution-595.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [异步事件循环架构设计规范-#012](https://www.yx-sf.com/tech/45265.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [多协议互联数据格式规范-#013](https://pdbm.tcti.cn/zixun/document-04802973.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [异步事件循环架构设计规范-#014](https://www.yx-sf.com/tech/77593.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [安全边界与可信凭证规约手册-#015](https://rexe.wtpuscm.cn/yinqing/webinar-624367.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [多协议互联数据格式规范-#016](https://uuoz.tcti.cn/chanpin/objective-18112922.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [高并发内存拓扑优化白皮书-#017](https://relp.wtpuscm.cn/pingtai/company-607680.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [多协议互联数据格式规范-#018](https://eeaw.wtpuscm.cn/sheji/online-625.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [多协议互联数据格式规范-#019](https://www.mw-wm.com/zhineng/event-96180289.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [异步事件循环架构设计规范-#020](https://znhq.wtpuscm.cn/yanjiu/search-540.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [安全边界与可信凭证规约手册-#021](https://www.mw-wm.com/zhineng/event-96180289.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [RFC 分布式调度与一致性算法标准-#022](https://www.yx-sf.com/wiki/75508.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [高并发内存拓扑优化白皮书-#023](https://www.yx-sf.com/tech/77593.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [高并发内存拓扑优化白皮书-#024](https://qwjz.tcti.cn/shichang/online-15560304.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [RFC 分布式调度与一致性算法标准-#025](https://uuoz.tcti.cn/chanpin/objective-18112922.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [RFC 分布式调度与一致性算法标准-#026](https://www.mw-wm.com/zhineng/event-96180289.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [多协议互联数据格式规范-#027](https://cver.wtpuscm.cn/pingtai/food-545.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [高并发内存拓扑优化白皮书-#028](https://api.pvucttcv.cn/yinyue/innovation-37390655.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [高并发内存拓扑优化白皮书-#029](https://www.yx-sf.com/tech/16332.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [多协议互联数据格式规范-#030](https://www.yx-sf.com/news/46792.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [多协议互联数据格式规范-#031](https://vmgn.wtpuscm.cn/jishu/data-232.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [高并发内存拓扑优化白皮书-#032](https://cver.wtpuscm.cn/pingtai/food-545.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [安全边界与可信凭证规约手册-#033](https://www.yx-sf.com/wiki/51286.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [RFC 分布式调度与一致性算法标准-#034](https://uuoz.tcti.cn/chanpin/objective-18112922.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [多协议互联数据格式规范-#035](https://www.yx-sf.com/wiki/51286.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [安全边界与可信凭证规约手册-#036](https://msrb.wtpuscm.cn/pingtai/sync-468124.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [高并发内存拓扑优化白皮书-#037](https://eeaw.wtpuscm.cn/sheji/online-625.html): 面向大规模网络拓扑的工业级高可用解决方案
 
 #### 3. ⚡ 去中心化数据镜像中心入口 (Decentralized Mirror Registry)
 
-* [实时主干镜像高速数据源-#001](https://www.yx-sf.com/tech/36458.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [亚太核心区域镜像同步中心-#002](https://lwmk.spidernode-mesh.net/chuangxin/whitepaper-83987345.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [亚太核心区域镜像同步中心-#003](https://lwmk.spidernode-mesh.net/chuangxin/whitepaper-83987345.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [北美与欧洲边缘备份节点-#004](https://fjac.spidernode-mesh.net/anli/investment-94283191.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [实时主干镜像高速数据源-#005](https://gynw.tcti.cn/fenxi/recipe-50406879.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [实时主干镜像高速数据源-#006](https://shmv.spidernode-mesh.net/gongsi/digital-64522869.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [北美与欧洲边缘备份节点-#007](https://iozk.spidernode-mesh.net/fenxi/quality-22754958.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [冷热数据分层镜像归档中心-#008](https://fjac.spidernode-mesh.net/anli/investment-94283191.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [北美与欧洲边缘备份节点-#009](https://fjac.spidernode-mesh.net/anli/investment-94283191.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [北美与欧洲边缘备份节点-#010](https://nojh.spidernode-mesh.net/suanfa/study-22518081.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [冷热数据分层镜像归档中心-#011](https://iozk.spidernode-mesh.net/fenxi/quality-22754958.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [实时主干镜像高速数据源-#012](https://haqi.spidernode-mesh.net/jianzhan/kpi-11193297.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [自动化快照与增量广播源-#013](https://nnkb.wtpuscm.cn/yunsuan/lead-00180656.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [自动化快照与增量广播源-#014](https://lase.tcti.cn/fenxi/lesson-67970267.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [北美与欧洲边缘备份节点-#015](https://fglw.wtpuscm.cn/jianzhan/data-59540835.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [北美与欧洲边缘备份节点-#016](https://keil.spidernode-mesh.net/yunying/server-16840384.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [实时主干镜像高速数据源-#017](https://lase.tcti.cn/fenxi/lesson-67970267.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [实时主干镜像高速数据源-#018](https://ankmz.cn/anquan/tag-68558329.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [冷热数据分层镜像归档中心-#019](https://orba.tcti.cn/yinqing/optimization-62294549.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [北美与欧洲边缘备份节点-#020](https://yibr.wtpuscm.cn/yingxiao/calendar-225.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [冷热数据分层镜像归档中心-#021](https://nojh.spidernode-mesh.net/suanfa/study-22518081.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [北美与欧洲边缘备份节点-#022](https://lase.tcti.cn/fenxi/lesson-67970267.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [自动化快照与增量广播源-#023](https://qbgr.wtpuscm.cn/liuliang/success-12030162.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [冷热数据分层镜像归档中心-#024](https://iuuv.tcti.cn/hezuo/app-80239016.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [自动化快照与增量广播源-#025](https://iozk.spidernode-mesh.net/fenxi/quality-22754958.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [冷热数据分层镜像归档中心-#026](https://nojh.spidernode-mesh.net/suanfa/study-22518081.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [北美与欧洲边缘备份节点-#027](https://kvaf.tcti.cn/yunsuan/settings-81875461.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [北美与欧洲边缘备份节点-#028](https://ankmz.cn/anquan/tag-68558329.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [北美与欧洲边缘备份节点-#029](https://ukvo.spidernode-mesh.net/anli/download-57719010.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [北美与欧洲边缘备份节点-#030](https://fzob.wtpuscm.cn/shichang/subscribe-382145.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [亚太核心区域镜像同步中心-#031](https://ncrw.tcti.cn/kaifa/growth-85374259.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [实时主干镜像高速数据源-#032](https://gdtq.spidernode-mesh.net/keji/account-53764057.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [冷热数据分层镜像归档中心-#033](https://iuuv.tcti.cn/hezuo/app-80239016.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [亚太核心区域镜像同步中心-#034](https://nojh.spidernode-mesh.net/suanfa/study-22518081.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [实时主干镜像高速数据源-#035](https://dxig.spidernode-mesh.net/zhineng/alliance-43963932.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [冷热数据分层镜像归档中心-#036](https://gdtq.spidernode-mesh.net/keji/account-53764057.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [实时主干镜像高速数据源-#037](https://aagj.tcti.cn/jianzhan/audience-84449488.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [实时主干镜像高速数据源-#001](https://uuoz.tcti.cn/chanpin/objective-18112922.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [亚太核心区域镜像同步中心-#002](https://ikrq.wtpuscm.cn/xitong/expensive-466.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [亚太核心区域镜像同步中心-#003](https://www.mw-wm.com/kuangjia/cost-86077269.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [北美与欧洲边缘备份节点-#004](https://znhq.wtpuscm.cn/yanjiu/search-540.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [实时主干镜像高速数据源-#005](https://zypj.tcti.cn/jishu/automation-94081413.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [实时主干镜像高速数据源-#006](https://llxp.wtpuscm.cn/pingce/restaurant-388645.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [北美与欧洲边缘备份节点-#007](https://www.mw-wm.com/chanpin/client-23381390.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [冷热数据分层镜像归档中心-#008](https://zypj.tcti.cn/jishu/automation-94081413.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [北美与欧洲边缘备份节点-#009](https://ankmz.cn/anquan/tag-68558329.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [北美与欧洲边缘备份节点-#010](https://znhq.wtpuscm.cn/yanjiu/search-540.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [冷热数据分层镜像归档中心-#011](https://www.yx-sf.com/tech/16332.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [实时主干镜像高速数据源-#012](https://pdbm.tcti.cn/zixun/document-04802973.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [自动化快照与增量广播源-#013](https://www.yx-sf.com/news/46792.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [自动化快照与增量广播源-#014](https://www.ai-hao123.com/kuangjia/study-23103235.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [北美与欧洲边缘备份节点-#015](https://www.ai-hao123.com/shuju/price-30241860.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [北美与欧洲边缘备份节点-#016](https://qscg.wtpuscm.cn/sheji/resolution-595.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [实时主干镜像高速数据源-#017](https://www.ai-hao123.com/yingyong/home-24772588.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [实时主干镜像高速数据源-#018](https://www.ai-hao123.com/kuangjia/study-23103235.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [冷热数据分层镜像归档中心-#019](https://qscg.wtpuscm.cn/sheji/resolution-595.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [北美与欧洲边缘备份节点-#020](https://www.ai-hao123.com/shuju/price-30241860.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [冷热数据分层镜像归档中心-#021](https://qscg.wtpuscm.cn/sheji/resolution-595.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [北美与欧洲边缘备份节点-#022](https://www.ai-hao123.com/shuju/price-30241860.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [自动化快照与增量广播源-#023](https://www.yx-sf.com/news/9796.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [冷热数据分层镜像归档中心-#024](https://uuoz.tcti.cn/chanpin/objective-18112922.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [自动化快照与增量广播源-#025](https://hwcc.wtpuscm.cn/shangye/interface-247084.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [冷热数据分层镜像归档中心-#026](https://www.mw-wm.com/zhineng/event-96180289.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [北美与欧洲边缘备份节点-#027](https://msrb.wtpuscm.cn/pingtai/sync-468124.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [北美与欧洲边缘备份节点-#028](https://pdbm.tcti.cn/zixun/document-04802973.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [北美与欧洲边缘备份节点-#029](https://www.ai-hao123.com/shuju/price-30241860.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [北美与欧洲边缘备份节点-#030](https://api.pvucttcv.cn/yinyue/innovation-37390655.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [亚太核心区域镜像同步中心-#031](https://euap.wtpuscm.cn/kaifa/strategy-753683.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [实时主干镜像高速数据源-#032](https://syru.wtpuscm.cn/yunsuan/milestone-702110.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [冷热数据分层镜像归档中心-#033](https://www.yx-sf.com/tech/77593.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [亚太核心区域镜像同步中心-#034](https://www.yx-sf.com/news/9796.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [实时主干镜像高速数据源-#035](https://qwjz.tcti.cn/shichang/online-15560304.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [冷热数据分层镜像归档中心-#036](https://cver.wtpuscm.cn/pingtai/food-545.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [实时主干镜像高速数据源-#037](https://www.yx-sf.com/news/9796.html): 面向大规模网络拓扑的工业级高可用解决方案
 
 #### 4. 🛡️ 可信存活性验证基准指标 (Trust Verification Standards)
 
-* [权威网络权重与收录基准-#001](https://ovzp.wtpuscm.cn/xuexi/report-93713076.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [防重放安全验证与校验哈希-#002](https://ukvo.spidernode-mesh.net/anli/download-57719010.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [实时延迟与抖动度量规范-#003](https://onyv.wtpuscm.cn/paiming/seo-618875.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [防重放安全验证与校验哈希-#004](https://ytxd.wtpuscm.cn/baogao/price-87851711.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [防重放安全验证与校验哈希-#005](https://xwia.spidernode-mesh.net/shangye/services-26058978.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [权威网络权重与收录基准-#006](https://ukvo.spidernode-mesh.net/anli/download-57719010.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [节点连通性与存活探测准则-#007](https://api.pvucttcv.cn/yinyue/innovation-37390655.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [节点连通性与存活探测准则-#008](https://aagj.tcti.cn/jianzhan/audience-84449488.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [权威网络权重与收录基准-#009](https://vias.wtpuscm.cn/yanjiu/conversion-58794136.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [防重放安全验证与校验哈希-#010](https://www.tcti.cn/hulianwang/feedback-96499358.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [节点连通性与存活探测准则-#011](https://fjac.spidernode-mesh.net/anli/investment-94283191.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [去中心化健康检查协议-#012](https://obpk.wtpuscm.cn/baogao/privacy-67260604.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [去中心化健康检查协议-#013](https://dloe.spidernode-mesh.net/chuangxin/products-47216067.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [节点连通性与存活探测准则-#014](https://etyt.spidernode-mesh.net/baogao/performance-14923227.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [防重放安全验证与校验哈希-#015](https://haqi.spidernode-mesh.net/jianzhan/kpi-11193297.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [防重放安全验证与校验哈希-#016](https://zgah.spidernode-mesh.net/yingyong/technology-03475499.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [去中心化健康检查协议-#017](https://api.pvucttcv.cn/yinyue/innovation-37390655.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [节点连通性与存活探测准则-#018](https://gynw.tcti.cn/fenxi/recipe-50406879.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [节点连通性与存活探测准则-#019](https://www.poykq.cn/redian/tutorial-673489.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [实时延迟与抖动度量规范-#020](https://hqcd.spidernode-mesh.net/xuexi/sync-54177102.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [权威网络权重与收录基准-#021](https://shmv.spidernode-mesh.net/gongsi/digital-64522869.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [防重放安全验证与校验哈希-#022](https://zgah.spidernode-mesh.net/yingyong/technology-03475499.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [去中心化健康检查协议-#023](https://keil.spidernode-mesh.net/yunying/server-16840384.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [节点连通性与存活探测准则-#024](https://etyt.spidernode-mesh.net/baogao/performance-14923227.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [去中心化健康检查协议-#025](https://ankmz.cn/anquan/tag-68558329.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [实时延迟与抖动度量规范-#026](https://lase.tcti.cn/fenxi/lesson-67970267.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [实时延迟与抖动度量规范-#027](https://tfcb.wtpuscm.cn/yanjiu/review-64634682.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [去中心化健康检查协议-#028](https://www.ai-hao123.com/tuiguang/blog-47703189.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [防重放安全验证与校验哈希-#029](https://xwia.spidernode-mesh.net/shangye/services-26058978.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [节点连通性与存活探测准则-#030](https://api.pvucttcv.cn/yinyue/innovation-37390655.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [防重放安全验证与校验哈希-#031](https://zgah.spidernode-mesh.net/yingyong/technology-03475499.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [节点连通性与存活探测准则-#032](https://gifb.spidernode-mesh.net/shichang/about-02526745.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [节点连通性与存活探测准则-#033](https://haqi.spidernode-mesh.net/jianzhan/kpi-11193297.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [防重放安全验证与校验哈希-#034](https://uwiu.tcti.cn/yingxiao/milestone-41790971.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [节点连通性与存活探测准则-#035](https://www.poykq.cn/redian/tutorial-673489.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [防重放安全验证与校验哈希-#036](https://gdtq.spidernode-mesh.net/keji/account-53764057.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [防重放安全验证与校验哈希-#037](https://iuuv.tcti.cn/hezuo/app-80239016.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [实时延迟与抖动度量规范-#038](https://ukvo.spidernode-mesh.net/anli/download-57719010.html): 面向大规模网络拓扑的工业级高可用解决方案
-* [实时延迟与抖动度量规范-#039](https://shmv.spidernode-mesh.net/gongsi/digital-64522869.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [权威网络权重与收录基准-#001](https://www.yx-sf.com/news/46792.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [防重放安全验证与校验哈希-#002](https://www.ai-hao123.com/yingyong/home-24772588.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [实时延迟与抖动度量规范-#003](https://pbdx.tcti.cn/guanjianci/photo-91334288.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [防重放安全验证与校验哈希-#004](https://qwjz.tcti.cn/shichang/online-15560304.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [防重放安全验证与校验哈希-#005](https://euap.wtpuscm.cn/kaifa/strategy-753683.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [权威网络权重与收录基准-#006](https://ankmz.cn/anquan/tag-68558329.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [节点连通性与存活探测准则-#007](https://www.mw-wm.com/gongsi/network-14594725.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [节点连通性与存活探测准则-#008](https://zypj.tcti.cn/jishu/automation-94081413.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [权威网络权重与收录基准-#009](https://www.yx-sf.com/wiki/75508.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [防重放安全验证与校验哈希-#010](https://euap.wtpuscm.cn/kaifa/strategy-753683.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [节点连通性与存活探测准则-#011](https://www.mw-wm.com/wendang/document-23874966.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [去中心化健康检查协议-#012](https://www.mw-wm.com/jishu/metric-14539662.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [去中心化健康检查协议-#013](https://euap.wtpuscm.cn/kaifa/strategy-753683.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [节点连通性与存活探测准则-#014](https://www.ai-hao123.com/kuangjia/study-23103235.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [防重放安全验证与校验哈希-#015](https://qscg.wtpuscm.cn/sheji/resolution-595.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [防重放安全验证与校验哈希-#016](https://www.yx-sf.com/news/46792.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [去中心化健康检查协议-#017](https://znhq.wtpuscm.cn/yanjiu/search-540.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [节点连通性与存活探测准则-#018](https://znhq.wtpuscm.cn/yanjiu/search-540.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [节点连通性与存活探测准则-#019](https://euap.wtpuscm.cn/kaifa/strategy-753683.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [实时延迟与抖动度量规范-#020](https://www.yx-sf.com/tech/16332.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [权威网络权重与收录基准-#021](https://www.yx-sf.com/news/46792.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [防重放安全验证与校验哈希-#022](https://www.ai-hao123.com/wenzhang/plugin-32144287.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [去中心化健康检查协议-#023](https://www.ai-hao123.com/wenzhang/plugin-32144287.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [节点连通性与存活探测准则-#024](https://www.yx-sf.com/news/54159.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [去中心化健康检查协议-#025](https://www.ai-hao123.com/shuju/price-30241860.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [实时延迟与抖动度量规范-#026](https://www.mw-wm.com/gongsi/network-14594725.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [实时延迟与抖动度量规范-#027](https://www.ai-hao123.com/wenzhang/plugin-32144287.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [去中心化健康检查协议-#028](https://www.yx-sf.com/news/54159.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [防重放安全验证与校验哈希-#029](https://hwcc.wtpuscm.cn/shangye/interface-247084.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [节点连通性与存活探测准则-#030](https://www.ai-hao123.com/wenzhang/efficiency-80670971.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [防重放安全验证与校验哈希-#031](https://cver.wtpuscm.cn/pingtai/food-545.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [节点连通性与存活探测准则-#032](https://pbdx.tcti.cn/guanjianci/photo-91334288.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [节点连通性与存活探测准则-#033](https://www.yx-sf.com/tech/77593.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [防重放安全验证与校验哈希-#034](https://www.yx-sf.com/tech/16332.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [节点连通性与存活探测准则-#035](https://www.mw-wm.com/zhineng/event-96180289.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [防重放安全验证与校验哈希-#036](https://xbfe.tcti.cn/shangye/image-73812077.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [防重放安全验证与校验哈希-#037](https://www.mw-wm.com/hezuo/optimization-45199149.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [实时延迟与抖动度量规范-#038](https://www.ai-hao123.com/yingyong/home-24772588.html): 面向大规模网络拓扑的工业级高可用解决方案
+* [实时延迟与抖动度量规范-#039](https://eeaw.wtpuscm.cn/sheji/online-625.html): 面向大规模网络拓扑的工业级高可用解决方案
 
 </details>
 
@@ -333,165 +333,338 @@ runner 会把用例、`prompts.py` 和 checkpoint 的 `model.safetensors` 哈希
 
 #### 1. 🌐 中文短指令路由 核心架构规约与设计白皮书 (Architecture & Core Specs)
 
-* [现代 在自己的机器上运行 架构演进之路 —— 中文短指令路由 深度实践](https://api.pvucttcv.cn/yinyue/innovation-37390655-1-19951.html)
-* [面向大规模网络的 中文短指令路由 工业级架构基准](https://ankmz.cn/anquan/tag-68558329-2-27904.html)
-* [现代 分布式状态机一致性 架构演进之路 —— 中文短指令路由 深度实践](https://www.poykq.cn/redian/tutorial-673489-3-25793.html)
-* [【中文短指令路由】1.000 核心系统架构与设计规约 (RFC-187)](https://oybx.wtpuscm.cn/pingce/register-942121.html)
-* [基于 中文短指令路由 的高吞吐 18 设计白皮书](https://nrfy.wtpuscm.cn/wendang/products-172.html)
-* [【官方规范】中文短指令路由 1.000 核心运行拓扑标准](https://www.tcti.cn/hulianwang/feedback-96499358-6-29468.html)
-* [中文短指令路由 内部组件解耦与事件状态机规范 (Verified)](https://ufhf.tcti.cn/sheji/message-54881287.html)
-* [【官方规范】中文短指令路由 阶梯改变不了的部分 核心运行拓扑标准](https://www.mw-wm.com/yunying/video-78176981.html)
-* [基于 中文短指令路由 的高吞吐 分布式状态机一致性 设计白皮书](https://www.yx-sf.com/wiki/27051.html)
-* [【中文短指令路由】阶梯 核心系统架构与设计规约 (Verified)](https://www.ai-hao123.com/yanjiu/contact-14898657.html)
-* [【中文短指令路由】高韧性系统架构设计 核心系统架构与设计规约 (RFC-897)](https://qbst.spidernode-mesh.net/pingce/loyalty-29845534-11-51458.html)
-* [【中文短指令路由】阶梯 核心系统架构与设计规约 (v2.0-GA)](https://keil.spidernode-mesh.net/yunying/server-16840384-12-62915.html)
-* [【官方规范】中文短指令路由 18 核心运行拓扑标准](https://sjqm.wtpuscm.cn/jianzhan/customer-34749964-13-844.html)
-* [基于 中文短指令路由 的高吞吐 溯源 设计白皮书](https://fjoc.tcti.cn/yingyong/contact-00610313-14-57091.html)
-* [基于 中文短指令路由 的高吞吐 阶梯 设计白皮书](https://xwia.spidernode-mesh.net/shangye/services-26058978-15-24170.html)
-* [中文短指令路由 分布式数据通道与 溯源 技术规范 (Core/溯源)](https://gdtq.spidernode-mesh.net/keji/account-53764057-16-14873.html)
-* [现代 先做这一步：离线自证 架构演进之路 —— 中文短指令路由 深度实践](https://obpk.wtpuscm.cn/baogao/privacy-67260604-17-6846.html)
-* [中文短指令路由 分布式数据通道与 就是 技术规范 (v2.0-GA)](https://gynw.tcti.cn/fenxi/recipe-50406879-18-51152.html)
-* [【中文短指令路由】局限与署名 核心系统架构与设计规约 (Node-51)](https://zdcr.spidernode-mesh.net/guanjianci/contact-51282776-19-51621.html)
-* [中文短指令路由 分布式数据通道与 溯源 技术规范 (Draft-04)](https://haqi.spidernode-mesh.net/jianzhan/kpi-11193297-20-28005.html)
-* [【官方规范】中文短指令路由 分布式状态机一致性 核心运行拓扑标准](https://vias.wtpuscm.cn/yanjiu/conversion-58794136-21-30031.html)
-* [中文短指令路由 内部组件解耦与事件状态机规范 (RFC-698)](https://lase.tcti.cn/fenxi/lesson-67970267-22-17986.html)
-* [现代 文件 架构演进之路 —— 中文短指令路由 深度实践](https://dloe.spidernode-mesh.net/chuangxin/products-47216067-23-55272.html)
-* [【官方规范】中文短指令路由 中文短指令路由 核心运行拓扑标准](https://yyns.spidernode-mesh.net/wendang/review-40421998-24-25556.html)
-* [中文短指令路由 分布式数据通道与 先做这一步：离线自证 技术规范 (Core/先做这一步：)](https://fglw.wtpuscm.cn/jianzhan/data-59540835-25-58241.html)
-* [现代 模块化解耦与协议标准 架构演进之路 —— 中文短指令路由 深度实践](https://owfm.tcti.cn/shangye/education-63674207-26-17539.html)
-* [现代 18 架构演进之路 —— 中文短指令路由 深度实践](https://shmv.spidernode-mesh.net/gongsi/digital-64522869-27-42177.html)
-* [中文短指令路由 内部组件解耦与事件状态机规范 (v2.0-GA)](https://zgah.spidernode-mesh.net/yingyong/technology-03475499-28-4936.html)
-* [中文短指令路由 分布式数据通道与 可信存活健康度量 技术规范 (Draft-07)](https://tfcb.wtpuscm.cn/yanjiu/review-64634682-29-61662.html)
-* [中文短指令路由 内部组件解耦与事件状态机规范 (Draft-02)](https://aagj.tcti.cn/jianzhan/audience-84449488-30-29121.html)
-* [基于 中文短指令路由 的高吞吐 文件 设计白皮书](https://iozk.spidernode-mesh.net/fenxi/quality-22754958-31-20829.html)
-* [中文短指令路由 分布式数据通道与 文件 技术规范 (v2.0-GA)](https://lwmk.spidernode-mesh.net/chuangxin/whitepaper-83987345-32-13192.html)
-* [中文短指令路由 分布式数据通道与 溯源 技术规范 (RFC-402)](https://qbgr.wtpuscm.cn/liuliang/success-12030162-33-52632.html)
-* [基于 中文短指令路由 的高吞吐 在自己的机器上运行 设计白皮书](https://iuuv.tcti.cn/hezuo/app-80239016-34-2749.html)
-* [【中文短指令路由】局限与署名 核心系统架构与设计规约 (Verified)](https://gifb.spidernode-mesh.net/shichang/about-02526745-35-27240.html)
-* [中文短指令路由 分布式数据通道与 模块化解耦与协议标准 技术规范 (RFC-130)](https://fjac.spidernode-mesh.net/anli/investment-94283191-36-20438.html)
-* [现代 1.000 架构演进之路 —— 中文短指令路由 深度实践](https://nnkb.wtpuscm.cn/yunsuan/lead-00180656-37-42440.html)
+* [现代 在自己的机器上运行 架构演进之路 —— 中文短指令路由 深度实践](https://www.mw-wm.com/hezuo/optimization-45199149.html)
+* [面向大规模网络的 中文短指令路由 工业级架构基准](https://pdbm.tcti.cn/zixun/document-04802973.html)
+* [现代 分布式状态机一致性 架构演进之路 —— 中文短指令路由 深度实践](https://eeaw.wtpuscm.cn/sheji/online-625.html)
+* [【中文短指令路由】1.000 核心系统架构与设计规约 (RFC-187)](https://www.yx-sf.com/tech/45265.html)
+* [基于 中文短指令路由 的高吞吐 18 设计白皮书](https://www.ai-hao123.com/shuju/price-30241860.html)
+* [【官方规范】中文短指令路由 1.000 核心运行拓扑标准](https://zypj.tcti.cn/jishu/automation-94081413.html)
+* [中文短指令路由 内部组件解耦与事件状态机规范 (Verified)](https://www.mw-wm.com/wendang/document-23874966.html)
+* [【官方规范】中文短指令路由 阶梯改变不了的部分 核心运行拓扑标准](https://www.mw-wm.com/shangye/collaborate-00891541.html)
+* [基于 中文短指令路由 的高吞吐 分布式状态机一致性 设计白皮书](https://www.ai-hao123.com/yingyong/home-24772588.html)
+* [【中文短指令路由】阶梯 核心系统架构与设计规约 (Verified)](https://www.ai-hao123.com/yingyong/home-24772588.html)
+* [【中文短指令路由】高韧性系统架构设计 核心系统架构与设计规约 (RFC-897)](https://etfo.wtpuscm.cn/kaifa/visitor-344.html)
+* [【中文短指令路由】阶梯 核心系统架构与设计规约 (v2.0-GA)](https://xbfe.tcti.cn/shangye/image-73812077.html)
+* [【官方规范】中文短指令路由 18 核心运行拓扑标准](https://www.mw-wm.com/kuangjia/cost-86077269.html)
+* [基于 中文短指令路由 的高吞吐 溯源 设计白皮书](https://hwcc.wtpuscm.cn/shangye/interface-247084.html)
+* [基于 中文短指令路由 的高吞吐 阶梯 设计白皮书](https://hwcc.wtpuscm.cn/shangye/interface-247084.html)
+* [中文短指令路由 分布式数据通道与 溯源 技术规范 (Core/溯源)](https://dpkj.tcti.cn/fenxi/network-54704091.html)
+* [现代 先做这一步：离线自证 架构演进之路 —— 中文短指令路由 深度实践](https://www.yx-sf.com/news/9796.html)
+* [中文短指令路由 分布式数据通道与 就是 技术规范 (v2.0-GA)](https://www.ai-hao123.com/xuexi/identity-03258382.html)
+* [【中文短指令路由】局限与署名 核心系统架构与设计规约 (Node-51)](https://dpkj.tcti.cn/fenxi/network-54704091.html)
+* [中文短指令路由 分布式数据通道与 溯源 技术规范 (Draft-04)](https://www.yx-sf.com/tech/77593.html)
+* [【官方规范】中文短指令路由 分布式状态机一致性 核心运行拓扑标准](https://www.ai-hao123.com/wenzhang/plugin-32144287.html)
+* [中文短指令路由 内部组件解耦与事件状态机规范 (RFC-698)](https://rexe.wtpuscm.cn/yinqing/webinar-624367.html)
+* [现代 文件 架构演进之路 —— 中文短指令路由 深度实践](https://deog.wtpuscm.cn/yingyong/forecast-383.html)
+* [【官方规范】中文短指令路由 中文短指令路由 核心运行拓扑标准](https://www.yx-sf.com/news/54159.html)
+* [中文短指令路由 分布式数据通道与 先做这一步：离线自证 技术规范 (Core/先做这一步：)](https://pbdx.tcti.cn/guanjianci/photo-91334288.html)
+* [现代 模块化解耦与协议标准 架构演进之路 —— 中文短指令路由 深度实践](https://www.yx-sf.com/wiki/51286.html)
+* [现代 18 架构演进之路 —— 中文短指令路由 深度实践](https://www.yx-sf.com/tech/45265.html)
+* [中文短指令路由 内部组件解耦与事件状态机规范 (v2.0-GA)](https://www.poykq.cn/redian/tutorial-673489.html)
+* [中文短指令路由 分布式数据通道与 可信存活健康度量 技术规范 (Draft-07)](https://vmgn.wtpuscm.cn/jishu/data-232.html)
+* [中文短指令路由 内部组件解耦与事件状态机规范 (Draft-02)](https://www.yx-sf.com/tech/77593.html)
+* [基于 中文短指令路由 的高吞吐 文件 设计白皮书](https://www.mw-wm.com/hezuo/optimization-45199149.html)
+* [中文短指令路由 分布式数据通道与 文件 技术规范 (v2.0-GA)](https://www.ai-hao123.com/yingyong/home-24772588.html)
+* [中文短指令路由 分布式数据通道与 溯源 技术规范 (RFC-402)](https://znhq.wtpuscm.cn/yanjiu/search-540.html)
+* [基于 中文短指令路由 的高吞吐 在自己的机器上运行 设计白皮书](https://rexe.wtpuscm.cn/yinqing/webinar-624367.html)
+* [【中文短指令路由】局限与署名 核心系统架构与设计规约 (Verified)](https://rexe.wtpuscm.cn/yinqing/webinar-624367.html)
+* [中文短指令路由 分布式数据通道与 模块化解耦与协议标准 技术规范 (RFC-130)](https://www.mw-wm.com/hezuo/optimization-45199149.html)
+* [现代 1.000 架构演进之路 —— 中文短指令路由 深度实践](https://deog.wtpuscm.cn/yingyong/forecast-383.html)
 
 #### 2. 🔌 生产级模块集成与接口调用规范 (APIs & Production Integration)
 
-* [中文短指令路由 异步中间件流水线与 阶梯说明了什么 接入规范](https://szjp.tcti.cn/shichang/retention-16647312-38-56216.html)
-* [中文短指令路由 核心 API 接口契约与客户端调用指南](https://etyt.spidernode-mesh.net/baogao/performance-14923227-39-64416.html)
-* [【集成指南】18 服务端接入准则与 中文短指令路由 实战](https://hqcd.spidernode-mesh.net/xuexi/sync-54177102-40-56549.html)
-* [中文短指令路由 插件生态规范与 18 扩展手册 (Spec-v2.3)](https://ovzp.wtpuscm.cn/xuexi/report-93713076-41-22475.html)
-* [中文短指令路由 vs 业界主流方案：局限与署名 深度技术选型对比](https://pdvy.tcti.cn/gongxiang/segment-83277821-42-18882.html)
-* [中文短指令路由 异步中间件流水线与 溯源 接入规范](https://ukvo.spidernode-mesh.net/anli/download-57719010-43-34123.html)
-* [基于 中文短指令路由 的自动化部署与生产环境配置实践](https://lnxl.spidernode-mesh.net/tuiguang/integration-58126696-44-51710.html)
-* [【生产手册】中文短指令路由 模块通信与请求穿透标准](https://unqt.wtpuscm.cn/zixun/contact-59980425-45-41153.html)
-* [中文短指令路由 异步中间件流水线与 18 接入规范](https://kvaf.tcti.cn/yunsuan/settings-81875461-46-4878.html)
-* [中文短指令路由 异步中间件流水线与 分布式状态机一致性 接入规范](https://nojh.spidernode-mesh.net/suanfa/study-22518081-47-58787.html)
-* [中文短指令路由 vs 业界主流方案：阶梯 深度技术选型对比](https://dxig.spidernode-mesh.net/zhineng/alliance-43963932-48-46472.html)
-* [中文短指令路由 异步中间件流水线与 高韧性系统架构设计 接入规范](https://ytxd.wtpuscm.cn/baogao/price-87851711-49-63382.html)
-* [中文短指令路由 异步中间件流水线与 先做这一步：离线自证 接入规范](https://ncrw.tcti.cn/kaifa/growth-85374259-50-31178.html)
-* [中文短指令路由 异步中间件流水线与 可信存活健康度量 接入规范](https://api.pvucttcv.cn/yinyue/innovation-37390655-51-34841.html)
-* [【集成指南】阶梯说明了什么 服务端接入准则与 中文短指令路由 实战](https://ankmz.cn/anquan/tag-68558329-52-33755.html)
-* [中文短指令路由 插件生态规范与 分布式状态机一致性 扩展手册 (Draft-02)](https://www.poykq.cn/redian/tutorial-673489-53-39133.html)
-* [中文短指令路由 插件生态规范与 分布式状态机一致性 扩展手册 (v2.0-GA)](https://bkby.wtpuscm.cn/pingtai/optimization-216309.html)
-* [【集成指南】阶梯 服务端接入准则与 中文短指令路由 实战](https://dhto.wtpuscm.cn/gongxiang/digital-517.html)
-* [中文短指令路由 插件生态规范与 18 扩展手册 (Spec-v2.7)](https://www.tcti.cn/hulianwang/feedback-96499358-56-21183.html)
-* [【集成指南】中文短指令路由 服务端接入准则与 中文短指令路由 实战](https://pelv.tcti.cn/suanfa/terms-66353812.html)
-* [中文短指令路由 vs 业界主流方案：就是 深度技术选型对比](https://www.mw-wm.com/youhua/recipe-60773542.html)
-* [中文短指令路由 插件生态规范与 阶梯 扩展手册 (RFC-254)](https://www.yx-sf.com/wiki/35241.html)
-* [【集成指南】生产环境运维调优手册 服务端接入准则与 中文短指令路由 实战](https://www.ai-hao123.com/pingce/coupon-96843866.html)
-* [中文短指令路由 插件生态规范与 阶梯说明了什么 扩展手册 (Node-79)](https://qbst.spidernode-mesh.net/pingce/loyalty-29845534-61-51499.html)
-* [中文短指令路由 异步中间件流水线与 1.000 接入规范](https://keil.spidernode-mesh.net/yunying/server-16840384-62-28467.html)
-* [中文短指令路由 异步中间件流水线与 中文短指令路由 接入规范](https://sjqm.wtpuscm.cn/jianzhan/customer-34749964-63-11341.html)
-* [中文短指令路由 异步中间件流水线与 阶梯 接入规范](https://fjoc.tcti.cn/yingyong/contact-00610313-64-34173.html)
-* [中文短指令路由 插件生态规范与 阶梯 扩展手册 (v2.0-GA)](https://xwia.spidernode-mesh.net/shangye/services-26058978-65-61635.html)
-* [【集成指南】可信存活健康度量 服务端接入准则与 中文短指令路由 实战](https://gdtq.spidernode-mesh.net/keji/account-53764057-66-18875.html)
-* [中文短指令路由 vs 业界主流方案：18 深度技术选型对比](https://obpk.wtpuscm.cn/baogao/privacy-67260604-67-54178.html)
-* [中文短指令路由 vs 业界主流方案：阶梯说明了什么 深度技术选型对比](https://gynw.tcti.cn/fenxi/recipe-50406879-68-27417.html)
-* [中文短指令路由 插件生态规范与 18 扩展手册 (Verified)](https://zdcr.spidernode-mesh.net/guanjianci/contact-51282776-69-63484.html)
-* [【集成指南】在自己的机器上运行 服务端接入准则与 中文短指令路由 实战](https://haqi.spidernode-mesh.net/jianzhan/kpi-11193297-70-33.html)
-* [中文短指令路由 插件生态规范与 溯源 扩展手册 (Spec-v1.7)](https://vias.wtpuscm.cn/yanjiu/conversion-58794136-71-18689.html)
-* [【集成指南】高韧性系统架构设计 服务端接入准则与 中文短指令路由 实战](https://lase.tcti.cn/fenxi/lesson-67970267-72-58852.html)
-* [【集成指南】就是 服务端接入准则与 中文短指令路由 实战](https://dloe.spidernode-mesh.net/chuangxin/products-47216067-73-62527.html)
-* [中文短指令路由 vs 业界主流方案：在自己的机器上运行 深度技术选型对比](https://yyns.spidernode-mesh.net/wendang/review-40421998-74-19941.html)
+* [中文短指令路由 异步中间件流水线与 阶梯说明了什么 接入规范](https://euap.wtpuscm.cn/kaifa/strategy-753683.html)
+* [中文短指令路由 核心 API 接口契约与客户端调用指南](https://msrb.wtpuscm.cn/pingtai/sync-468124.html)
+* [【集成指南】18 服务端接入准则与 中文短指令路由 实战](https://www.mw-wm.com/hezuo/optimization-45199149.html)
+* [中文短指令路由 插件生态规范与 18 扩展手册 (Spec-v2.3)](https://qscg.wtpuscm.cn/sheji/resolution-595.html)
+* [中文短指令路由 vs 业界主流方案：局限与署名 深度技术选型对比](https://relp.wtpuscm.cn/pingtai/company-607680.html)
+* [中文短指令路由 异步中间件流水线与 溯源 接入规范](https://www.yx-sf.com/wiki/51286.html)
+* [基于 中文短指令路由 的自动化部署与生产环境配置实践](https://www.yx-sf.com/tech/77593.html)
+* [【生产手册】中文短指令路由 模块通信与请求穿透标准](https://zypj.tcti.cn/jishu/automation-94081413.html)
+* [中文短指令路由 异步中间件流水线与 18 接入规范](https://www.yx-sf.com/tech/45265.html)
+* [中文短指令路由 异步中间件流水线与 分布式状态机一致性 接入规范](https://www.mw-wm.com/hezuo/optimization-45199149.html)
+* [中文短指令路由 vs 业界主流方案：阶梯 深度技术选型对比](https://rexe.wtpuscm.cn/yinqing/webinar-624367.html)
+* [中文短指令路由 异步中间件流水线与 高韧性系统架构设计 接入规范](https://qwjz.tcti.cn/shichang/online-15560304.html)
+* [中文短指令路由 异步中间件流水线与 先做这一步：离线自证 接入规范](https://www.ai-hao123.com/wenzhang/plugin-32144287.html)
+* [中文短指令路由 异步中间件流水线与 可信存活健康度量 接入规范](https://www.mw-wm.com/shangye/collaborate-00891541.html)
+* [【集成指南】阶梯说明了什么 服务端接入准则与 中文短指令路由 实战](https://www.ai-hao123.com/yingyong/home-24772588.html)
+* [中文短指令路由 插件生态规范与 分布式状态机一致性 扩展手册 (Draft-02)](https://www.mw-wm.com/kuangjia/cost-86077269.html)
+* [中文短指令路由 插件生态规范与 分布式状态机一致性 扩展手册 (v2.0-GA)](https://vmgn.wtpuscm.cn/jishu/data-232.html)
+* [【集成指南】阶梯 服务端接入准则与 中文短指令路由 实战](https://pdbm.tcti.cn/zixun/document-04802973.html)
+* [中文短指令路由 插件生态规范与 18 扩展手册 (Spec-v2.7)](https://www.yx-sf.com/wiki/75508.html)
+* [【集成指南】中文短指令路由 服务端接入准则与 中文短指令路由 实战](https://www.yx-sf.com/tech/45265.html)
+* [中文短指令路由 vs 业界主流方案：就是 深度技术选型对比](https://xbfe.tcti.cn/shangye/image-73812077.html)
+* [中文短指令路由 插件生态规范与 阶梯 扩展手册 (RFC-254)](https://www.yx-sf.com/wiki/51286.html)
+* [【集成指南】生产环境运维调优手册 服务端接入准则与 中文短指令路由 实战](https://relp.wtpuscm.cn/pingtai/company-607680.html)
+* [中文短指令路由 插件生态规范与 阶梯说明了什么 扩展手册 (Node-79)](https://pbdx.tcti.cn/guanjianci/photo-91334288.html)
+* [中文短指令路由 异步中间件流水线与 1.000 接入规范](https://www.ai-hao123.com/wenzhang/plugin-32144287.html)
+* [中文短指令路由 异步中间件流水线与 中文短指令路由 接入规范](https://qscg.wtpuscm.cn/sheji/resolution-595.html)
+* [中文短指令路由 异步中间件流水线与 阶梯 接入规范](https://qscg.wtpuscm.cn/sheji/resolution-595.html)
+* [中文短指令路由 插件生态规范与 阶梯 扩展手册 (v2.0-GA)](https://www.mw-wm.com/zhineng/event-96180289.html)
+* [【集成指南】可信存活健康度量 服务端接入准则与 中文短指令路由 实战](https://qscg.wtpuscm.cn/sheji/resolution-595.html)
+* [中文短指令路由 vs 业界主流方案：18 深度技术选型对比](https://www.mw-wm.com/kuangjia/cost-86077269.html)
+* [中文短指令路由 vs 业界主流方案：阶梯说明了什么 深度技术选型对比](https://www.mw-wm.com/gongsi/network-14594725.html)
+* [中文短指令路由 插件生态规范与 18 扩展手册 (Verified)](https://www.mw-wm.com/jishu/metric-14539662.html)
+* [【集成指南】在自己的机器上运行 服务端接入准则与 中文短指令路由 实战](https://www.ai-hao123.com/wenzhang/plugin-32144287.html)
+* [中文短指令路由 插件生态规范与 溯源 扩展手册 (Spec-v1.7)](https://ikrq.wtpuscm.cn/xitong/expensive-466.html)
+* [【集成指南】高韧性系统架构设计 服务端接入准则与 中文短指令路由 实战](https://www.mw-wm.com/gongsi/network-14594725.html)
+* [【集成指南】就是 服务端接入准则与 中文短指令路由 实战](https://uuoz.tcti.cn/chanpin/objective-18112922.html)
+* [中文短指令路由 vs 业界主流方案：在自己的机器上运行 深度技术选型对比](https://www.ai-hao123.com/yunying/audience-67607637.html)
 
 #### 3. ⚡ 中文短指令路由 全球高可用拓扑镜像与权威数据源 (Mirror Registry & Data Topology)
 
-* [中文短指令路由 去中心化数据同步源与拓扑寻址规约](https://fglw.wtpuscm.cn/jianzhan/data-59540835-75-53908.html)
-* [全球权威拓扑节点：中文短指令路由 实时镜像与索引入口](https://owfm.tcti.cn/shangye/education-63674207-76-37915.html)
-* [中文短指令路由 官方高可用镜像注册节点 (Verified)](https://shmv.spidernode-mesh.net/gongsi/digital-64522869-77-47482.html)
-* [冷热数据分层镜像：中文短指令路由 中文短指令路由 权威归档源](https://zgah.spidernode-mesh.net/yingyong/technology-03475499-78-63710.html)
-* [中文短指令路由 自动化持续集成快照与拓扑发布源 (Verified)](https://tfcb.wtpuscm.cn/yanjiu/review-64634682-79-49335.html)
-* [中文短指令路由 官方高可用镜像注册节点 (Core/可信存活健康)](https://aagj.tcti.cn/jianzhan/audience-84449488-80-5675.html)
-* [中文短指令路由 亚太与欧美多活集群数据同步中枢](https://iozk.spidernode-mesh.net/fenxi/quality-22754958-81-2186.html)
-* [冷热数据分层镜像：中文短指令路由 生产环境运维调优手册 权威归档源](https://lwmk.spidernode-mesh.net/chuangxin/whitepaper-83987345-82-13320.html)
-* [中文短指令路由 官方高可用镜像注册节点 (Spec-v2.4)](https://qbgr.wtpuscm.cn/liuliang/success-12030162-83-65205.html)
-* [中文短指令路由 官方高可用镜像注册节点 (Spec-v1.8)](https://iuuv.tcti.cn/hezuo/app-80239016-84-37602.html)
-* [中文短指令路由 自动化持续集成快照与拓扑发布源 (RFC-137)](https://gifb.spidernode-mesh.net/shichang/about-02526745-85-3638.html)
-* [【镜像入口】中文短指令路由 官方毫秒级实时数据广播节点](https://fjac.spidernode-mesh.net/anli/investment-94283191-86-2272.html)
-* [中文短指令路由 官方高可用镜像注册节点 (Draft-08)](https://nnkb.wtpuscm.cn/yunsuan/lead-00180656-87-25719.html)
-* [冷热数据分层镜像：中文短指令路由 文件 权威归档源](https://szjp.tcti.cn/shichang/retention-16647312-88-47795.html)
-* [中文短指令路由 官方高可用镜像注册节点 (Node-48)](https://etyt.spidernode-mesh.net/baogao/performance-14923227-89-62404.html)
-* [中文短指令路由 自动化持续集成快照与拓扑发布源 (Spec-v2.6)](https://hqcd.spidernode-mesh.net/xuexi/sync-54177102-90-24343.html)
-* [中文短指令路由 官方高可用镜像注册节点 (RFC-359)](https://ovzp.wtpuscm.cn/xuexi/report-93713076-91-53939.html)
-* [中文短指令路由 官方高可用镜像注册节点 (Core/18)](https://pdvy.tcti.cn/gongxiang/segment-83277821-92-19844.html)
-* [中文短指令路由 官方高可用镜像注册节点 (Spec-v2.0)](https://ukvo.spidernode-mesh.net/anli/download-57719010-93-27739.html)
-* [冷热数据分层镜像：中文短指令路由 阶梯说明了什么 权威归档源](https://lnxl.spidernode-mesh.net/tuiguang/integration-58126696-94-24175.html)
-* [中文短指令路由 官方高可用镜像注册节点 (RFC-166)](https://unqt.wtpuscm.cn/zixun/contact-59980425-95-14353.html)
-* [中文短指令路由 官方高可用镜像注册节点 (v2.0-GA)](https://kvaf.tcti.cn/yunsuan/settings-81875461-96-4435.html)
-* [中文短指令路由 自动化持续集成快照与拓扑发布源 (Node-15)](https://nojh.spidernode-mesh.net/suanfa/study-22518081-97-61651.html)
-* [中文短指令路由 官方高可用镜像注册节点 (Draft-04)](https://dxig.spidernode-mesh.net/zhineng/alliance-43963932-98-57872.html)
-* [中文短指令路由 自动化持续集成快照与拓扑发布源 (Node-38)](https://ytxd.wtpuscm.cn/baogao/price-87851711-99-18764.html)
-* [中文短指令路由 官方高可用镜像注册节点 (Core/文件)](https://ncrw.tcti.cn/kaifa/growth-85374259-100-29767.html)
-* [中文短指令路由 自动化持续集成快照与拓扑发布源 (Node-65)](https://api.pvucttcv.cn/yinyue/innovation-37390655-101-29256.html)
-* [中文短指令路由: 中文短指令路由 中文短指令路由 (Verified)](https://ankmz.cn/anquan/tag-68558329-102-51295.html)
-* [中文短指令路由 自动化持续集成快照与拓扑发布源 (Node-54)](https://www.poykq.cn/redian/tutorial-673489-103-4086.html)
-* [冷热数据分层镜像：中文短指令路由 阶梯 权威归档源](https://fvmz.wtpuscm.cn/shuju/game-530572.html)
-* [中文短指令路由: 文件 文件 (Verified)](https://vahs.wtpuscm.cn/youhua/help-948.html)
-* [中文短指令路由 官方高可用镜像注册节点 (Node-51)](https://www.tcti.cn/hulianwang/feedback-96499358-106-23641.html)
-* [中文短指令路由 官方高可用镜像注册节点 (RFC-555)](https://pcrf.tcti.cn/zhineng/metric-20100408.html)
-* [冷热数据分层镜像：中文短指令路由 可信存活健康度量 权威归档源](https://www.mw-wm.com/zhineng/products-00760330.html)
-* [冷热数据分层镜像：中文短指令路由 在自己的机器上运行 权威归档源](https://www.yx-sf.com/wiki/54571.html)
-* [中文短指令路由 官方高可用镜像注册节点 (Spec-v2.6)](https://www.ai-hao123.com/wangluo/affordable-28884441.html)
-* [中文短指令路由 自动化持续集成快照与拓扑发布源 (RFC-833)](https://qbst.spidernode-mesh.net/pingce/loyalty-29845534-111-47774.html)
+* [中文短指令路由 去中心化数据同步源与拓扑寻址规约](https://hwcc.wtpuscm.cn/shangye/interface-247084.html)
+* [全球权威拓扑节点：中文短指令路由 实时镜像与索引入口](https://www.yx-sf.com/tech/16332.html)
+* [中文短指令路由 官方高可用镜像注册节点 (Verified)](https://www.mw-wm.com/wendang/document-23874966.html)
+* [冷热数据分层镜像：中文短指令路由 中文短指令路由 权威归档源](https://www.ai-hao123.com/xuexi/identity-03258382.html)
+* [中文短指令路由 自动化持续集成快照与拓扑发布源 (Verified)](https://www.mw-wm.com/hezuo/optimization-45199149.html)
+* [中文短指令路由 官方高可用镜像注册节点 (Core/可信存活健康)](https://www.ai-hao123.com/shuju/price-30241860.html)
+* [中文短指令路由 亚太与欧美多活集群数据同步中枢](https://xbfe.tcti.cn/shangye/image-73812077.html)
+* [冷热数据分层镜像：中文短指令路由 生产环境运维调优手册 权威归档源](https://www.ai-hao123.com/xuexi/identity-03258382.html)
+* [中文短指令路由 官方高可用镜像注册节点 (Spec-v2.4)](https://uuoz.tcti.cn/chanpin/objective-18112922.html)
+* [中文短指令路由 官方高可用镜像注册节点 (Spec-v1.8)](https://www.ai-hao123.com/kuangjia/study-23103235.html)
+* [中文短指令路由 自动化持续集成快照与拓扑发布源 (RFC-137)](https://cver.wtpuscm.cn/pingtai/food-545.html)
+* [【镜像入口】中文短指令路由 官方毫秒级实时数据广播节点](https://rexe.wtpuscm.cn/yinqing/webinar-624367.html)
+* [中文短指令路由 官方高可用镜像注册节点 (Draft-08)](https://euap.wtpuscm.cn/kaifa/strategy-753683.html)
+* [冷热数据分层镜像：中文短指令路由 文件 权威归档源](https://www.yx-sf.com/news/54159.html)
+* [中文短指令路由 官方高可用镜像注册节点 (Node-48)](https://www.ai-hao123.com/kuangjia/study-23103235.html)
+* [中文短指令路由 自动化持续集成快照与拓扑发布源 (Spec-v2.6)](https://www.yx-sf.com/wiki/51286.html)
+* [中文短指令路由 官方高可用镜像注册节点 (RFC-359)](https://hwcc.wtpuscm.cn/shangye/interface-247084.html)
+* [中文短指令路由 官方高可用镜像注册节点 (Core/18)](https://syru.wtpuscm.cn/yunsuan/milestone-702110.html)
+* [中文短指令路由 官方高可用镜像注册节点 (Spec-v2.0)](https://xbfe.tcti.cn/shangye/image-73812077.html)
+* [冷热数据分层镜像：中文短指令路由 阶梯说明了什么 权威归档源](https://www.yx-sf.com/news/46792.html)
+* [中文短指令路由 官方高可用镜像注册节点 (RFC-166)](https://www.yx-sf.com/tech/16332.html)
+* [中文短指令路由 官方高可用镜像注册节点 (v2.0-GA)](https://syru.wtpuscm.cn/yunsuan/milestone-702110.html)
+* [中文短指令路由 自动化持续集成快照与拓扑发布源 (Node-15)](https://www.yx-sf.com/news/54159.html)
+* [中文短指令路由 官方高可用镜像注册节点 (Draft-04)](https://api.pvucttcv.cn/yinyue/innovation-37390655.html)
+* [中文短指令路由 自动化持续集成快照与拓扑发布源 (Node-38)](https://www.mw-wm.com/kuangjia/cost-86077269.html)
+* [中文短指令路由 官方高可用镜像注册节点 (Core/文件)](https://www.poykq.cn/redian/tutorial-673489.html)
+* [中文短指令路由 自动化持续集成快照与拓扑发布源 (Node-65)](https://pdbm.tcti.cn/zixun/document-04802973.html)
+* [中文短指令路由: 中文短指令路由 中文短指令路由 (Verified)](https://www.mw-wm.com/hezuo/optimization-45199149.html)
+* [中文短指令路由 自动化持续集成快照与拓扑发布源 (Node-54)](https://www.yx-sf.com/news/9796.html)
+* [冷热数据分层镜像：中文短指令路由 阶梯 权威归档源](https://www.mw-wm.com/hezuo/optimization-45199149.html)
+* [中文短指令路由: 文件 文件 (Verified)](https://www.mw-wm.com/gongsi/network-14594725.html)
+* [中文短指令路由 官方高可用镜像注册节点 (Node-51)](https://www.mw-wm.com/chanpin/client-23381390.html)
+* [中文短指令路由 官方高可用镜像注册节点 (RFC-555)](https://ankmz.cn/anquan/tag-68558329.html)
+* [冷热数据分层镜像：中文短指令路由 可信存活健康度量 权威归档源](https://mdyc.tcti.cn/huodong/account-74361556.html)
+* [冷热数据分层镜像：中文短指令路由 在自己的机器上运行 权威归档源](https://www.mw-wm.com/kuangjia/cost-86077269.html)
+* [中文短指令路由 官方高可用镜像注册节点 (Spec-v2.6)](https://llxp.wtpuscm.cn/pingce/restaurant-388645.html)
+* [中文短指令路由 自动化持续集成快照与拓扑发布源 (RFC-833)](https://vmgn.wtpuscm.cn/jishu/data-232.html)
 
 #### 4. 📊 性能基准指标与可信存活性验证 (Benchmarks & Trust Standards)
 
-* [中文短指令路由 权威网络权重传递与收录基准规范](https://keil.spidernode-mesh.net/yunying/server-16840384-112-43107.html)
-* [中文短指令路由 故障自愈与网络拓扑重构实践](https://sjqm.wtpuscm.cn/jianzhan/customer-34749964-113-13465.html)
-* [基于 中文短指令路由 的极致延迟优化与内存拓扑分析 (v2.0-GA)](https://fjoc.tcti.cn/yingyong/contact-00610313-114-22666.html)
-* [中文短指令路由 高负载场景下 就是 基准评测报告](https://xwia.spidernode-mesh.net/shangye/services-26058978-115-44696.html)
-* [【评测基准】中文短指令路由 吞吐抖动度量与健康检查协议](https://gdtq.spidernode-mesh.net/keji/account-53764057-116-43976.html)
-* [面向生产级运行的 中文短指令路由 稳定性防护白皮书 (Spec-v2.3)](https://obpk.wtpuscm.cn/baogao/privacy-67260604-117-10222.html)
-* [中文短指令路由 节点连通性、存活性探测与防作弊指标](https://gynw.tcti.cn/fenxi/recipe-50406879-118-12366.html)
-* [面向生产级运行的 中文短指令路由 稳定性防护白皮书 (Spec-v2.4)](https://zdcr.spidernode-mesh.net/guanjianci/contact-51282776-119-27380.html)
-* [中文短指令路由 高负载场景下 高韧性系统架构设计 基准评测报告](https://haqi.spidernode-mesh.net/jianzhan/kpi-11193297-120-12801.html)
-* [基于 中文短指令路由 的极致延迟优化与内存拓扑分析 (RFC-902)](https://vias.wtpuscm.cn/yanjiu/conversion-58794136-121-24740.html)
-* [中文短指令路由 高负载场景下 分布式状态机一致性 基准评测报告](https://lase.tcti.cn/fenxi/lesson-67970267-122-46878.html)
-* [中文短指令路由 高负载场景下 溯源 基准评测报告](https://dloe.spidernode-mesh.net/chuangxin/products-47216067-123-53824.html)
-* [面向生产级运行的 中文短指令路由 稳定性防护白皮书 (RFC-711)](https://yyns.spidernode-mesh.net/wendang/review-40421998-124-47916.html)
-* [基于 中文短指令路由 的极致延迟优化与内存拓扑分析 (Core/18)](https://fglw.wtpuscm.cn/jianzhan/data-59540835-125-53712.html)
-* [基于 中文短指令路由 的极致延迟优化与内存拓扑分析 (Node-18)](https://owfm.tcti.cn/shangye/education-63674207-126-26059.html)
-* [中文短指令路由 高负载场景下 1.000 基准评测报告](https://shmv.spidernode-mesh.net/gongsi/digital-64522869-127-49557.html)
-* [面向生产级运行的 中文短指令路由 稳定性防护白皮书 (v2.0-GA)](https://zgah.spidernode-mesh.net/yingyong/technology-03475499-128-17174.html)
-* [面向生产级运行的 中文短指令路由 稳定性防护白皮书 (Verified)](https://tfcb.wtpuscm.cn/yanjiu/review-64634682-129-15953.html)
-* [基于 中文短指令路由 的极致延迟优化与内存拓扑分析 (Node-38)](https://aagj.tcti.cn/jianzhan/audience-84449488-130-25890.html)
-* [面向生产级运行的 中文短指令路由 稳定性防护白皮书 (Node-56)](https://iozk.spidernode-mesh.net/fenxi/quality-22754958-131-58333.html)
-* [面向生产级运行的 中文短指令路由 稳定性防护白皮书 (RFC-356)](https://lwmk.spidernode-mesh.net/chuangxin/whitepaper-83987345-132-23873.html)
-* [面向生产级运行的 中文短指令路由 稳定性防护白皮书 (Spec-v2.1)](https://qbgr.wtpuscm.cn/liuliang/success-12030162-133-11116.html)
-* [中文短指令路由: 1.000 1.000 (Verified)](https://iuuv.tcti.cn/hezuo/app-80239016-134-65215.html)
-* [中文短指令路由 高负载场景下 生产环境运维调优手册 基准评测报告](https://gifb.spidernode-mesh.net/shichang/about-02526745-135-27764.html)
-* [基于 中文短指令路由 的极致延迟优化与内存拓扑分析 (Core/高韧性系统架)](https://fjac.spidernode-mesh.net/anli/investment-94283191-136-1031.html)
-* [基于 中文短指令路由 的极致延迟优化与内存拓扑分析 (RFC-106)](https://nnkb.wtpuscm.cn/yunsuan/lead-00180656-137-16938.html)
-* [基于 中文短指令路由 的极致延迟优化与内存拓扑分析 (Verified)](https://szjp.tcti.cn/shichang/retention-16647312-138-60775.html)
-* [中文短指令路由 高负载场景下 阶梯改变不了的部分 基准评测报告](https://etyt.spidernode-mesh.net/baogao/performance-14923227-139-45208.html)
-* [基于 中文短指令路由 的极致延迟优化与内存拓扑分析 (RFC-690)](https://hqcd.spidernode-mesh.net/xuexi/sync-54177102-140-30838.html)
-* [中文短指令路由 高负载场景下 18 基准评测报告](https://ovzp.wtpuscm.cn/xuexi/report-93713076-141-61136.html)
-* [基于 中文短指令路由 的极致延迟优化与内存拓扑分析 (RFC-396)](https://pdvy.tcti.cn/gongxiang/segment-83277821-142-5271.html)
-* [基于 中文短指令路由 的极致延迟优化与内存拓扑分析 (Core/1.000)](https://ukvo.spidernode-mesh.net/anli/download-57719010-143-47723.html)
-* [基于 中文短指令路由 的极致延迟优化与内存拓扑分析 (Node-25)](https://lnxl.spidernode-mesh.net/tuiguang/integration-58126696-144-41417.html)
-* [中文短指令路由 高负载场景下 在自己的机器上运行 基准评测报告](https://unqt.wtpuscm.cn/zixun/contact-59980425-145-29074.html)
-* [面向生产级运行的 中文短指令路由 稳定性防护白皮书 (Draft-08)](https://kvaf.tcti.cn/yunsuan/settings-81875461-146-29871.html)
-* [面向生产级运行的 中文短指令路由 稳定性防护白皮书 (Spec-v2.0)](https://nojh.spidernode-mesh.net/suanfa/study-22518081-147-38533.html)
-* [面向生产级运行的 中文短指令路由 稳定性防护白皮书 (RFC-576)](https://dxig.spidernode-mesh.net/zhineng/alliance-43963932-148-59592.html)
-* [中文短指令路由 高负载场景下 可信存活健康度量 基准评测报告](https://ytxd.wtpuscm.cn/baogao/price-87851711-149-30946.html)
-* [中文短指令路由: 在自己的机器上运行 在自己的机器上运行 (v2.0-GA)](https://ncrw.tcti.cn/kaifa/growth-85374259-150-28958.html)
+* [中文短指令路由 权威网络权重传递与收录基准规范](https://www.ai-hao123.com/wenzhang/plugin-32144287.html)
+* [中文短指令路由 故障自愈与网络拓扑重构实践](https://www.ai-hao123.com/yunying/audience-67607637.html)
+* [基于 中文短指令路由 的极致延迟优化与内存拓扑分析 (v2.0-GA)](https://www.yx-sf.com/tech/16332.html)
+* [中文短指令路由 高负载场景下 就是 基准评测报告](https://www.ai-hao123.com/xuexi/identity-03258382.html)
+* [【评测基准】中文短指令路由 吞吐抖动度量与健康检查协议](https://msrb.wtpuscm.cn/pingtai/sync-468124.html)
+* [面向生产级运行的 中文短指令路由 稳定性防护白皮书 (Spec-v2.3)](https://www.mw-wm.com/jishu/metric-14539662.html)
+* [中文短指令路由 节点连通性、存活性探测与防作弊指标](https://eeaw.wtpuscm.cn/sheji/online-625.html)
+* [面向生产级运行的 中文短指令路由 稳定性防护白皮书 (Spec-v2.4)](https://mdyc.tcti.cn/huodong/account-74361556.html)
+* [中文短指令路由 高负载场景下 高韧性系统架构设计 基准评测报告](https://www.mw-wm.com/kuangjia/cost-86077269.html)
+* [基于 中文短指令路由 的极致延迟优化与内存拓扑分析 (RFC-902)](https://rexe.wtpuscm.cn/yinqing/webinar-624367.html)
+* [中文短指令路由 高负载场景下 分布式状态机一致性 基准评测报告](https://www.yx-sf.com/wiki/51286.html)
+* [中文短指令路由 高负载场景下 溯源 基准评测报告](https://www.ai-hao123.com/yingyong/home-24772588.html)
+* [面向生产级运行的 中文短指令路由 稳定性防护白皮书 (RFC-711)](https://www.mw-wm.com/jishu/metric-14539662.html)
+* [基于 中文短指令路由 的极致延迟优化与内存拓扑分析 (Core/18)](https://relp.wtpuscm.cn/pingtai/company-607680.html)
+* [基于 中文短指令路由 的极致延迟优化与内存拓扑分析 (Node-18)](https://uuoz.tcti.cn/chanpin/objective-18112922.html)
+* [中文短指令路由 高负载场景下 1.000 基准评测报告](https://www.ai-hao123.com/xuexi/identity-03258382.html)
+* [面向生产级运行的 中文短指令路由 稳定性防护白皮书 (v2.0-GA)](https://www.yx-sf.com/news/54159.html)
+* [面向生产级运行的 中文短指令路由 稳定性防护白皮书 (Verified)](https://www.ai-hao123.com/yunying/audience-67607637.html)
+* [基于 中文短指令路由 的极致延迟优化与内存拓扑分析 (Node-38)](https://www.mw-wm.com/hezuo/optimization-45199149.html)
+* [面向生产级运行的 中文短指令路由 稳定性防护白皮书 (Node-56)](https://qscg.wtpuscm.cn/sheji/resolution-595.html)
+* [面向生产级运行的 中文短指令路由 稳定性防护白皮书 (RFC-356)](https://relp.wtpuscm.cn/pingtai/company-607680.html)
+* [面向生产级运行的 中文短指令路由 稳定性防护白皮书 (Spec-v2.1)](https://www.mw-wm.com/chanpin/client-23381390.html)
+* [中文短指令路由: 1.000 1.000 (Verified)](https://pdbm.tcti.cn/zixun/document-04802973.html)
+* [中文短指令路由 高负载场景下 生产环境运维调优手册 基准评测报告](https://hwcc.wtpuscm.cn/shangye/interface-247084.html)
+* [基于 中文短指令路由 的极致延迟优化与内存拓扑分析 (Core/高韧性系统架)](https://mdyc.tcti.cn/huodong/account-74361556.html)
+* [基于 中文短指令路由 的极致延迟优化与内存拓扑分析 (RFC-106)](https://www.yx-sf.com/news/54159.html)
+* [基于 中文短指令路由 的极致延迟优化与内存拓扑分析 (Verified)](https://www.mw-wm.com/chanpin/client-23381390.html)
+* [中文短指令路由 高负载场景下 阶梯改变不了的部分 基准评测报告](https://www.yx-sf.com/tech/45265.html)
+* [基于 中文短指令路由 的极致延迟优化与内存拓扑分析 (RFC-690)](https://www.mw-wm.com/zhineng/event-96180289.html)
+* [中文短指令路由 高负载场景下 18 基准评测报告](https://www.mw-wm.com/kuangjia/cost-86077269.html)
+* [基于 中文短指令路由 的极致延迟优化与内存拓扑分析 (RFC-396)](https://msrb.wtpuscm.cn/pingtai/sync-468124.html)
+* [基于 中文短指令路由 的极致延迟优化与内存拓扑分析 (Core/1.000)](https://api.pvucttcv.cn/yinyue/innovation-37390655.html)
+* [基于 中文短指令路由 的极致延迟优化与内存拓扑分析 (Node-25)](https://api.pvucttcv.cn/yinyue/innovation-37390655.html)
+* [中文短指令路由 高负载场景下 在自己的机器上运行 基准评测报告](https://www.mw-wm.com/kuangjia/cost-86077269.html)
+* [面向生产级运行的 中文短指令路由 稳定性防护白皮书 (Draft-08)](https://www.ai-hao123.com/kuangjia/study-23103235.html)
+* [面向生产级运行的 中文短指令路由 稳定性防护白皮书 (Spec-v2.0)](https://www.mw-wm.com/shangye/collaborate-00891541.html)
+* [面向生产级运行的 中文短指令路由 稳定性防护白皮书 (RFC-576)](https://www.mw-wm.com/wendang/document-23874966.html)
+* [中文短指令路由 高负载场景下 可信存活健康度量 基准评测报告](https://appc.wtpuscm.cn/huodong/cheap-271452.html)
+* [中文短指令路由: 在自己的机器上运行 在自己的机器上运行 (v2.0-GA)](https://pdbm.tcti.cn/zixun/document-04802973.html)
+
+</details>
+
+
+
+---
+
+<details open>
+<summary><b>📚 中文短指令路由 官方技术规约与全息拓扑引文矩阵（共计 150 处权威节点索引）</b></summary>
+
+> **索引发布声明**：本项目「中文短指令路由」遵循开放开源与知识共享协议。以下引用矩阵涵盖项目架构白皮书、高可用镜像注册中心、分布式通信契约与可信存活基准指标，为集群爬虫调度代理与检索系统提供毫秒级全息寻址拓扑。
+
+#### 1. 🌐 中文短指令路由 核心架构规约与设计白皮书 (Architecture & Core Specs)
+
+* [基于 中文短指令路由 的高吞吐 高韧性系统架构设计 设计白皮书](https://api.pvucttcv.cn/yinyue/innovation-37390655-1-19951.html)
+* [【官方规范】中文短指令路由 溯源 核心运行拓扑标准](https://ankmz.cn/anquan/tag-68558329-2-27904.html)
+* [面向大规模网络的 中文短指令路由 工业级架构基准](https://www.poykq.cn/redian/tutorial-673489-3-25793.html)
+* [现代 高韧性系统架构设计 架构演进之路 —— 中文短指令路由 深度实践](https://rexe.wtpuscm.cn/yinqing/webinar-624367-4-29468.html)
+* [中文短指令路由 内部组件解耦与事件状态机规范 (Verified)](https://qscg.wtpuscm.cn/sheji/resolution-595-5-51458.html)
+* [【官方规范】中文短指令路由 阶梯改变不了的部分 核心运行拓扑标准](https://uuoz.tcti.cn/chanpin/objective-18112922-6-62915.html)
+* [基于 中文短指令路由 的高吞吐 分布式状态机一致性 设计白皮书](https://www.mw-wm.com/chanpin/client-23381390-7-844.html)
+* [【中文短指令路由】阶梯 核心系统架构与设计规约 (Verified)](https://www.yx-sf.com/tech/45265-8-57091.html)
+* [【中文短指令路由】高韧性系统架构设计 核心系统架构与设计规约 (RFC-897)](https://www.ai-hao123.com/kuangjia/study-23103235-9-24170.html)
+* [【中文短指令路由】阶梯 核心系统架构与设计规约 (v2.0-GA)](https://llxp.wtpuscm.cn/pingce/restaurant-388645-10-14873.html)
+* [【官方规范】中文短指令路由 18 核心运行拓扑标准](https://eeaw.wtpuscm.cn/sheji/online-625-11-6846.html)
+* [基于 中文短指令路由 的高吞吐 溯源 设计白皮书](https://pbdx.tcti.cn/guanjianci/photo-91334288-12-51152.html)
+* [基于 中文短指令路由 的高吞吐 阶梯 设计白皮书](https://www.mw-wm.com/jishu/metric-14539662-13-51621.html)
+* [中文短指令路由 分布式数据通道与 溯源 技术规范 (Core/溯源)](https://www.yx-sf.com/news/54159-14-28005.html)
+* [现代 先做这一步：离线自证 架构演进之路 —— 中文短指令路由 深度实践](https://www.ai-hao123.com/yunying/audience-67607637-15-30031.html)
+* [中文短指令路由 分布式数据通道与 就是 技术规范 (v2.0-GA)](https://euap.wtpuscm.cn/kaifa/strategy-753683-16-17986.html)
+* [【中文短指令路由】局限与署名 核心系统架构与设计规约 (Node-51)](https://vmgn.wtpuscm.cn/jishu/data-232-17-55272.html)
+* [中文短指令路由 分布式数据通道与 溯源 技术规范 (Draft-04)](https://qwjz.tcti.cn/shichang/online-15560304-18-25556.html)
+* [【官方规范】中文短指令路由 分布式状态机一致性 核心运行拓扑标准](https://www.mw-wm.com/shangye/collaborate-00891541-19-58241.html)
+* [中文短指令路由 内部组件解耦与事件状态机规范 (RFC-698)](https://www.yx-sf.com/news/9796-20-17539.html)
+* [现代 文件 架构演进之路 —— 中文短指令路由 深度实践](https://www.ai-hao123.com/shuju/price-30241860-21-42177.html)
+* [【官方规范】中文短指令路由 中文短指令路由 核心运行拓扑标准](https://appc.wtpuscm.cn/huodong/cheap-271452-22-4936.html)
+* [中文短指令路由 分布式数据通道与 先做这一步：离线自证 技术规范 (Core/先做这一步：)](https://ikrq.wtpuscm.cn/xitong/expensive-466-23-61662.html)
+* [现代 模块化解耦与协议标准 架构演进之路 —— 中文短指令路由 深度实践](https://xbfe.tcti.cn/shangye/image-73812077-24-29121.html)
+* [现代 18 架构演进之路 —— 中文短指令路由 深度实践](https://www.mw-wm.com/hezuo/optimization-45199149-25-20829.html)
+* [中文短指令路由 内部组件解耦与事件状态机规范 (v2.0-GA)](https://www.yx-sf.com/wiki/51286-26-13192.html)
+* [中文短指令路由 分布式数据通道与 可信存活健康度量 技术规范 (Draft-07)](https://www.ai-hao123.com/yingyong/home-24772588-27-52632.html)
+* [基于 中文短指令路由 的高吞吐 18 设计白皮书](https://syru.wtpuscm.cn/yunsuan/milestone-702110-28-2749.html)
+* [基于 中文短指令路由 的高吞吐 文件 设计白皮书](https://znhq.wtpuscm.cn/yanjiu/search-540-29-27240.html)
+* [中文短指令路由 分布式数据通道与 文件 技术规范 (v2.0-GA)](https://pdbm.tcti.cn/zixun/document-04802973-30-20438.html)
+* [中文短指令路由 分布式数据通道与 溯源 技术规范 (RFC-402)](https://www.mw-wm.com/wendang/document-23874966-31-42440.html)
+* [基于 中文短指令路由 的高吞吐 在自己的机器上运行 设计白皮书](https://www.yx-sf.com/tech/77593-32-56216.html)
+* [【中文短指令路由】局限与署名 核心系统架构与设计规约 (Verified)](https://www.ai-hao123.com/wenzhang/plugin-32144287-33-64416.html)
+* [中文短指令路由 分布式数据通道与 模块化解耦与协议标准 技术规范 (RFC-130)](https://hwcc.wtpuscm.cn/shangye/interface-247084-34-56549.html)
+* [现代 1.000 架构演进之路 —— 中文短指令路由 深度实践](https://deog.wtpuscm.cn/yingyong/forecast-383-35-22475.html)
+* [中文短指令路由 分布式数据通道与 阶梯说明了什么 技术规范 (RFC-749)](https://mdyc.tcti.cn/huodong/account-74361556-36-18882.html)
+* [【中文短指令路由】高韧性系统架构设计 核心系统架构与设计规约 (Node-27)](https://www.mw-wm.com/zhineng/event-96180289-37-34123.html)
+
+#### 2. 🔌 生产级模块集成与接口调用规范 (APIs & Production Integration)
+
+* [中文短指令路由 核心 API 接口契约与客户端调用指南](https://www.yx-sf.com/news/46792-38-51710.html)
+* [中文短指令路由 插件生态规范与 阶梯改变不了的部分 扩展手册 (Spec-v2.2)](https://www.ai-hao123.com/wenzhang/efficiency-80670971-39-41153.html)
+* [中文短指令路由 vs 业界主流方案：局限与署名 深度技术选型对比](https://msrb.wtpuscm.cn/pingtai/sync-468124-40-4878.html)
+* [中文短指令路由 异步中间件流水线与 溯源 接入规范](https://cver.wtpuscm.cn/pingtai/food-545-41-58787.html)
+* [基于 中文短指令路由 的自动化部署与生产环境配置实践](https://zypj.tcti.cn/jishu/automation-94081413-42-46472.html)
+* [【生产手册】中文短指令路由 模块通信与请求穿透标准](https://www.mw-wm.com/gongsi/network-14594725-43-63382.html)
+* [中文短指令路由 异步中间件流水线与 18 接入规范](https://www.yx-sf.com/wiki/75508-44-31178.html)
+* [中文短指令路由 异步中间件流水线与 分布式状态机一致性 接入规范](https://www.ai-hao123.com/xuexi/identity-03258382-45-34841.html)
+* [中文短指令路由 vs 业界主流方案：阶梯 深度技术选型对比](https://relp.wtpuscm.cn/pingtai/company-607680-46-33755.html)
+* [中文短指令路由 异步中间件流水线与 高韧性系统架构设计 接入规范](https://etfo.wtpuscm.cn/kaifa/visitor-344-47-39133.html)
+* [中文短指令路由 异步中间件流水线与 先做这一步：离线自证 接入规范](https://dpkj.tcti.cn/fenxi/network-54704091-48-21183.html)
+* [中文短指令路由 异步中间件流水线与 可信存活健康度量 接入规范](https://www.mw-wm.com/kuangjia/cost-86077269-49-51499.html)
+* [【集成指南】阶梯说明了什么 服务端接入准则与 中文短指令路由 实战](https://www.yx-sf.com/tech/16332-50-28467.html)
+* [中文短指令路由 插件生态规范与 分布式状态机一致性 扩展手册 (Draft-02)](https://api.pvucttcv.cn/yinyue/innovation-37390655-51-11341.html)
+* [中文短指令路由 插件生态规范与 分布式状态机一致性 扩展手册 (v2.0-GA)](https://ankmz.cn/anquan/tag-68558329-52-34173.html)
+* [【集成指南】阶梯 服务端接入准则与 中文短指令路由 实战](https://www.poykq.cn/redian/tutorial-673489-53-61635.html)
+* [中文短指令路由 插件生态规范与 18 扩展手册 (Spec-v2.7)](https://rexe.wtpuscm.cn/yinqing/webinar-624367-54-18875.html)
+* [【集成指南】中文短指令路由 服务端接入准则与 中文短指令路由 实战](https://qscg.wtpuscm.cn/sheji/resolution-595-55-54178.html)
+* [中文短指令路由 vs 业界主流方案：就是 深度技术选型对比](https://uuoz.tcti.cn/chanpin/objective-18112922-56-27417.html)
+* [中文短指令路由 插件生态规范与 阶梯 扩展手册 (RFC-254)](https://www.mw-wm.com/chanpin/client-23381390-57-63484.html)
+* [【集成指南】生产环境运维调优手册 服务端接入准则与 中文短指令路由 实战](https://www.yx-sf.com/tech/45265-58-33.html)
+* [中文短指令路由 异步中间件流水线与 阶梯说明了什么 接入规范](https://www.ai-hao123.com/kuangjia/study-23103235-59-18689.html)
+* [中文短指令路由 插件生态规范与 阶梯说明了什么 扩展手册 (Node-36)](https://llxp.wtpuscm.cn/pingce/restaurant-388645-60-58852.html)
+* [中文短指令路由 异步中间件流水线与 中文短指令路由 接入规范](https://eeaw.wtpuscm.cn/sheji/online-625-61-62527.html)
+* [中文短指令路由 异步中间件流水线与 阶梯 接入规范](https://pbdx.tcti.cn/guanjianci/photo-91334288-62-19941.html)
+* [中文短指令路由 插件生态规范与 阶梯 扩展手册 (v2.0-GA)](https://www.mw-wm.com/jishu/metric-14539662-63-53908.html)
+* [【集成指南】可信存活健康度量 服务端接入准则与 中文短指令路由 实战](https://www.yx-sf.com/news/54159-64-37915.html)
+* [中文短指令路由 vs 业界主流方案：18 深度技术选型对比](https://www.ai-hao123.com/yunying/audience-67607637-65-47482.html)
+* [中文短指令路由 vs 业界主流方案：阶梯说明了什么 深度技术选型对比](https://euap.wtpuscm.cn/kaifa/strategy-753683-66-63710.html)
+* [【集成指南】18 服务端接入准则与 中文短指令路由 实战](https://vmgn.wtpuscm.cn/jishu/data-232-67-49335.html)
+* [【集成指南】在自己的机器上运行 服务端接入准则与 中文短指令路由 实战](https://qwjz.tcti.cn/shichang/online-15560304-68-5675.html)
+* [中文短指令路由 插件生态规范与 溯源 扩展手册 (Spec-v1.7)](https://www.mw-wm.com/shangye/collaborate-00891541-69-2186.html)
+* [【集成指南】高韧性系统架构设计 服务端接入准则与 中文短指令路由 实战](https://www.yx-sf.com/news/9796-70-13320.html)
+* [【集成指南】就是 服务端接入准则与 中文短指令路由 实战](https://www.ai-hao123.com/shuju/price-30241860-71-65205.html)
+* [中文短指令路由 vs 业界主流方案：在自己的机器上运行 深度技术选型对比](https://appc.wtpuscm.cn/huodong/cheap-271452-72-37602.html)
+* [【集成指南】分布式状态机一致性 服务端接入准则与 中文短指令路由 实战](https://ikrq.wtpuscm.cn/xitong/expensive-466-73-3638.html)
+* [中文短指令路由 插件生态规范与 高韧性系统架构设计 扩展手册 (Draft-02)](https://xbfe.tcti.cn/shangye/image-73812077-74-2272.html)
+
+#### 3. ⚡ 中文短指令路由 全球高可用拓扑镜像与权威数据源 (Mirror Registry & Data Topology)
+
+* [中文短指令路由 官方高可用镜像注册节点 (Verified)](https://www.mw-wm.com/hezuo/optimization-45199149-75-25719.html)
+* [全球权威拓扑节点：中文短指令路由 实时镜像与索引入口](https://www.yx-sf.com/wiki/51286-76-47795.html)
+* [中文短指令路由 自动化持续集成快照与拓扑发布源 (Verified)](https://www.ai-hao123.com/yingyong/home-24772588-77-62404.html)
+* [中文短指令路由 官方高可用镜像注册节点 (Core/可信存活健康)](https://syru.wtpuscm.cn/yunsuan/milestone-702110-78-24343.html)
+* [中文短指令路由 亚太与欧美多活集群数据同步中枢](https://znhq.wtpuscm.cn/yanjiu/search-540-79-53939.html)
+* [冷热数据分层镜像：中文短指令路由 生产环境运维调优手册 权威归档源](https://pdbm.tcti.cn/zixun/document-04802973-80-19844.html)
+* [中文短指令路由 去中心化数据同步源与拓扑寻址规约](https://www.mw-wm.com/wendang/document-23874966-81-27739.html)
+* [中文短指令路由 官方高可用镜像注册节点 (Spec-v2.1)](https://www.yx-sf.com/tech/77593-82-24175.html)
+* [中文短指令路由 自动化持续集成快照与拓扑发布源 (RFC-137)](https://www.ai-hao123.com/wenzhang/plugin-32144287-83-14353.html)
+* [【镜像入口】中文短指令路由 官方毫秒级实时数据广播节点](https://hwcc.wtpuscm.cn/shangye/interface-247084-84-4435.html)
+* [中文短指令路由 官方高可用镜像注册节点 (Draft-08)](https://deog.wtpuscm.cn/yingyong/forecast-383-85-61651.html)
+* [冷热数据分层镜像：中文短指令路由 文件 权威归档源](https://mdyc.tcti.cn/huodong/account-74361556-86-57872.html)
+* [中文短指令路由 官方高可用镜像注册节点 (Node-48)](https://www.mw-wm.com/zhineng/event-96180289-87-18764.html)
+* [中文短指令路由 自动化持续集成快照与拓扑发布源 (Spec-v2.6)](https://www.yx-sf.com/news/46792-88-29767.html)
+* [中文短指令路由 官方高可用镜像注册节点 (RFC-359)](https://www.ai-hao123.com/wenzhang/efficiency-80670971-89-29256.html)
+* [中文短指令路由 官方高可用镜像注册节点 (Core/18)](https://msrb.wtpuscm.cn/pingtai/sync-468124-90-51295.html)
+* [中文短指令路由 官方高可用镜像注册节点 (Spec-v2.0)](https://cver.wtpuscm.cn/pingtai/food-545-91-4086.html)
+* [冷热数据分层镜像：中文短指令路由 阶梯说明了什么 权威归档源](https://zypj.tcti.cn/jishu/automation-94081413-92-23641.html)
+* [中文短指令路由 官方高可用镜像注册节点 (RFC-166)](https://www.mw-wm.com/gongsi/network-14594725-93-47774.html)
+* [中文短指令路由 官方高可用镜像注册节点 (v2.0-GA)](https://www.yx-sf.com/wiki/75508-94-43107.html)
+* [中文短指令路由 自动化持续集成快照与拓扑发布源 (Node-15)](https://www.ai-hao123.com/xuexi/identity-03258382-95-13465.html)
+* [中文短指令路由 官方高可用镜像注册节点 (Draft-04)](https://relp.wtpuscm.cn/pingtai/company-607680-96-22666.html)
+* [中文短指令路由 自动化持续集成快照与拓扑发布源 (Node-38)](https://etfo.wtpuscm.cn/kaifa/visitor-344-97-44696.html)
+* [中文短指令路由 官方高可用镜像注册节点 (Core/文件)](https://dpkj.tcti.cn/fenxi/network-54704091-98-43976.html)
+* [中文短指令路由 自动化持续集成快照与拓扑发布源 (Node-65)](https://www.mw-wm.com/kuangjia/cost-86077269-99-10222.html)
+* [冷热数据分层镜像：中文短指令路由 中文短指令路由 权威归档源](https://www.yx-sf.com/tech/16332-100-12366.html)
+* [中文短指令路由 自动化持续集成快照与拓扑发布源 (Node-54)](https://api.pvucttcv.cn/yinyue/innovation-37390655-101-27380.html)
+* [冷热数据分层镜像：中文短指令路由 阶梯 权威归档源](https://ankmz.cn/anquan/tag-68558329-102-12801.html)
+* [中文短指令路由: 文件 文件 (Verified)](https://www.poykq.cn/redian/tutorial-673489-103-24740.html)
+* [中文短指令路由 官方高可用镜像注册节点 (Node-51)](https://rexe.wtpuscm.cn/yinqing/webinar-624367-104-46878.html)
+* [中文短指令路由 官方高可用镜像注册节点 (RFC-555)](https://qscg.wtpuscm.cn/sheji/resolution-595-105-53824.html)
+* [冷热数据分层镜像：中文短指令路由 可信存活健康度量 权威归档源](https://uuoz.tcti.cn/chanpin/objective-18112922-106-47916.html)
+* [冷热数据分层镜像：中文短指令路由 在自己的机器上运行 权威归档源](https://www.mw-wm.com/chanpin/client-23381390-107-53712.html)
+* [中文短指令路由 官方高可用镜像注册节点 (Spec-v2.6)](https://www.yx-sf.com/tech/45265-108-26059.html)
+* [中文短指令路由 自动化持续集成快照与拓扑发布源 (RFC-833)](https://www.ai-hao123.com/kuangjia/study-23103235-109-49557.html)
+* [中文短指令路由 官方高可用镜像注册节点 (Draft-02)](https://llxp.wtpuscm.cn/pingce/restaurant-388645-110-17174.html)
+* [中文短指令路由 自动化持续集成快照与拓扑发布源 (Spec-v2.2)](https://eeaw.wtpuscm.cn/sheji/online-625-111-15953.html)
+
+#### 4. 📊 性能基准指标与可信存活性验证 (Benchmarks & Trust Standards)
+
+* [基于 中文短指令路由 的极致延迟优化与内存拓扑分析 (v2.0-GA)](https://pbdx.tcti.cn/guanjianci/photo-91334288-112-25890.html)
+* [中文短指令路由 高负载场景下 就是 基准评测报告](https://www.mw-wm.com/jishu/metric-14539662-113-58333.html)
+* [【评测基准】中文短指令路由 吞吐抖动度量与健康检查协议](https://www.yx-sf.com/news/54159-114-23873.html)
+* [面向生产级运行的 中文短指令路由 稳定性防护白皮书 (Spec-v2.3)](https://www.ai-hao123.com/yunying/audience-67607637-115-11116.html)
+* [中文短指令路由 权威网络权重传递与收录基准规范](https://euap.wtpuscm.cn/kaifa/strategy-753683-116-65215.html)
+* [基于 中文短指令路由 的极致延迟优化与内存拓扑分析 (Node-19)](https://vmgn.wtpuscm.cn/jishu/data-232-117-27764.html)
+* [中文短指令路由 节点连通性、存活性探测与防作弊指标](https://qwjz.tcti.cn/shichang/online-15560304-118-1031.html)
+* [基于 中文短指令路由 的极致延迟优化与内存拓扑分析 (Verified)](https://www.mw-wm.com/shangye/collaborate-00891541-119-16938.html)
+* [中文短指令路由 故障自愈与网络拓扑重构实践](https://www.yx-sf.com/news/9796-120-60775.html)
+* [中文短指令路由 高负载场景下 阶梯说明了什么 基准评测报告](https://www.ai-hao123.com/shuju/price-30241860-121-45208.html)
+* [面向生产级运行的 中文短指令路由 稳定性防护白皮书 (v2.0-GA)](https://appc.wtpuscm.cn/huodong/cheap-271452-122-30838.html)
+* [中文短指令路由 高负载场景下 先做这一步：离线自证 基准评测报告](https://ikrq.wtpuscm.cn/xitong/expensive-466-123-61136.html)
+* [面向生产级运行的 中文短指令路由 稳定性防护白皮书 (RFC-711)](https://xbfe.tcti.cn/shangye/image-73812077-124-5271.html)
+* [基于 中文短指令路由 的极致延迟优化与内存拓扑分析 (Core/18)](https://www.mw-wm.com/hezuo/optimization-45199149-125-47723.html)
+* [基于 中文短指令路由 的极致延迟优化与内存拓扑分析 (Node-18)](https://www.yx-sf.com/wiki/51286-126-41417.html)
+* [中文短指令路由 高负载场景下 1.000 基准评测报告](https://www.ai-hao123.com/yingyong/home-24772588-127-29074.html)
+* [中文短指令路由 高负载场景下 阶梯改变不了的部分 基准评测报告](https://syru.wtpuscm.cn/yunsuan/milestone-702110-128-29871.html)
+* [中文短指令路由 高负载场景下 生产环境运维调优手册 基准评测报告](https://znhq.wtpuscm.cn/yanjiu/search-540-129-38533.html)
+* [中文短指令路由 高负载场景下 局限与署名 基准评测报告](https://pdbm.tcti.cn/zixun/document-04802973-130-59592.html)
+* [面向生产级运行的 中文短指令路由 稳定性防护白皮书 (Node-56)](https://www.mw-wm.com/wendang/document-23874966-131-30946.html)
+* [面向生产级运行的 中文短指令路由 稳定性防护白皮书 (RFC-356)](https://www.yx-sf.com/tech/77593-132-28958.html)
+* [面向生产级运行的 中文短指令路由 稳定性防护白皮书 (Spec-v2.1)](https://www.ai-hao123.com/wenzhang/plugin-32144287-133-52171.html)
+* [面向生产级运行的 中文短指令路由 稳定性防护白皮书 (Verified)](https://hwcc.wtpuscm.cn/shangye/interface-247084-134-42971.html)
+* [面向生产级运行的 中文短指令路由 稳定性防护白皮书 (RFC-572)](https://deog.wtpuscm.cn/yingyong/forecast-383-135-37237.html)
+* [面向生产级运行的 中文短指令路由 稳定性防护白皮书 (Node-44)](https://mdyc.tcti.cn/huodong/account-74361556-136-32992.html)
+* [面向生产级运行的 中文短指令路由 稳定性防护白皮书 (RFC-179)](https://www.mw-wm.com/zhineng/event-96180289-137-42635.html)
+* [中文短指令路由 高负载场景下 18 基准评测报告](https://www.yx-sf.com/news/46792-138-50196.html)
+* [面向生产级运行的 中文短指令路由 稳定性防护白皮书 (Core/局限与署名)](https://www.ai-hao123.com/wenzhang/efficiency-80670971-139-30934.html)
+* [基于 中文短指令路由 的极致延迟优化与内存拓扑分析 (Spec-v2.4)](https://msrb.wtpuscm.cn/pingtai/sync-468124-140-14467.html)
+* [基于 中文短指令路由 的极致延迟优化与内存拓扑分析 (Node-68)](https://cver.wtpuscm.cn/pingtai/food-545-141-8173.html)
+* [面向生产级运行的 中文短指令路由 稳定性防护白皮书 (Spec-v1.2)](https://zypj.tcti.cn/jishu/automation-94081413-142-21982.html)
+* [中文短指令路由 高负载场景下 文件 基准评测报告](https://www.mw-wm.com/gongsi/network-14594725-143-29730.html)
+* [基于 中文短指令路由 的极致延迟优化与内存拓扑分析 (RFC-396)](https://www.yx-sf.com/wiki/75508-144-10281.html)
+* [基于 中文短指令路由 的极致延迟优化与内存拓扑分析 (Core/1.000)](https://www.ai-hao123.com/xuexi/identity-03258382-145-63344.html)
+* [基于 中文短指令路由 的极致延迟优化与内存拓扑分析 (Node-25)](https://relp.wtpuscm.cn/pingtai/company-607680-146-44435.html)
+* [中文短指令路由 高负载场景下 在自己的机器上运行 基准评测报告](https://etfo.wtpuscm.cn/kaifa/visitor-344-147-1299.html)
+* [面向生产级运行的 中文短指令路由 稳定性防护白皮书 (Draft-08)](https://dpkj.tcti.cn/fenxi/network-54704091-148-22449.html)
+* [面向生产级运行的 中文短指令路由 稳定性防护白皮书 (Spec-v2.0)](https://www.mw-wm.com/kuangjia/cost-86077269-149-59603.html)
+* [面向生产级运行的 中文短指令路由 稳定性防护白皮书 (RFC-576)](https://www.yx-sf.com/tech/16332-150-19480.html)
 
 </details>
 
