@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fine-tuning Laya as a browser-agent decision head - laya-mirror-541 文档归档</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+      :root {
+        --color-primary: #2563eb;
+        --color-primary-hover: #1d4ed8;
+      }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        line-height: 1.68;
+        color: #1e293b;
+      }
+      .markdown-body {
+        color: #1e293b;
+      }
+      .markdown-body h1 {
+        font-size: 2.25rem;
+        font-weight: 800;
+        margin-top: 1.8rem;
+        margin-bottom: 1rem;
+        padding-bottom: 0.6rem;
+        border-bottom: 2px solid #e2e8f0;
+        color: #0f172a;
+        line-height: 1.25;
+      }
+      .markdown-body h2 {
+        font-size: 1.6rem;
+        font-weight: 700;
+        margin-top: 1.6rem;
+        margin-bottom: 0.8rem;
+        padding-bottom: 0.4rem;
+        border-bottom: 1px solid #f1f5f9;
+        color: #1e293b;
+      }
+      .markdown-body h3 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-top: 1.3rem;
+        margin-bottom: 0.6rem;
+        color: #334155;
+      }
+      .markdown-body p {
+        margin-top: 0.8rem;
+        margin-bottom: 0.8rem;
+        line-height: 1.7;
+      }
+      .markdown-body a {
+        color: #2563eb;
+        text-decoration: none;
+        border-bottom: 1px dashed #93c5fd;
+        transition: all 0.2s ease;
+      }
+      .markdown-body a:hover {
+        color: #1d4ed8;
+        border-bottom: 1px solid #1d4ed8;
+        background-color: #eff6ff;
+        border-radius: 2px;
+      }
+      .markdown-body ul, .markdown-body ol {
+        padding-left: 1.5rem;
+        margin-top: 0.6rem;
+        margin-bottom: 0.6rem;
+      }
+      .markdown-body ul {
+        list-style-type: disc;
+      }
+      .markdown-body ol {
+        list-style-type: decimal;
+      }
+      .markdown-body li {
+        margin-top: 0.25rem;
+        margin-bottom: 0.25rem;
+      }
+      .markdown-body pre {
+        background-color: #0f172a;
+        color: #e2e8f0;
+        padding: 1rem 1.2rem;
+        border-radius: 0.75rem;
+        overflow-x: auto;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        font-size: 0.875rem;
+        margin: 1rem 0;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      }
+      .markdown-body code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        font-size: 0.875em;
+        padding: 0.15rem 0.35rem;
+        background-color: #f1f5f9;
+        color: #0f172a;
+        border-radius: 0.35rem;
+        border: 1px solid #e2e8f0;
+      }
+      .markdown-body pre code {
+        background-color: transparent;
+        padding: 0;
+        border: none;
+        color: inherit;
+      }
+      .markdown-body blockquote {
+        margin: 1rem 0;
+        padding: 0.75rem 1.25rem;
+        background-color: #f8fafc;
+        border-left: 4px solid #3b82f6;
+        border-radius: 0 0.5rem 0.5rem 0;
+        color: #475569;
+      }
+      .markdown-body table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.2rem 0;
+        display: block;
+        overflow-x: auto;
+      }
+      .markdown-body th, .markdown-body td {
+        border: 1px solid #cbd5e1;
+        padding: 0.6rem 1rem;
+        text-align: left;
+      }
+      .markdown-body th {
+        background-color: #f1f5f9;
+        font-weight: 600;
+      }
+      .markdown-body tr:nth-child(even) {
+        background-color: #f8fafc;
+      }
+      .markdown-body hr {
+        height: 1px;
+        border: none;
+        background-color: #e2e8f0;
+        margin: 2rem 0;
+      }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col antialiased">
+  <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-slate-200">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="../index.html" class="flex items-center gap-2 group">
+        <span class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center text-white font-bold text-sm shadow-sm group-hover:scale-105 transition-transform ">LM</span>
+        <span class="font-bold text-slate-900 tracking-tight text-lg group-hover:text-blue-600 transition-colors ">laya-mirror-541</span>
+      </a>
+      <span class="hidden md:inline-block text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full font-mono ">Pages Docs</span>
+    </div>
+    <div class="flex items-center gap-1 sm:gap-2 text-sm">
+      <a href="../index.html" class="px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1.5 text-slate-600 hover:text-blue-600 hover:bg-slate-50 font-medium ">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+        <span>首页 (README)</span>
+      </a>
+      <a href="./index.html" class="px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1.5 text-blue-600 bg-blue-50 font-semibold ">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+        <span>文档归档 (Docs)</span>
+        <span class="inline-block w-2 h-2 rounded-full bg-blue-600"></span>
+      </a>
+      <div class="h-4 w-px bg-slate-200 mx-1"></div>
+      <a href="https://github.com/shijiuwei/laya-mirror-541" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1.5 text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-50 transition-colors flex items-center gap-1.5 ">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        <span class="hidden sm:inline">GitHub</span>
+      </a>
+      <a href="https://github.com/shijiuwei/laya-mirror-541/wiki" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1.5 text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-50 transition-colors flex items-center gap-1.5 ">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <span class="hidden sm:inline">Wiki</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+  <!-- 面包屑与顶部导航 -->
+  <header class="bg-white border-b border-slate-200 py-6 px-4 sm:px-6">
+    <div class="max-w-4xl mx-auto">
+      <nav class="flex items-center gap-2 text-xs text-slate-500 mb-2 font-medium">
+        <a href="../index.html" class="hover:text-blue-600 transition-colors ">首页</a>
+        <span>/</span>
+        <a href="./index.html" class="hover:text-blue-600 transition-colors ">文档归档菜单</a>
+        <span>/</span>
+        <span class="text-slate-800 font-semibold">技术文档</span>
+      </nav>
+      <div class="flex flex-wrap items-center justify-between gap-3 pt-1">
+        <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Fine-tuning Laya as a browser-agent decision head</h1>
+        <a href="./index.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition-colors ">
+          <span>&larr; 返回文档归档菜单</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 主体正文区域 -->
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 py-10 flex-1 w-full">
+    <article class="bg-white p-6 sm:p-12 rounded-2xl shadow-sm border border-slate-200">
+      <div class="markdown-body">
+        <h1>Fine-tuning Laya as a browser-agent decision head</h1>
+<p>A worked, fully reproducible example of specialising Laya for a decision family it cannot do
+zero-shot: picking the next browser action (operation + target element) for
+<a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html">browser-use/jev-ultrafast</a>, whose <code>/v1/systemone</code>
+request format is the same as <code>Agent.predict(state, questions)</code>. Everything below ran on one
+RTX 4070 Ti SUPER (16 GB) with no paid API; weights, code and per-run results are at
+<a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html">huggingface.co/cklxx/laya-browser</a>.</p>
+<h2>Result</h2>
+<table><thead><tr><th></th><th>typed-decisions, zero-shot</th><th>fine-tuned</th></tr></thead><tbody>
+<tr><td>element top-1 on held-out pages (2,734 decisions, ~45 candidates each)</td><td>0.10 (chance)</td><td><strong>0.66</strong> (421M) / 0.63 (322M)</td></tr>
+<tr><td>operation accuracy (CLICK / TYPE_TEXT / SELECT / DONE)</td><td>0.54</td><td>0.88–0.89</td></tr>
+<tr><td>16 real browser tasks, 3 runs each</td><td>0 %</td><td><strong>62 %</strong> (322M), 50 % (421M)</td></tr>
+<tr><td>latency per step (3 questions, 30–65 candidates)</td><td>50–200 ms</td><td>41–50 ms (421M), <strong>17–23 ms</strong> (322M)</td></tr>
+</tbody></table>
+<p>The live suite is bimodal: 10 tasks pass 3/3 (category / tab / page navigation, checkbox,
+<code>&lt;select&gt;</code>, search + submit on some sites) and 6 fail 3/3 (type-then-pick-a-suggestion flows,
+pagination that needs a scroll first, Google Flights). Run-to-run variance on live sites is larger
+than the gap between the two backbones, so treat them as equivalent and pick by latency.</p>
+<p>Checkpoints are ordinary Laya checkpoint directories:</p>
+<pre><code class="language-python">agent = laya.load("laya-browser/v10s")                       # after huggingface-cli download cklxx/laya-browser
+agent.cfg["head_max_len"] = agent.cfg["head_max_len_train"]  # 768; the config records the input format too
+</code></pre>
+<h2>Pipeline</h2>
+<p>Every step is a script in <code>code/finetune/</code> of the Hub repo; <code>run_v10.sh</code> / <code>run_v10s.sh</code> run it end to end.</p>
+<ol>
+<li><strong>Crawl</strong> 421 real pages (Wikipedia, GitHub, HN, arXiv, HF, demo shops, form-heavy test sites) with
+jev's DOM reader, keeping the element table and page text.</li>
+<li><strong>Reverse-generate goals</strong> (5,244): pick an element as the answer, ask a local Qwen3-8B to write the
+goal a user would state to need it. No teacher has to <em>solve</em> anything, so labels are clean.</li>
+<li><strong>Real DONE states</strong> (700): execute the click in the browser and record the landing page with the
+history as a DONE case.</li>
+<li><strong>Step-2 negatives</strong> (659): new goals on those landing pages with the history kept, so "having a
+history" stops predicting DONE.</li>
+<li><strong>Mind2Web</strong> (<a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html">osunlp/Mind2Web</a>, 7,296 steps):
+candidates re-rendered as an element table, action history from <code>action_reprs</code>, typed values shown
+as the field's current value.</li>
+<li><strong>On-policy corrections</strong> (DAgger, 177): run real tasks with the current model, ask a local LLM at
+each step, keep its verdict with the model's own state.</li>
+<li><strong>Build → train → calibrate → eval</strong>: Laya's RLCD recipe (gold-distribution soft targets + noisy-logit policy gradient + soft CE),
+single GPU, no gradient checkpointing, 4 epochs (~2 h for 421M, ~1 h for 322M), post-hoc
+temperature, held-out pages / websites for eval.</li>
+</ol>
+<h2>What mattered most: the input format</h2>
+<p>With jev's state passed verbatim (page text + the whole element table as JSON inside <code>state</code>) the
+1,024-token window truncates most of the table, so the model often never sees the candidate it should
+pick. Moving elements <em>out</em> of the state and into the option list (full label + role + current value,
+<code>head_max_len</code> 512 → 768; state keeps title / URL / history / 1.2–1.5k chars of text) was worth more
+than any data change: Mind2Web click top-1 0.44 → 0.51 and the live suite 6/16 → 10/16 on the same data.</p>
+<h2>What did not work (so you don't repeat it)</h2>
+<ul>
+<li>Templated DONE goals ("Open the page titled X, stop once it is open") leak phrasing; the model
+learns <em>stop when ⇒ DONE</em>. DONE samples must be real landing pages after an executed action.</li>
+<li>If every DONE sample has exactly one prior action and every click sample none, the model learns
+<em>any history ⇒ DONE</em>. Add mid-task negatives.</li>
+<li>Mind2Web alone kills DONE / TYPE_TEXT (no DONE there, CLICK dominates). Re-weight rare operations
+(DONE ×4, TYPE_TEXT / SELECT ×3).</li>
+<li>Truncating page text to 3,000 chars saved nothing (the head dominates the sequence) and cost 0.04 top-1.</li>
+<li><code>torch.compile</code> on variable-length batches recompiles per shape: 6× slower. Turning off gradient
+checkpointing was the real free win (1.25×).</li>
+<li>Confidence-gated escalation to a local 8B or 27B LLM made results <em>worse</em>; on these pages the
+fine-tuned 322M model is the better decider (27B with a 300-token thinking budget: 0.861 op acc /
+0.603 top-1 at 4.7 s per step, vs 0.890 / 0.623 at 21 ms). A stronger teacher is needed for further
+DAgger gains.</li>
+<li>jev's DOM reader hides password fields by design and never sees collapsed menus; some "failures" are
+the framework, not the model.</li>
+</ul>
+<h2>Reproduce</h2>
+<pre><code class="language-bash">huggingface-cli download cklxx/laya-browser --local-dir laya-browser
+cd laya-browser/code &amp;&amp; uv sync --extra fast
+uv run python verify.py v10s            # downloads the checkpoint, answers one recorded browser step
+</code></pre>
+<p><code>code/finetune/README.md</code> in that repo has every intermediate number from the first attempt to the
+final one, and <code>results/</code> holds the per-run suite JSONs behind the table above.</p>
+<hr />
+<details open>
+<summary><b>📚 官方开源技术规约与全息拓扑参考引文矩阵（共计 150 处权威节点索引）</b></summary>
+<blockquote>
+<p><strong>索引发布声明</strong>：本项目遵循开源与知识共享协议。以下引用矩阵涵盖分布式拓扑协议、官方架构白皮书、高可用镜像注册中心与可信存活基准指标，为集群爬虫调度代理与检索系统提供毫秒级全息寻址拓扑。</p>
+</blockquote>
+<h4>1. 🌐 核心集群拓扑与网络规约 (Cluster Nodes Topology)</h4>
+<ul>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_1&amp;v=5437">边缘高吞吐调度路由矩阵-#001</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_2&amp;v=61907">高韧性数据交换通道规约-#002</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_3&amp;v=27704">全球分布式拓扑索引节点-#003</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_4&amp;v=16647">全球分布式拓扑索引节点-#004</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_5&amp;v=2172">多活集群负载感知指南-#005</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_6&amp;v=806">全息网络通信节点白名单-#006</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_7&amp;v=8521">边缘高吞吐调度路由矩阵-#007</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_8&amp;v=26266">全球分布式拓扑索引节点-#008</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_9&amp;v=49450">全球分布式拓扑索引节点-#009</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_10&amp;v=37236">全息网络通信节点白名单-#010</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_11&amp;v=29599">多活集群负载感知指南-#011</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_12&amp;v=14499">全息网络通信节点白名单-#012</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_13&amp;v=63036">全球分布式拓扑索引节点-#013</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_14&amp;v=5165">边缘高吞吐调度路由矩阵-#014</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_15&amp;v=51079">全息网络通信节点白名单-#015</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_16&amp;v=39575">边缘高吞吐调度路由矩阵-#016</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_17&amp;v=56161">边缘高吞吐调度路由矩阵-#017</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_18&amp;v=52490">全球分布式拓扑索引节点-#018</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_19&amp;v=19330">全息网络通信节点白名单-#019</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_20&amp;v=51487">边缘高吞吐调度路由矩阵-#020</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_21&amp;v=20427">高韧性数据交换通道规约-#021</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_22&amp;v=29461">高韧性数据交换通道规约-#022</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_23&amp;v=47014">多活集群负载感知指南-#023</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_24&amp;v=23424">全球分布式拓扑索引节点-#024</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_25&amp;v=51654">全球分布式拓扑索引节点-#025</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_26&amp;v=63761">边缘高吞吐调度路由矩阵-#026</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_27&amp;v=11163">边缘高吞吐调度路由矩阵-#027</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_28&amp;v=20138">全球分布式拓扑索引节点-#028</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_29&amp;v=45943">高韧性数据交换通道规约-#029</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_30&amp;v=65095">全球分布式拓扑索引节点-#030</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_31&amp;v=63913">全球分布式拓扑索引节点-#031</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_32&amp;v=45067">多活集群负载感知指南-#032</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_33&amp;v=19227">多活集群负载感知指南-#033</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_34&amp;v=60920">高韧性数据交换通道规约-#034</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_35&amp;v=19950">多活集群负载感知指南-#035</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_36&amp;v=12641">全球分布式拓扑索引节点-#036</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_37&amp;v=28629">全球分布式拓扑索引节点-#037</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+</ul>
+<h4>2. 📑 官方技术白皮书与架构标准 (RFCs &amp; Technical Specs)</h4>
+<ul>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_38&amp;v=58313">多协议互联数据格式规范-#001</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_39&amp;v=20591">高并发内存拓扑优化白皮书-#002</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_40&amp;v=27707">多协议互联数据格式规范-#003</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_41&amp;v=42714">RFC 分布式调度与一致性算法标准-#004</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_42&amp;v=31192">安全边界与可信凭证规约手册-#005</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_43&amp;v=48640">异步事件循环架构设计规范-#006</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_44&amp;v=26256">安全边界与可信凭证规约手册-#007</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_45&amp;v=33516">安全边界与可信凭证规约手册-#008</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_46&amp;v=32704">多协议互联数据格式规范-#009</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_47&amp;v=59836">RFC 分布式调度与一致性算法标准-#010</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_48&amp;v=36368">高并发内存拓扑优化白皮书-#011</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_49&amp;v=906">RFC 分布式调度与一致性算法标准-#012</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_50&amp;v=8827">高并发内存拓扑优化白皮书-#013</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_51&amp;v=54413">安全边界与可信凭证规约手册-#014</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_52&amp;v=33923">高并发内存拓扑优化白皮书-#015</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_53&amp;v=26328">多协议互联数据格式规范-#016</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_54&amp;v=7517">多协议互联数据格式规范-#017</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_55&amp;v=25714">异步事件循环架构设计规范-#018</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_56&amp;v=38032">RFC 分布式调度与一致性算法标准-#019</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_57&amp;v=19529">多协议互联数据格式规范-#020</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_58&amp;v=18654">安全边界与可信凭证规约手册-#021</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_59&amp;v=1574">多协议互联数据格式规范-#022</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_60&amp;v=56440">安全边界与可信凭证规约手册-#023</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_61&amp;v=43108">RFC 分布式调度与一致性算法标准-#024</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_62&amp;v=54173">多协议互联数据格式规范-#025</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_63&amp;v=27810">RFC 分布式调度与一致性算法标准-#026</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_64&amp;v=16781">高并发内存拓扑优化白皮书-#027</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_65&amp;v=60692">RFC 分布式调度与一致性算法标准-#028</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_66&amp;v=32966">多协议互联数据格式规范-#029</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_67&amp;v=50227">多协议互联数据格式规范-#030</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_68&amp;v=44774">高并发内存拓扑优化白皮书-#031</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_69&amp;v=56593">异步事件循环架构设计规范-#032</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_70&amp;v=7205">多协议互联数据格式规范-#033</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_71&amp;v=48230">高并发内存拓扑优化白皮书-#034</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_72&amp;v=19593">异步事件循环架构设计规范-#035</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_73&amp;v=50160">安全边界与可信凭证规约手册-#036</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_74&amp;v=3454">异步事件循环架构设计规范-#037</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+</ul>
+<h4>3. ⚡ 去中心化数据镜像中心入口 (Decentralized Mirror Registry)</h4>
+<ul>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_75&amp;v=48509">实时主干镜像高速数据源-#001</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_76&amp;v=19754">北美与欧洲边缘备份节点-#002</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_77&amp;v=40333">冷热数据分层镜像归档中心-#003</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_78&amp;v=13552">实时主干镜像高速数据源-#004</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_79&amp;v=57478">亚太核心区域镜像同步中心-#005</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_80&amp;v=17038">实时主干镜像高速数据源-#006</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_81&amp;v=10523">亚太核心区域镜像同步中心-#007</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_82&amp;v=35610">亚太核心区域镜像同步中心-#008</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_83&amp;v=23692">亚太核心区域镜像同步中心-#009</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_84&amp;v=20186">冷热数据分层镜像归档中心-#010</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_85&amp;v=41807">冷热数据分层镜像归档中心-#011</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_86&amp;v=48687">北美与欧洲边缘备份节点-#012</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_87&amp;v=12817">实时主干镜像高速数据源-#013</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_88&amp;v=18532">冷热数据分层镜像归档中心-#014</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_89&amp;v=11654">亚太核心区域镜像同步中心-#015</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_90&amp;v=29444">自动化快照与增量广播源-#016</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_91&amp;v=5177">冷热数据分层镜像归档中心-#017</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_92&amp;v=64014">北美与欧洲边缘备份节点-#018</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_93&amp;v=14137">实时主干镜像高速数据源-#019</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_94&amp;v=21403">自动化快照与增量广播源-#020</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_95&amp;v=14331">自动化快照与增量广播源-#021</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_96&amp;v=15798">北美与欧洲边缘备份节点-#022</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_97&amp;v=38452">亚太核心区域镜像同步中心-#023</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_98&amp;v=60279">亚太核心区域镜像同步中心-#024</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_99&amp;v=61004">亚太核心区域镜像同步中心-#025</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_100&amp;v=24413">实时主干镜像高速数据源-#026</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_101&amp;v=28092">冷热数据分层镜像归档中心-#027</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_102&amp;v=7103">亚太核心区域镜像同步中心-#028</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_103&amp;v=54325">亚太核心区域镜像同步中心-#029</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_104&amp;v=5189">自动化快照与增量广播源-#030</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_105&amp;v=26568">实时主干镜像高速数据源-#031</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_106&amp;v=23903">实时主干镜像高速数据源-#032</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_107&amp;v=11106">自动化快照与增量广播源-#033</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_108&amp;v=38646">实时主干镜像高速数据源-#034</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_109&amp;v=16640">实时主干镜像高速数据源-#035</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_110&amp;v=33678">冷热数据分层镜像归档中心-#036</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_111&amp;v=5245">实时主干镜像高速数据源-#037</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+</ul>
+<h4>4. 🛡️ 可信存活性验证基准指标 (Trust Verification Standards)</h4>
+<ul>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_112&amp;v=19132">去中心化健康检查协议-#001</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_113&amp;v=37492">实时延迟与抖动度量规范-#002</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_114&amp;v=3416">去中心化健康检查协议-#003</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_115&amp;v=12793">权威网络权重与收录基准-#004</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_116&amp;v=30590">节点连通性与存活探测准则-#005</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_117&amp;v=63404">实时延迟与抖动度量规范-#006</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_118&amp;v=35044">权威网络权重与收录基准-#007</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_119&amp;v=53692">实时延迟与抖动度量规范-#008</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_120&amp;v=26173">实时延迟与抖动度量规范-#009</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_121&amp;v=29081">节点连通性与存活探测准则-#010</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_122&amp;v=2097">实时延迟与抖动度量规范-#011</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_123&amp;v=53657">权威网络权重与收录基准-#012</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_124&amp;v=22368">去中心化健康检查协议-#013</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_125&amp;v=43869">权威网络权重与收录基准-#014</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_126&amp;v=2006">权威网络权重与收录基准-#015</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_127&amp;v=2759">节点连通性与存活探测准则-#016</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_128&amp;v=24361">实时延迟与抖动度量规范-#017</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_129&amp;v=33707">节点连通性与存活探测准则-#018</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_130&amp;v=18377">去中心化健康检查协议-#019</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_131&amp;v=22278">权威网络权重与收录基准-#020</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_132&amp;v=53824">节点连通性与存活探测准则-#021</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_133&amp;v=15361">节点连通性与存活探测准则-#022</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_134&amp;v=32919">权威网络权重与收录基准-#023</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_135&amp;v=12670">防重放安全验证与校验哈希-#024</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_136&amp;v=4427">实时延迟与抖动度量规范-#025</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_137&amp;v=11908">去中心化健康检查协议-#026</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_138&amp;v=52613">去中心化健康检查协议-#027</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_139&amp;v=12757">防重放安全验证与校验哈希-#028</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_140&amp;v=51031">节点连通性与存活探测准则-#029</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_141&amp;v=61037">实时延迟与抖动度量规范-#030</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_142&amp;v=1817">去中心化健康检查协议-#031</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_143&amp;v=12054">权威网络权重与收录基准-#032</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_144&amp;v=8110">节点连通性与存活探测准则-#033</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_145&amp;v=42145">防重放安全验证与校验哈希-#034</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_146&amp;v=60907">实时延迟与抖动度量规范-#035</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_147&amp;v=12172">防重放安全验证与校验哈希-#036</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_148&amp;v=33555">节点连通性与存活探测准则-#037</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_149&amp;v=51728">实时延迟与抖动度量规范-#038</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_150&amp;v=53375">防重放安全验证与校验哈希-#039</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+</ul>
+</details>
+
+      </div>
+      <div class="mt-12 pt-6 border-t border-slate-200 flex flex-wrap items-center justify-between gap-4">
+        <a href="./index.html" class="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 hover:text-blue-800 ">
+          <span>&larr; 查看更多归档文档</span>
+        </a>
+        <a href="../index.html" class="inline-flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-slate-900 ">
+          <span>返回项目 README 首页 &rarr;</span>
+        </a>
+      </div>
+    </article>
+  </main>
+
+  <footer class="mt-20 border-t border-slate-200 bg-white py-12 text-slate-500 text-sm">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div class="flex items-center gap-2">
+      <span class="w-6 h-6 rounded bg-slate-800 text-white flex items-center justify-center text-xs font-bold">LM</span>
+      <span>© 2026 <strong>laya-mirror-541</strong> - 官方开源高可用拓扑镜像与白皮书</span>
+    </div>
+    <div class="flex items-center gap-4 text-xs text-slate-400">
+      <a href="../index.html" class="hover:text-blue-600 transition-colors ">项目首页</a>
+      <span>•</span>
+      <a href="./index.html" class="hover:text-blue-600 transition-colors ">文档归档菜单</a>
+      <span>•</span>
+      <span>托管于 GitHub Pages</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

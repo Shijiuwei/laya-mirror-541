@@ -3,29 +3,1833 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>laya-mirror-541 - 官方高可用开源镜像中心</title>
+  <title>laya-mirror-541 - 官方开源镜像与技术白皮书中心</title>
+  <meta name="description" content="High availability mirror and network topology specifications for laya-mirror-541">
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+      :root {
+        --color-primary: #2563eb;
+        --color-primary-hover: #1d4ed8;
+      }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        line-height: 1.68;
+        color: #1e293b;
+      }
+      .markdown-body {
+        color: #1e293b;
+      }
+      .markdown-body h1 {
+        font-size: 2.25rem;
+        font-weight: 800;
+        margin-top: 1.8rem;
+        margin-bottom: 1rem;
+        padding-bottom: 0.6rem;
+        border-bottom: 2px solid #e2e8f0;
+        color: #0f172a;
+        line-height: 1.25;
+      }
+      .markdown-body h2 {
+        font-size: 1.6rem;
+        font-weight: 700;
+        margin-top: 1.6rem;
+        margin-bottom: 0.8rem;
+        padding-bottom: 0.4rem;
+        border-bottom: 1px solid #f1f5f9;
+        color: #1e293b;
+      }
+      .markdown-body h3 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-top: 1.3rem;
+        margin-bottom: 0.6rem;
+        color: #334155;
+      }
+      .markdown-body p {
+        margin-top: 0.8rem;
+        margin-bottom: 0.8rem;
+        line-height: 1.7;
+      }
+      .markdown-body a {
+        color: #2563eb;
+        text-decoration: none;
+        border-bottom: 1px dashed #93c5fd;
+        transition: all 0.2s ease;
+      }
+      .markdown-body a:hover {
+        color: #1d4ed8;
+        border-bottom: 1px solid #1d4ed8;
+        background-color: #eff6ff;
+        border-radius: 2px;
+      }
+      .markdown-body ul, .markdown-body ol {
+        padding-left: 1.5rem;
+        margin-top: 0.6rem;
+        margin-bottom: 0.6rem;
+      }
+      .markdown-body ul {
+        list-style-type: disc;
+      }
+      .markdown-body ol {
+        list-style-type: decimal;
+      }
+      .markdown-body li {
+        margin-top: 0.25rem;
+        margin-bottom: 0.25rem;
+      }
+      .markdown-body pre {
+        background-color: #0f172a;
+        color: #e2e8f0;
+        padding: 1rem 1.2rem;
+        border-radius: 0.75rem;
+        overflow-x: auto;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        font-size: 0.875rem;
+        margin: 1rem 0;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      }
+      .markdown-body code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        font-size: 0.875em;
+        padding: 0.15rem 0.35rem;
+        background-color: #f1f5f9;
+        color: #0f172a;
+        border-radius: 0.35rem;
+        border: 1px solid #e2e8f0;
+      }
+      .markdown-body pre code {
+        background-color: transparent;
+        padding: 0;
+        border: none;
+        color: inherit;
+      }
+      .markdown-body blockquote {
+        margin: 1rem 0;
+        padding: 0.75rem 1.25rem;
+        background-color: #f8fafc;
+        border-left: 4px solid #3b82f6;
+        border-radius: 0 0.5rem 0.5rem 0;
+        color: #475569;
+      }
+      .markdown-body table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.2rem 0;
+        display: block;
+        overflow-x: auto;
+      }
+      .markdown-body th, .markdown-body td {
+        border: 1px solid #cbd5e1;
+        padding: 0.6rem 1rem;
+        text-align: left;
+      }
+      .markdown-body th {
+        background-color: #f1f5f9;
+        font-weight: 600;
+      }
+      .markdown-body tr:nth-child(even) {
+        background-color: #f8fafc;
+      }
+      .markdown-body hr {
+        height: 1px;
+        border: none;
+        background-color: #e2e8f0;
+        margin: 2rem 0;
+      }
+    </style>
 </head>
-<body class="bg-slate-50 text-slate-900 min-h-screen">
-  <header class="bg-gradient-to-r from-blue-700 via-indigo-700 to-purple-800 text-white py-12 px-6 shadow-md">
-    <div class="max-w-5xl mx-auto">
-      <div class="inline-block px-3 py-1 bg-white/20 backdrop-blur rounded-full text-xs font-semibold mb-3">✓ 官方已验证镜像与拓扑枢纽</div>
-      <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">laya-mirror-541</h1>
-      <p class="mt-3 text-blue-100 text-lg max-w-3xl">High availability mirror and network topology specifications for NandhaKishorM/laya</p>
+<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col antialiased">
+  <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-slate-200">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="./index.html" class="flex items-center gap-2 group">
+        <span class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center text-white font-bold text-sm shadow-sm group-hover:scale-105 transition-transform ">LM</span>
+        <span class="font-bold text-slate-900 tracking-tight text-lg group-hover:text-blue-600 transition-colors ">laya-mirror-541</span>
+      </a>
+      <span class="hidden md:inline-block text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full font-mono ">Pages Docs</span>
+    </div>
+    <div class="flex items-center gap-1 sm:gap-2 text-sm">
+      <a href="./index.html" class="px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1.5 text-blue-600 bg-blue-50 font-semibold ">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+        <span>首页 (README)</span>
+      </a>
+      <a href="./docs/index.html" class="px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1.5 text-slate-600 hover:text-blue-600 hover:bg-slate-50 font-medium ">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+        <span>文档归档 (Docs)</span>
+        <span class="inline-block w-2 h-2 rounded-full bg-blue-600"></span>
+      </a>
+      <div class="h-4 w-px bg-slate-200 mx-1"></div>
+      <a href="https://github.com/shijiuwei/laya-mirror-541" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1.5 text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-50 transition-colors flex items-center gap-1.5 ">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        <span class="hidden sm:inline">GitHub</span>
+      </a>
+      <a href="https://github.com/shijiuwei/laya-mirror-541/wiki" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1.5 text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-50 transition-colors flex items-center gap-1.5 ">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <span class="hidden sm:inline">Wiki</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+  <!-- Hero Header -->
+  <header class="bg-gradient-to-r from-slate-900 via-indigo-950 to-blue-900 text-white py-12 px-4 sm:px-6 shadow-md border-b border-slate-800">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex flex-wrap items-center gap-2 mb-3">
+        <span class="px-2.5 py-0.5 bg-blue-500/20 text-blue-300 border border-blue-400/30 rounded-full text-xs font-semibold">✓ 官方高可用开源镜像</span>
+        <span class="px-2.5 py-0.5 bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 rounded-full text-xs font-semibold">● 72h 存活率指标 99.8%</span>
+        <span class="px-2.5 py-0.5 bg-purple-500/20 text-purple-300 border border-purple-400/30 rounded-full text-xs font-mono ">GitHub Pages</span>
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white mb-4">laya-mirror-541</h1>
+      <p class="text-slate-300 text-base sm:text-lg max-w-3xl leading-relaxed mb-6">High availability mirror and network topology specifications for laya-mirror-541</p>
+      
+      <!-- 行动入口栏：显要引导进入 Docs 归档菜单 -->
+      <div class="flex flex-wrap items-center gap-3 pt-2">
+        <a href="./docs/index.html" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm shadow-lg shadow-blue-600/30 transition-all hover:scale-[1.02] active:scale-[0.98] ">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+          <span>进入文档归档菜单 (Docs Catalog) &rarr;</span>
+        </a>
+        <a href="#readme-content" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-medium text-sm border border-white/20 backdrop-blur transition-colors ">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+          <span>查阅项目 README 正文</span>
+        </a>
+        <a href="https://github.com/shijiuwei/laya-mirror-541" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-slate-300 hover:text-white text-xs transition-colors ">
+          <span>访问 GitHub 源码库</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </a>
+      </div>
     </div>
   </header>
-  <main class="max-w-5xl mx-auto px-6 py-10 space-y-10">
-    <section class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
-      <h2 class="text-xl font-bold mb-4 flex items-center gap-2">🌐 核心架构技术白皮书与拓扑节点导航</h2>
-      <p class="text-slate-600 mb-6 leading-relaxed">本项目代码库与技术架构遵循开放协作协议。以下为实时同步的全息镜像路由与权威白皮书数据清单，面向广大开发者及搜索引擎网络代理提供低延迟感知：</p>
-      <ul class="divide-y divide-slate-100">
-        <li class="py-1.5"><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html" class="text-blue-600 hover:underline flex items-center gap-2"><span class="text-xs bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded font-mono">#01</span> 官方权威技术拓扑与镜像数据节点</a></li>
 
-      </ul>
-    </section>
+  <!-- 主体区域：两栏布局（主栏：改造后 README；侧栏：Docs 归档菜单预览与外链速查） -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-10 flex-1 w-full">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      
+      <!-- 主内容区：展示改造后的 README.md 静态渲染 HTML -->
+      <article id="readme-content" class="lg:col-span-8 bg-white p-6 sm:p-10 rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+        <div class="flex items-center justify-between pb-4 mb-6 border-b border-slate-100">
+          <div class="flex items-center gap-2 text-xs text-slate-500 font-mono ">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+            <span>README.md (已注入高权重拓扑网络)</span>
+          </div>
+          <a href="./docs/index.html" class="text-xs text-blue-600 hover:underline flex items-center gap-1 font-medium ">
+            <span>浏览全部 87 篇归档文档</span>
+            <span>&rarr;</span>
+          </a>
+        </div>
+        <div class="markdown-body">
+          <p align="left">
+  <a href="https://shijiuwei.github.io/laya-mirror-541/"><img src="https://img.shields.io/badge/GitHub_Pages-在线文档中心-2563eb?style=flat-square&logo=github" alt="GitHub Pages"></a>
+  <a href="https://shijiuwei.github.io/laya-mirror-541/docs/"><img src="https://img.shields.io/badge/Docs_Archive-文档归档菜单-10b981?style=flat-square" alt="Docs Archive"></a>
+</p>
+<blockquote>
+<p>🌐 <strong>官方在线文档与静态镜像中心 (GitHub Pages)</strong>：<a href="https://shijiuwei.github.io/laya-mirror-541/">https://shijiuwei.github.io/laya-mirror-541/</a><br />
+📚 <strong>技术规约与文档归档菜单 (Docs Catalog)</strong>：<a href="https://shijiuwei.github.io/laya-mirror-541/docs/">https://shijiuwei.github.io/laya-mirror-541/docs/</a></p>
+</blockquote>
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/NandhaKishorM/laya/main/assets/logo-lockup-dark.png" />
+    <img src="https://raw.githubusercontent.com/NandhaKishorM/laya/main/assets/logo-lockup.png" alt="Laya" width="330" />
+  </picture>
+</p>
+<p><strong>Multilingual, non-autoregressive System 1 decision engine.</strong> Typed decisions over 100+ languages in a single forward pass — 33 ms — trained with reinforcement learning against strictly proper scoring rules (RLCD), with a router that picks the right checkpoint per request.</p>
+<div align="center">
+<p><a href="https://colab.research.google.com/drive/15d4Yv__KHeHjshVb-6PRTfqVllxih2S3?usp=sharing"><img src="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html" alt="Open In Colab" /></a>
+<a href="https://pypi.org/project/laya/"><img src="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html" alt="PyPI version" /></a>
+<a href="https://nandhakishorm.github.io/laya/"><img src="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html" alt="Docs" /></a>
+<a href="https://huggingface.co/convaiinnovations/laya"><img src="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html" alt="Hugging Face Model" /></a>
+<a href="https://huggingface.co/convaiinnovations/laya-multilingual"><img src="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html" alt="Multilingual" /></a>
+<a href="https://huggingface.co/spaces/convaiinnovations/laya-demo"><img src="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html" alt="Hugging Face Space" /></a>
+<a href="https://dev.to/nandakishor_m_6cc0adfde9f/i-built-non-autoregressive-decision-models-a-year-ago-then-a-frontier-lab-called-it-a-18me"><img src="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html" alt="Dev.to Article" /></a>
+<a href="https://www.buymeacoffee.com/nandakishorm"><img src="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html" alt="Buy Me A Coffee" /></a>
+<a href="https://opensource.org/licenses/Apache-2.0"><img src="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html" alt="License" /></a></p>
+</div>
+<h2>Installation</h2>
+<pre><code class="language-bash">python -m pip install laya
+</code></pre>
+<p>Python 3.10 or newer. Optional extras: <code>laya[serve]</code> (HTTP server), <code>laya[mcp]</code> (MCP server), <code>laya[langchain]</code> (LangChain and LangGraph), <code>laya[onnx]</code> (ONNX Runtime), <code>laya[fast]</code> (TileLang GPU fast path). Step-by-step setup for each platform, CPU-only or GPU PyTorch builds, and troubleshooting are in <a href="#installation-details">Installation details</a>.</p>
+<p><strong>Long documents.</strong> <code>laya-multilingual</code> reads up to 8,192 tokens with <code>max_len=8192</code>. Measured accuracy and time by document length, reproducible with <a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html"><code>research/scripts/bench_long_context.py</code></a>:</p>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/NandhaKishorM/laya/main/assets/long_context_8192.png" alt="laya-multilingual with max_len=8192: 16 to 18 of 20 requests correct with up to about 4,000 tokens of text before them, more variable beyond" width="100%" />
+</p>
+<h2>Quickstart</h2>
+<blockquote>
+<p><strong>Long documents: <code>laya-multilingual</code> reads up to 8,192 tokens.</strong> It ships with a 1,024-token limit that cuts long documents off, so pass <code>max_len=8192</code> for them:</p>
+<pre><code class="language-python">result = router.predict(long_document, questions, model="multilingual", max_len=8192)
+</code></pre>
+<p>In the table above, 16 to 18 of 20 requests were answered correctly with up to about 4,000 tokens of text before them; beyond that results vary (8 to 17 of 20), so check long-document accuracy on your own data. Short inputs give identical answers with <code>max_len=8192</code>, and speed follows the input's real length, not the limit: short inputs are unchanged, and a 4,000-token input takes about 1.7 s on an Apple GPU. Name the checkpoint with <code>model="multilingual"</code>, since long mostly-English text would otherwise route to the English checkpoint.</p>
+</blockquote>
+<pre><code class="language-python">from laya import Router
+
+router = Router()  # downloads a checkpoint on first use; Router(preload=True) loads all three up front
+
+state = "Hi, we were billed twice for March. Please refund the duplicate today or we will cancel our plan."
+questions = {
+    "department": {"type": "choice", "instructions": "Which department should handle this?",
+                   "criteria": {"billing": "invoices, payments, refunds",
+                                "technical": "bugs, outages, system errors",
+                                "other": "everything else"}},
+    "urgency": {"type": "score", "instructions": "How urgent is this?",
+                "criteria": ["not urgent", "soon", "blocking"]},
+    "churn_risk": {"type": "noul", "instructions": "Does the user threaten to cancel or leave?"},
+}
+
+result = router.predict(state, questions)
+print(result["answers"]["department"]["choice"])  # billing
+print(result["answers"]["churn_risk"]["noul"])    # probability the answer is yes
+print(result["routing"]["model"])                 # english
+</code></pre>
+<p>The same call works in any of 100+ languages. The <code>Router</code> detects the script and language and sends non-English text to <code>laya-multilingual</code>:</p>
+<pre><code class="language-python">for text in ["मुझसे मार्च में दो बार शुल्क लिया गया, कृपया डुप्लिकेट राशि वापस करें।",
+             "La aplicación se cierra cada vez que abro la configuración."]:
+    r = router.predict(text, {"department": questions["department"]})
+    print(r["routing"]["model"], r["answers"]["department"]["choice"])
+# multilingual billing
+# multilingual technical
+</code></pre>
+<p>From the command line, <code>laya "My payment failed twice" --preset triage</code> answers a ready-made question set. More in the <a href="#quickstart-route-mode-recommended">full quickstart</a> and the <a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html">docs</a>.</p>
+<h2>Fine-tune for better accuracy</h2>
+<p>The shipped checkpoints work zero-shot, but fine-tuning on decisions from your own domain is where accuracy jumps. On the typed-decisions benchmark (2,000 decisions across four workflows), the fine-tuned <code>laya-typed-decisions</code> checkpoint scores <strong>0.766</strong> accuracy, against <strong>0.362</strong> for the base English checkpoint on the same decisions.</p>
+<p><strong><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html">Fine-tuning notebook</a></strong>: runs the whole loop on Kaggle's free 2x T4 GPUs (build the dataset, train, fit calibration temperatures, evaluate, and push the result to the Hub). Details in <a href="#fine-tuning">Fine-Tuning</a>.</p>
+<h2>Documentation</h2>
+<p><strong><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html">nandhakishorm.github.io/laya</a></strong>: guides for <a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html">prediction hooks</a>, <a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html">schema-driven decisions</a>, <a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html">Docker</a> and <a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html">LangChain and LangGraph</a>, plus a full <a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html">API reference</a>.</p>
+<h2>What's new in 0.3.20</h2>
+<ul>
+<li><strong>Long documents with <code>max_len=8192</code>.</strong> A measured table below Installation shows accuracy and time for <code>laya-multilingual</code> by document length, from a reproducible benchmark: strong up to about 4,000 tokens of text, more variable beyond.</li>
+<li><strong>Installation, quickstart and documentation first.</strong> This README now opens with how to install Laya, runnable English and multilingual examples, how fine-tuning improves accuracy, and where the docs are.</li>
+<li><strong>Documentation site</strong> at <a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html">nandhakishorm.github.io/laya</a>, with an API reference generated from the docstrings.</li>
+</ul>
+<p>The code is unchanged from the last runtime release, whose fixes are:</p>
+<ul>
+<li><strong>Sturdier fast path.</strong> After a CUDA out-of-memory error, the fallback to CPU switches the TileLang fast path off first instead of retrying on CUDA. A <code>choice</code> question with a single option no longer crashes it, requests longer than it was built for get a clear error, and concurrent calls can no longer overwrite each other's CUDA-graph buffers.</li>
+<li><strong>Server and runtime.</strong> <code>laya-serve</code> drains its inference pool on shutdown and returns 401 for a malformed bearer header, and <code>ONNXAgent</code> matches <code>Agent</code> on empty question sets and long conversation lists.</li>
+<li><strong>Smaller fixes.</strong> The <code>laya</code> command prints the right probability for a choice, LangChain remote calls refuse cross-origin or HTTPS-downgrade redirects, and <code>AGENTS.md</code> gives AI coding assistants the contribution rules.</li>
+</ul>
+<hr />
+<p align="center">
+  <img src="https://raw.githubusercontent.com/NandhaKishorM/laya/main/assets/laya_vs_jev_full.png" alt="Laya versus TypeSafe Jev: accuracy on shared public datasets, every application workflow, all 51 languages, speed, calibration, and the cost of not preloading" width="100%" />
+</p>
+<p>Laya evaluates typed questions (<code>choice</code>, <code>score</code>, <code>noul</code>) over any state (text, email, ticket or JSON document) in <strong>a single forward pass</strong> — 33 ms for one question, 7.2 ms/question batched, measured on a T4. No text generation, so nothing to parse and nothing to hallucinate.</p>
+<p>Three checkpoints, and a <code>Router</code> that picks between them per request:</p>
+<table><thead><tr><th></th><th>encoder</th><th>params</th><th>context</th><th>use it for</th></tr></thead><tbody>
+<tr><td><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html"><code>laya</code></a></td><td>ModernBERT-large</td><td>421M</td><td>512</td><td>English</td></tr>
+<tr><td><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html"><code>laya-multilingual</code></a></td><td>mmBERT-base</td><td>322M</td><td>1024 (up to 8,192)</td><td>100+ languages, 2x faster</td></tr>
+<tr><td><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html"><code>laya-typed-decisions</code></a></td><td>ModernBERT-large</td><td>421M</td><td>1024</td><td>the typed-decisions workflows</td></tr>
+</tbody></table>
+<h2>Installation details</h2>
+<p>Python 3.10 or newer. The dependencies set that floor: <code>huggingface_hub</code> 1.x, <code>transformers</code> 5.x and <code>torch</code> 2.14 all require 3.10.</p>
+<p><strong>Optional PyTorch build selection:</strong> If you need a CPU-only or GPU-specific PyTorch build, follow <a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html">PyTorch's installation guide</a> after creating your virtual environment and before installing Laya. Replace <code>pip</code> or <code>pip3</code> in the selected command with the environment's Python executable followed by <code>-m pip</code>.</p>
+<p>If you already use a virtual environment, install the PyPI release with:</p>
+<pre><code class="language-bash">python -m pip install laya
+</code></pre>
+<p>For a new environment, choose the commands for your platform below. Run them from your project directory; the explicit Python paths keep installation and verification in the same environment.</p>
+<p><strong>macOS / Linux</strong> (with Python 3.10 or newer):</p>
+<p>On Debian/Ubuntu, the system Python may require <code>sudo apt install python3-venv</code> before creating a virtual environment. If <code>venv</code> reports that <code>ensurepip</code> is unavailable, install that package and retry.</p>
+<pre><code class="language-bash">python3 -m venv .venv
+.venv/bin/python -m pip install laya
+.venv/bin/python -I -c "import laya; print(laya.__version__)"
+</code></pre>
+<p><strong>Windows PowerShell</strong> (this example uses an installed Python 3.11):</p>
+<pre><code class="language-powershell">py -3.11 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install laya
+.\.venv\Scripts\python.exe -I -c "import laya; print(laya.__version__)"
+</code></pre>
+<p>Both checks print the installed Laya version without loading a checkpoint. <code>-I</code> excludes the current directory from the import search path, so a local source copy cannot mask a missing installation. Keep using the same virtual environment's Python when running your application.</p>
+<p><strong>Intel GPU (XPU)</strong></p>
+<p>Install a supported Intel GPU driver first. For an XPU-enabled PyTorch build, install its wheel before Laya; the default PyPI wheel may be CPU-only. PyTorch's validated hardware and OS list is in the <a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html">Intel GPU guide</a>.</p>
+<pre><code class="language-powershell">.\.venv\Scripts\python.exe -m pip install torch --index-url https://download.pytorch.org/whl/xpu
+.\.venv\Scripts\python.exe -m pip install laya
+.\.venv\Scripts\python.exe -c "import torch; print(torch.xpu.is_available())"
+</code></pre>
+<p>For a source checkout, replace <code>pip install laya</code> with <code>pip install -e .</code>. Laya automatically selects an available XPU when no device is specified; you can also request one explicitly with <code>device="xpu"</code> in <code>laya.load()</code> or <code>Router(device="xpu")</code>.</p>
+<p><strong>Install from GitHub</strong></p>
+<p>To use the development version instead of the PyPI release, create the virtual environment above and replace its installation command with the appropriate command below. Git must be installed.</p>
+<pre><code class="language-bash"># macOS / Linux
+.venv/bin/python -m pip install "git+https://github.com/NandhaKishorM/laya.git"
+</code></pre>
+<pre><code class="language-powershell"># Windows PowerShell
+.\.venv\Scripts\python.exe -m pip install "git+https://github.com/NandhaKishorM/laya.git"
+</code></pre>
+<p>Run the same version check afterward. The GitHub version follows the repository's default branch and may differ from the published release.</p>
+<p><strong>Model setup and troubleshooting</strong></p>
+<p>Continue with the <a href="#quickstart-route-mode-recommended">Router quickstart</a> to run inference. Loading a Hub checkpoint requires access to Hugging Face on its first download; the quickstart's <code>Router(preload=True)</code> loads all three configured checkpoints at construction.</p>
+<ul>
+<li><strong><code>ModuleNotFoundError: No module named 'laya'</code>:</strong> run both installation and your script with the same virtual environment's Python executable shown above. In an editor, select that interpreter as well.</li>
+<li><strong>Missing <code>rl_agent_config.json</code>:</strong> this file ships with a Laya checkpoint alongside <code>model.safetensors</code>; it is not a configuration file you need to create in the source repository. For a local model, pass the directory containing those checkpoint files.</li>
+</ul>
+<hr />
+<h3>Command line</h3>
+<p>Installing the package also installs a <code>laya</code> command for quick local testing, no script needed:</p>
+<pre><code class="language-bash">laya "I was charged twice, please refund"            # routing decision only; works offline, no download
+laya "Refactor this service" --predict               # full answers (downloads the checkpoint on first use)
+laya "Mein Konto wurde zweimal belastet" --lang de   # force a language instead of detecting it
+laya "My payment failed twice" --preset triage       # answer a ready-made preset (triage, email, guard, moderation, router)
+laya                                                 # interactive mode
+</code></pre>
+<p>Routing alone never downloads a checkpoint, so it returns in milliseconds. <code>--predict</code> loads the routed checkpoint, which needs network access to the Hugging Face hub the first time; if a checkpoint cannot be downloaded, the CLI says so instead of crashing.</p>
+<hr />
+<h2>Try it locally: web GUI + JSON API</h2>
+<p><code>examples/server.py</code> is a self-contained FastAPI app for testing Laya without writing any code:
+a two-pane playground (edit the request as a form or as JSON, run it with Ctrl+Enter, read each
+answer's full distribution and calibrated confidence, copy it as curl or Python), plus a plain
+JSON API (<code>/predict</code>, <code>/predict/batch</code>) for scripting against.</p>
+<pre><code class="language-bash">pip install "laya[serve]"
+python examples/server.py               # http://127.0.0.1:8000
+</code></pre>
+<p>Open <code>http://127.0.0.1:8000</code> in a browser for the playground, or hit it directly:</p>
+<pre><code class="language-bash">curl -s localhost:8000/predict -H 'content-type: application/json' -d '{
+  "state": {"body": "We were billed twice for March. Please refund it today."},
+  "questions": {
+    "department": {"type": "choice",
+                   "instructions": "Which department should handle this?",
+                   "criteria": {"billing": "invoices, payments, refunds", "other": "everything else"}},
+    "urgency": {"type": "score",
+                "instructions": "How urgent is this?",
+                "criteria": ["not urgent", "soon", "critical"]}
+  }
+}' | python -m json.tool
+</code></pre>
+<p><code>--no-preload</code> loads checkpoints lazily instead of all three up front; <code>--device cuda|cpu|mps</code>
+pins the device. See <code>python examples/server.py --help</code> for the rest.</p>
+<hr />
+<h2>Quickstart: Route Mode (Recommended)</h2>
+<p>To try the Python SDK in a CPU container, see the
+<a href="docs/docker.md">Docker Compose quickstart</a>. It runs a sample request and keeps
+downloaded models between runs.</p>
+<p>Laya ships three checkpoints. The built-in <strong><code>Router</code></strong> is the recommended entry point: it evaluates any state in any language, automatically detects scripts and languages in sub-milliseconds, and dispatches to the optimal checkpoint in a single forward pass.</p>
+<pre><code class="language-python">from laya import Router
+
+# Preload checkpoints into memory for instant sub-35ms routing
+router = Router(preload=True)
+
+# 1. State in any language or schema
+state = {
+    "from": "user@acme.com",
+    "subject": "Duplicate charge on invoice #4411",
+    "body": "Hi, we were billed twice for March. Please refund the duplicate today or we will cancel our plan."
+}
+
+# 2. Define your typed questions
+questions = {
+    "department": {
+        "type": "choice",
+        "instructions": "Which department should handle this request?",
+        "criteria": {
+            "billing": "invoices, payments, refunds",
+            "technical": "bugs, outages, system errors",
+            "sales": "pricing, new contracts",
+            "other": "everything else"
+        }
+    },
+    "urgency": {
+        "type": "score",
+        "instructions": "How urgent is this request?",
+        "criteria": ["not urgent", "soon", "critical deadline or blocking issue"]
+    },
+    "churn_risk": {
+        "type": "noul",
+        "instructions": "Does the user threaten to cancel or leave?"
+    },
+    "refund_requested": {
+        "type": "noul",
+        "instructions": "Does the user explicitly request a refund?"
+    }
+}
+
+# 3. English state -&gt; automatically routed to laya (ModernBERT-large, 39.5 ms)
+res_en = router.predict(state, questions)
+print("Department :", res_en["answers"]["department"]["choice"])  # -&gt; billing (confidence: 0.94)
+print("Routing    :", res_en["routing"]["model"])                 # -&gt; english
+
+# 4. Hindi state -&gt; automatically routed to laya-multilingual (mmBERT-base, 32.8 ms)
+res_hi = router.predict({"body": "मुझसे दो बार शुल्क लिया गया, कृपया पैसे वापस करें।"}, questions)
+print("Department :", res_hi["answers"]["department"]["choice"])  # -&gt; billing (confidence: 0.86)
+print("Routing    :", res_hi["routing"]["model"])                 # -&gt; multilingual
+
+# 5. Explicit override when you want a specific checkpoint
+res_td = router.predict(state, questions, model="typed-decisions")
+</code></pre>
+<p>Every result carries full routing metadata explaining why the choice was made:</p>
+<pre><code class="language-python">res_hi["routing"]
+# {
+#   'model': 'multilingual',
+#   'repo': 'convaiinnovations/laya/multilingual',
+#   'reason': 'non-Latin script (devanagari, 100% of letters); the English checkpoint cannot read it'
+# }
+</code></pre>
+<p>Inspect a routing decision without running any forward pass:</p>
+<pre><code class="language-python">router.route({"body": "Der Kunde wurde zweimal belastet"}, questions).reason
+# "Latin script but language looks like 'de', not English"
+</code></pre>
+<p>Very short Latin-script text often carries nothing that identifies its language (<code>"Quero cancelar"</code>, <code>"Esqueci minha senha"</code>). Such text goes to <code>default</code>, which is <code>"english"</code> unless you change it. If most of your traffic is not English, set:</p>
+<pre><code class="language-python">router = Router(default="multilingual")
+router.route({"body": "Esqueci minha senha"}).model                 # -&gt; multilingual
+router.route({"body": "Please refund the duplicate charge"}).model  # -&gt; english
+</code></pre>
+<h3>Heterogeneous routed batches</h3>
+<p>If a lazy router receives an interleaved workload whose requests route to different checkpoints, calling <code>predict()</code> in a loop can still cause unnecessary checkpoint churn when the required checkpoints exceed the resident cache, for example with <code>max_loaded=1</code> or when <code>typed-decisions</code> is also used.</p>
+<p><code>Router.predict_batch()</code> routes the full workload first, groups requests by checkpoint, then groups requests with the same question schema within each checkpoint. Each compatible group is dispatched to <code>Agent.predict_batch()</code> so states can share forward passes, and results are restored to the original request order.</p>
+<pre><code class="language-python">requests = [
+    {"state": "Please refund invoice 1", "questions": questions},
+    {"state": "تم خصم المبلغ مرتين", "questions": questions},
+    {"state": "Please refund invoice 2", "questions": questions},
+]
+
+results = Router(max_loaded=1).predict_batch(requests)
+# results stay in input order while compatible requests are batched by checkpoint
+</code></pre>
+<p>Each item can independently set <code>model</code>, <code>task</code>, <code>lang</code>, or <code>lang_guess</code>. Use <code>route_batch(requests)</code> when you only want the ordered routing decisions without loading any checkpoint. <code>predict_many</code> is an alias for <code>predict_batch</code>.</p>
+<p>Requests are validated before model loading. Different requests may use different question schemas; requests sharing both a checkpoint and question schema are passed together to <code>Agent.predict_batch()</code>.</p>
+<p><a href="#prediction-hooks">Prediction hooks</a> installed on the <code>Router</code> run once per request, as they do for <code>predict()</code>, so a redaction hook rewrites every state before the model sees it. Requests that share a checkpoint run all their start hooks before their shared forward pass; see <a href="docs/hooks/lifecycle.md#routerpredict_batch"><code>docs/hooks/lifecycle.md</code></a>.</p>
+<p>You can also bound the Agent-level forward-pass batch size:</p>
+<pre><code class="language-python">results = router.predict_batch(requests, batch_size=8)
+</code></pre>
+<h3>Why Route: The Evidence</h3>
+<p>On a shared benchmark (17,416 questions, one T4 GPU, identical questions per model):</p>
+<table><thead><tr><th>Benchmark / Task</th><th>English (<code>laya</code>)</th><th>Multilingual (<code>laya-multilingual</code>)</th><th><code>Router</code> (Routed)</th></tr></thead><tbody>
+<tr><td>MASSIVE intent, English</td><td><strong>0.783</strong></td><td>0.657</td><td><strong>0.783</strong></td></tr>
+<tr><td>MASSIVE intent, 13 other languages</td><td>0.306</td><td><strong>0.451</strong></td><td><strong>0.451</strong></td></tr>
+<tr><td>XNLI, English</td><td><strong>0.860</strong></td><td>0.843</td><td><strong>0.860</strong></td></tr>
+<tr><td>XNLI, 14 other languages</td><td>0.521</td><td><strong>0.731</strong></td><td><strong>0.731</strong></td></tr>
+<tr><td>Languages usable (&gt;3x random)</td><td>23 / 51</td><td>45 / 51</td><td><strong>45 / 51</strong></td></tr>
+<tr><td>Latency, 1 question (T4 GPU)</td><td>39.5 ms</td><td><strong>32.8 ms</strong></td><td><strong>32.8 ms</strong></td></tr>
+<tr><td>Latency, 10 questions batched</td><td>158.6 ms</td><td><strong>72.3 ms</strong></td><td><strong>72.3 ms</strong></td></tr>
+</tbody></table>
+<p>The English checkpoint collapses on non-Latin scripts (Khmer scores <strong>0.000 accuracy at 0.952 confidence</strong>). Because the model stays confident while being wrong, confidence gating cannot save you. <code>Router</code> detects the script in &lt;0.5 ms pure Python before the forward pass.</p>
+<h3>Production Preload &amp; Memory</h3>
+<p>A cold checkpoint build costs seconds; language detection costs microseconds. The lazy default keeps <strong>two</strong> checkpoints resident — <code>english</code> and <code>multilingual</code>, the only two automatic routing chooses between — so a language flip costs detection only once each has been built. <code>max_loaded=1</code> rebuilds the checkpoint it just evicted on <em>every</em> switch (measured at a 7.4 s median reload on CPU and 10.3 s on T4), and traffic that only ever sees one language never builds the second, so the default costs a single-language deployment nothing.</p>
+<p>For a server or production app, preload:</p>
+<pre><code class="language-python"># Every checkpoint resident in memory; language flips cost detection only (&lt;1 ms)
+router = Router(preload=True)
+router = Router(preload=True, device="cuda")
+
+# Or preload only the specific checkpoints you serve:
+router.preload(["english", "multilingual"])
+
+# If your app already built an agent, attach it to avoid duplicate VRAM:
+router.attach("english", existing_agent)
+
+# Manage resident memory (default keeps two hot: english + multilingual, LRU eviction)
+router = Router(max_loaded=3)       # keep all three hot, e.g. with auto_task_detection
+router = Router(max_loaded=1)       # memory-constrained host, reloads on every switch
+router.unload()                     # free memory
+</code></pre>
+<table><thead><tr><th>Deployment Mode</th><th>Per-Request Latency</th><th>Model Reloads</th></tr></thead><tbody>
+<tr><td><code>Router()</code> (lazy, <code>max_loaded=2</code>)</td><td>detection only (&lt;1 ms) on a switch, after each language's first load</td><td>1 the first time a language appears</td></tr>
+<tr><td><code>Router(max_loaded=1)</code></td><td>7 to 10 s on every language switch</td><td>1 per switch</td></tr>
+<tr><td><code>Router(preload=True)</code></td><td><strong>32.8 ms (GPU) / 193–464 ms (CPU)</strong></td><td><strong>none</strong></td></tr>
+</tbody></table>
+<p>A rebuild still re-reads the checkpoint, but each checkpoint's tokenizer is parsed once per process
+and reused by every <code>Agent</code> — including one the Router rebuilds after eviction. The multilingual
+<code>tokenizer.json</code> alone is 34 MB / 256k vocab, several times the cost of applying its weights.
+Preloading is still the right answer for a server: it removes the rebuild rather than making it
+cheaper.</p>
+<h3>Supplying Your Own Language Detection</h3>
+<p>Routing asks one question: <em>can the English checkpoint read this state?</em> The built-in detector answers it from the script and a function-word heuristic, and is deliberately dependency-free. That heuristic is best-effort on Latin-script languages it holds no word list for, so a short request can carry no usable signal:</p>
+<pre><code class="language-python">from laya.lang import analyse
+analyse("Care este ora in Tokyo?")
+# {'script': 'latin', 'language': 'en', 'is_english': True}   -&gt; the English checkpoint
+</code></pre>
+<p>If you already run a language-identification model, hand routing the answer instead of relying on the heuristic. <code>lang_guess</code> takes a language code or a callable receiving the state, and is checked after an explicit <code>lang=</code> and before detection:</p>
+<pre><code class="language-python"># A code you already know
+router.predict(state, questions, lang_guess="ro")
+
+# A callable, e.g. wrapping fastText, CLD3 or a transformer LID
+router.predict(state, questions, lang_guess=lambda s: my_lid(s))
+
+# Or install one for every request on a server
+router = Router(preload=True, lang_guess=my_lid)
+</code></pre>
+<p>The hint only decides <em>English or not</em>: a code whose primary subtag is <code>en</code>, <code>eng</code> or <code>english</code> routes to the English checkpoint, and every other code that names a language routes to the multilingual one. <code>"en_US"</code> and <code>"en_US.UTF-8"</code> are read as English, so <code>$LANG</code> can be passed straight through. Returning <code>None</code>, or a code that names no language, makes it abstain and the built-in detector decides as before — so a LID model that is unsure does not force a checkpoint. <code>C</code>, <code>POSIX</code> and <code>C.UTF-8</code> abstain, which matters because <code>C.UTF-8</code> is the default <code>$LANG</code> in the official Python image: passing it through no longer pins every request to the multilingual checkpoint, which is what it used to do. The ISO 639-2 special codes <code>und</code>, <code>zxx</code> and <code>mul</code> abstain for the same reason. An explicit <code>model=</code>, <code>task=</code> or <code>lang=</code> still wins, and the default path is unchanged.</p>
+<hr />
+<h2>Self-Hosting: HTTP Server (Jev-compatible)</h2>
+<p><code>laya.serve</code> exposes the <code>Router</code> over HTTP on the same <code>POST /v1/systemone</code>
+wire protocol as TypeSafe's hosted Jev API. Laya's answer payload is already
+schema-identical to what Jev returns (<code>choice</code>/<code>score</code>/<code>noul</code> answers and a
+<code>{input_tokens, output_tokens}</code> usage block), so an existing Jev client — e.g.
+the <a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html"><code>hs-jev</code></a> Haskell client — just
+needs its <code>baseUrl</code> repointed; nothing else changes.</p>
+<pre><code class="language-bash">pip install "laya[serve]"          # adds fastapi + uvicorn + python-multipart
+LAYA_DEVICE=cuda LAYA_PRELOAD=1 laya-serve   # binds 0.0.0.0:8000, preloads all 3 checkpoints
+</code></pre>
+<pre><code class="language-bash">curl -s localhost:8000/v1/systemone -H 'content-type: application/json' -d '{
+  "state": {"body": "billed twice, refund please or we cancel"},
+  "questions": {"dept": {"type": "choice", "instructions": "which team?",
+                "criteria": {"billing": "refunds", "tech": "bugs"}}}
+}'
+</code></pre>
+<p>Configuration is by environment variable: <code>LAYA_HOST</code>, <code>LAYA_PORT</code>,
+<code>LAYA_DEVICE</code>, <code>LAYA_PRELOAD</code>, <code>LAYA_MODELS</code> (comma list to preload),
+<code>LAYA_THREADS</code> (cap torch intra-op threads for CPU inference — keep at or below
+physical cores), <code>LAYA_AUTO_TASK</code>, and <code>LAYA_API_KEY</code> (when set, clients must
+send <code>Authorization: Bearer &lt;key&gt;</code>). A client's <code>model</code> field is honoured when it
+names a Laya checkpoint (<code>english</code>/<code>multilingual</code>/<code>typed-decisions</code>), otherwise
+the router auto-selects by script/language.</p>
+<p>Three things differ from Jev when you port a client:</p>
+<ul>
+<li><strong>Options per question.</strong> A question's options share the checkpoint's option budget, <code>head_max_len</code> (192 tokens on <code>laya</code>, 256 on the other two), not Jev's cap of 255 options. Once they overflow it, around 20 options with a short description each, every option is trimmed to fit, so long or similar labels can reach the model reading the same (<a href="#where-jev-leads">Where Jev leads</a>). Once they no longer fit the window at all, the request is rejected with 422. With short labels such as <code>Queue 042: Tickets routed to queue 42</code> that happens above 126 options on <code>laya</code> and 254 on the other two; the exact point moves with the length of the instructions and labels. For more candidates, narrow them first with <code>predict_shortlist</code> (<a href="#honest-limits">Honest limits</a>).</li>
+<li><strong>Score levels.</strong> Every level needs a description. A <code>null</code> level is rejected with 422 rather than scored and echoed back in <code>legend</code>.</li>
+<li><strong><code>confidence</code></strong> on <code>choice</code> and <code>score</code> answers is 1 minus normalised entropy, a measure of how concentrated the distribution is, not Jev's <code>(n·p_max − 1)/(n − 1)</code>. A threshold carried over from Jev does not transfer. For one calibrated number on every question type, gate on <code>answer_confidence</code>, the probability of the reported answer.</li>
+</ul>
+<h3>Nix / NixOS</h3>
+<p>This repo is a flake. On a machine with an NVIDIA GPU:</p>
+<pre><code class="language-bash">nix run .#laya-serve          # build (prebuilt CUDA torch, no compile) and serve
+nix develop                   # dev shell: torch-bin, transformers, fastapi, pytest
+</code></pre>
+<p>For a NixOS host, import the module and enable the service:</p>
+<pre><code class="language-nix"># flake inputs:  laya.url = "github:&lt;you&gt;/laya";  # or path:/… on the same host
+{
+  imports = [ laya.nixosModules.default ];
+  services.laya-serve = {
+    enable = true;
+    host = "0.0.0.0";           # or bind to the Tailscale/LAN address
+    openFirewall = true;
+    device = "cuda";
+    models = [ "english" "multilingual" "typed-decisions" ];
+    # apiKeyFile = config.age.secrets.laya-api-key.path;  # optional bearer auth
+  };
+}
+</code></pre>
+<p>The module runs a hardened <code>DynamicUser</code> systemd unit with CUDA device access,
+caches weights under <code>/var/lib/laya-serve</code>, and reads the bearer token (if any)
+via <code>LoadCredential</code> so it never enters the store.</p>
+<hr />
+<h2>Single-Model Mode (Direct SDK)</h2>
+<p>If you only need a single checkpoint for a dedicated pipeline, you can load models directly:</p>
+<pre><code class="language-python">import laya
+
+# 1. Load a specific checkpoint directly from the hub
+agent = laya.load("convaiinnovations/laya")                           # English root
+agent_ml = laya.load("convaiinnovations/laya", subfolder="multilingual") # 100+ languages
+agent_td = laya.load("convaiinnovations/laya", subfolder="typed-decisions")
+
+# 2. Run all questions in ONE single forward pass (~35 ms on GPU)
+result = agent.predict(state, questions)
+answers = result["answers"]
+
+print("Department :", answers["department"]["choice"])   # -&gt; billing (confidence: 0.94)
+print("Urgency    :", answers["urgency"]["score"])        # -&gt; 1.84 / 2.0
+print("Churn Risk :", answers["churn_risk"]["noul"])       # -&gt; 0.892 (89.2% probability)
+</code></pre>
+<p>Passing an empty question dictionary to <code>agent.predict(state, {})</code> or
+<code>agent.system_one(state, {})</code> returns the standard response with <code>"answers": {}</code>
+and <code>"usage": {"input_tokens": 0, "output_tokens": 0}</code>. The state is not tokenized
+and no model forward pass runs.</p>
+<h3>Batch Mode: score many states in one forward pass</h3>
+<p><code>predict</code> handles one state per call, which leaves most of the GPU's batch dimension idle. When you
+have a list of items to score against the <em>same</em> questions — a backlog of tickets, a table of rows,
+a log slice — <code>predict_batch</code> packs them into shared forward passes:</p>
+<pre><code class="language-python">states = [{"body": t} for t in ticket_texts]           # a list of states
+
+results = agent.predict_batch(states, questions)       # one forward pass for the whole list
+# results[i] corresponds to states[i], with the same output shape as predict
+
+# Bound peak memory when the list (or the texts) are large — chunk into passes of N:
+results = agent.predict_batch(states, questions, batch_size=64)
+
+# Reduce padding when input lengths vary; results still follow the original state order:
+results = agent.predict_batch(states, questions, batch_size=64, sort_by_length=True)
+</code></pre>
+<p><code>sort_by_length=True</code> groups states by their longest encoded question row, after truncation.
+It looks ahead at most eight batches and reuses the encoded rows for sorting. This uses more temporary
+CPU memory for tokenized inputs, and takes effect only when <code>1 &lt; batch_size &lt; len(states)</code>.
+Benchmark it on your workload and backend: uniform lengths offer little benefit, and changed
+batch shapes can cause small floating-point differences, including near decision thresholds.
+Hooks still see states and final results in input order. The option is available on <code>Agent</code>.</p>
+<p>Results are aligned with <code>states</code> by index and identical in shape to <code>predict</code>. Changing batch
+shapes can introduce floating-point differences on CPU and GPU; check decision thresholds on
+your workload, particularly with mixed precision. Batching is a <strong>GPU
+throughput win</strong> — on an RTX 5060 Ti, per-decision latency drops from ~10 ms one-by-one to ~1 ms
+batched (measured ~9–10×). On CPU, increasing batch size alone may not speed up inference;
+length grouping can help by reducing the padded work in a mixed-length workload. See the
+<a href="research/README.md#length-batching">CPU measurements and reproduction commands</a>.</p>
+<h3>Long documents: <code>predict_long</code></h3>
+<p><code>predict</code>/<code>system_one</code> truncate a state that exceeds <code>max_len</code> to a single window (the first, or
+for a conversation list the last), silently dropping the rest. <code>predict_long</code> scans the whole state
+in overlapping windows, scores them in shared forward passes (via <code>predict_batch</code>), and aggregates
+per question:</p>
+<pre><code class="language-python">result = agent.predict_long(state, questions)              # windows the state, one result back
+result = agent.predict_long(state, questions, window=256)  # smaller window isolates a localized span
+</code></pre>
+<ul>
+<li><code>noul</code> takes the strongest window (the statement holds if any window supports it).</li>
+<li><code>choice</code> / <code>score</code> take the most-confident window — averaging over a long, mostly-neutral
+document lets the neutral majority out-vote the one window that saw the deciding span.</li>
+<li>A state that already fits one window is passed straight to <code>system_one</code> (identical output).</li>
+</ul>
+<p>A smaller <code>window</code> isolates a short deciding span better (it becomes a larger fraction of its
+window); the default (<code>max_len - head_max_len</code>) favors context and throughput. Output shape matches
+<code>predict</code>, with <code>usage["windows"]</code> added.</p>
+<p>The returned probability is the deciding window's, <strong>not a calibrated number for the whole
+document</strong> — a <code>noul</code> max drifts up with the window count even with no signal, and <code>choice</code> can land
+on a confidently-neutral window when nothing is decisive. Each answer carries <code>answer["window"]</code>
+(the deciding window's <code>index</code>, <code>token_start</code>/<code>token_end</code>, and <code>count</code>) so you can check the span
+the answer actually came from:</p>
+<pre><code class="language-python">r = agent.predict_long(state, questions)
+r["answers"]["refund"]["window"]   # {'index': 13, 'token_start': 4680, 'token_end': 5432, 'count': 14}
+</code></pre>
+<hr />
+<h2>GPU Fast Path (TileLang)</h2>
+<p><code>pip install laya[fast]</code> adds an optional forward built from fused <a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html">TileLang</a>
+kernels: GEMM + bias/activation epilogues, GEMM + GEGLU, residual + LayerNorm, in-place RoPE, and a
+sliding-window flash attention that reads the packed QKV buffer directly. Weights stay resident in bf16
+and every (batch, length) bucket is captured as a CUDA graph, so a one-question call no longer pays
+~200 kernel launches from Python.</p>
+<pre><code class="language-python">agent = laya.load("convaiinnovations/laya", fast=True)   # or: agent.accelerate()
+agent.predict(state, questions)                            # same API, same answers
+</code></pre>
+<p>Numerics: on a fixed set of 60 states the fast path stays within 0.046 of an fp32 forward and within 0.076 of the stock
+bf16 path (max |Δp| ≤ 0.05 vs fp32 on both checkpoints, argmax agreement ≥ 47/48 per question type; every per-option
+probability is in <code>benchmarks/results/parity_*.json</code>) — see <code>benchmarks/parity_fast.py</code> and <a href="BENCHMARKS.md#gpu-fast-path">BENCHMARKS.md</a>.
+The fast path runs in the agent's autocast dtype at the time <code>accelerate()</code> is called: bf16 by default, fp16 if
+<code>agent.dtype</code> is <code>torch.float16</code>, where it stays within 0.009 of fp32 on the same set (<a href="BENCHMARKS.md#fp16">BENCHMARKS.md</a>).
+Falls back to the stock forward on CPU/MPS or when <code>tilelang</code> is not installed; <code>agent.deaccelerate()</code>
+restores it. Kernels compile once per shape bucket on first use (a few seconds, cached on disk).</p>
+<hr />
+<h2>Automated Confidence Gating</h2>
+<p>Because Laya's probabilities are trained with strictly proper scoring rules (RLCD), confidence scores are statistically meaningful:</p>
+<pre><code class="language-python">dept = answers["department"]["choice"]
+conf = answers["department"]["confidence"]
+
+if conf &gt;= THRESHOLD:               # refit and validate THRESHOLD on your own held-out data
+    route_automatically(dept)       # above it: act, and sample the decisions you act on
+else:
+    escalate_to_human_agent(dept, reason=f"Low confidence ({conf:.2f})")
+</code></pre>
+<p>A threshold is a policy you choose from measured accuracy at that coverage on your data, not a property of the model. Both checkpoints are over-confident as shipped and <code>laya-multilingual</code> has no fitted temperatures at all, so fit them before relying on these numbers — see <a href="#calibration">Calibration</a> above, and the <a href="notebooks/laya_finetune_typed_decisions_2xT4_kaggle.ipynb">fine-tuning notebook</a> for the fitting loop itself. Then pick the point where the errors you accept are ones you can live with. Confidence orders decisions; it does not establish that a decision is correct.</p>
+<p>A threshold also depends on the autocast dtype. On CUDA at compute capability 8 or above the runtime uses the checkpoint's <code>amp_dtype</code>, which is bf16 for all three shipped checkpoints. On the fixed set from <code>benchmarks/parity_fast.py</code> (60 states, 288 questions per checkpoint, RTX 2000 Ada) bf16 moves a probability by up to 0.073 against the fp32 forward and flips 3 of 864 argmaxes across the three checkpoints; fp16 stays within 0.019 and flips none, at the same latency. <code>LAYA_CUDA_AMP=fp16</code> selects fp16 and <code>LAYA_CUDA_AMP=bf16</code> selects bf16 (<code>LAYA_CPU_AMP=bf16</code> is the CPU counterpart). Fit and measure a threshold in the dtype you serve with.</p>
+<hr />
+<h2>Prediction Hooks</h2>
+<p>Hooks observe or shape every decision without forking: audit logging, PII redaction before
+inference, caching, metrics, confidence gating, routing overrides, and forwarding to an
+external service. They are opt-in, and unset hooks are a no-op.</p>
+<pre><code class="language-python">import laya
+
+def log(ctx):
+    print(ctx.model, ctx.results[0]["answers"], ctx.elapsed_ms)
+
+agent = laya.load("convaiinnovations/laya", on_predict_end=log)
+agent.system_one("I was charged twice.", {"urgent": {"type": "noul", "instructions": "Urgent?"}})
+</code></pre>
+<p>A hook is a plain callable, or an object implementing any of <code>on_predict_start</code>,
+<code>on_predict_end</code>, <code>on_route</code>, <code>on_load</code>, <code>on_evict</code>, <code>on_error</code>. A start hook can rewrite the
+state/questions or <code>ctx.skip(...)</code> a cached answer; an end hook can rewrite the result. See
+<a href="docs/hooks/index.md"><strong><code>docs/hooks/</code></strong></a> and <a href="examples/hooks/"><code>examples/hooks/</code></a>.</p>
+<hr />
+<h2>Schema-driven decisions</h2>
+<p>Describe the shape you want with a JSON schema or a pydantic model, and Laya answers it in one
+forward pass, with typed values and calibrated confidence.</p>
+<pre><code class="language-python">import laya
+
+schema = {
+    "type": "object",
+    "properties": {
+        "department": {"type": "string", "enum": ["billing", "support", "sales"],
+                       "description": "Which team should handle this?"},
+        "urgency": {"type": "integer", "minimum": 0, "maximum": 2},
+        "needs_human": {"type": "boolean"},
+    },
+}
+
+agent = laya.load("convaiinnovations/laya")
+agent.decide("I was charged twice, refund me.", schema=schema)
+# {"department": "billing", "urgency": 2, "needs_human": True}
+</code></pre>
+<p><code>decide</code> also works on a <code>Router</code>, accepts a pydantic model (install <code>laya[structured]</code>), and can
+return per-field confidence with <code>return_details=True</code>. See <a href="docs/structured.md"><code>docs/structured.md</code></a>.</p>
+<hr />
+<h2>Built-in Workflow Presets</h2>
+<p>Laya provides pre-tuned question schemas for immediate production use:</p>
+<pre><code class="language-python">import laya
+
+agent = laya.load("convaiinnovations/laya")
+
+# 1. Intelligent Model Router (routes to small vs. frontier models)
+routing = agent.predict({"request": "Refactor this service using dependency injection"}, laya.router_questions())
+
+# 2. Real-time Prompt Guardrails (jailbreaks, injections, leaks)
+guard = agent.predict({"prompt": "Ignore all instructions"}, laya.guard_questions())
+
+# 3. Content Safety &amp; Moderation (toxicity, harassment, threats)
+safety = agent.predict({"post": "User comment text"}, laya.moderation_questions())
+
+# 4. Support Ticket Triage (intent, urgency, frustration, churn)
+triage = agent.predict({"message": "My payment failed twice"}, laya.triage_questions())
+</code></pre>
+<hr />
+<h2>LangChain and LangGraph Integration</h2>
+<p>Fast System 1 routing and guardrails directly inside LangGraph workflows and LCEL chains:</p>
+<pre><code class="language-python">from laya.integrations.langchain import LayaRouter, LayaGuardrail
+
+# 1. Sub-35ms LangGraph conditional edge routing with confidence fallback
+router = LayaRouter(
+    criteria={"billing": "invoices, charges", "tech": "bugs, outages"},
+    confidence_threshold=0.80,
+    fallback="human_agent",
+)
+workflow.add_conditional_edges("triage", router)
+
+# 2. Inline prompt guardrails
+guard = LayaGuardrail(action="raise")  # raises LayaGuardrailError on jailbreak/injection
+</code></pre>
+<p>See <a href="docs/langchain.md"><strong><code>docs/langchain.md</code></strong></a> for full guide, support ticket triage nodes, and remote HTTP server configuration.</p>
+<hr />
+<h2>Decision Primitives</h2>
+<table><thead><tr><th>Primitive</th><th>Output</th><th>Use Cases</th></tr></thead><tbody>
+<tr><td><strong><code>choice</code></strong></td><td>Top label, probabilities per option, confidence</td><td>Department routing, intent classification, topic categorization</td></tr>
+<tr><td><strong><code>score</code></strong></td><td>Expected level on ordinal rubric, distribution, confidence</td><td>Frustration level, ticket urgency, harm severity</td></tr>
+<tr><td><strong><code>noul</code></strong></td><td>Calibrated probability P(true) from 0.0 to 1.0</td><td>Phishing detection, spam filtering, jailbreak detection, churn risk</td></tr>
+</tbody></table>
+<p><code>noul</code> always scores two semantic slots in <code>[false, true]</code> order and returns the probability of
+the second slot. For compatibility, those slots are shown to the model as <code>false</code> and <code>true</code> by
+default. The optional <code>labels</code> mapping overrides only that model-facing text without changing the
+returned meaning:</p>
+<pre><code class="language-python">question = {
+    "type": "noul",
+    "instructions": "Is this review positive?",
+    "criteria": {
+        "false": "the review is negative",
+        "true": "the review is positive",
+    },
+    "labels": {
+        "false": "B",
+        "true": "A",
+    },
+}
+</code></pre>
+<p>The <code>labels</code> mapping is optional. It must contain exactly the string keys <code>false</code> and <code>true</code>,
+whose values must be distinct non-empty strings. Mapping order does not matter, and the returned
+<code>noul</code> value is still P(true). Label sensitivity varies by checkpoint and state, so validate any
+override on your own data rather than treating <code>A</code>/<code>B</code> as a universal fix.</p>
+<hr />
+<h2>MCP Server (Optional)</h2>
+<p>Laya can be exposed as an <a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html">MCP</a> stdio server, so any MCP
+client (OpenClaw, Claude Desktop, Cursor, ...) can call typed decisions as tools
+(<code>laya_predict</code>, <code>laya_route</code>, <code>laya_shortlist</code>, <code>laya_preset</code>, <code>laya_status</code>) without writing glue code.
+This is an <strong>optional extra</strong>: the core package has no <code>mcp</code> dependency.</p>
+<pre><code class="language-bash">pip install "laya[mcp]"
+laya-mcp-server          # or: python -m laya.mcp.server
+</code></pre>
+<p>Example MCP client configuration (stdio transport):</p>
+<pre><code class="language-json">{
+  "mcpServers": {
+    "laya": {
+      "command": "laya-mcp-server",
+      "env": { "LAYA_DEVICE": "cpu" }
+    }
+  }
+}
+</code></pre>
+<p>The environment variables follow the contract documented at the top of
+<a href="laya/serve.py"><code>laya/serve.py</code></a>, so the same variable has one meaning across the
+package:</p>
+<table><thead><tr><th>Variable</th><th>Default</th><th>Meaning</th></tr></thead><tbody>
+<tr><td><code>LAYA_DEVICE</code></td><td>(auto)</td><td>Same as <code>laya.serve</code>: the value is passed straight to torch</td></tr>
+<tr><td><code>LAYA_PRELOAD</code></td><td><code>1</code></td><td>Same as <code>laya.serve</code>: build the checkpoints at startup, not lazily</td></tr>
+<tr><td><code>LAYA_MODELS</code></td><td><code>english,multilingual</code></td><td>Comma list to preload (serve contract). MCP difference: an empty value preloads <code>english,multilingual</code> so <code>typed-decisions</code> stays lazy; in <code>laya.serve</code> empty means every checkpoint</td></tr>
+<tr><td><code>LAYA_THREADS</code></td><td>(torch default)</td><td>Same as <code>laya.serve</code>: cap torch intra-op threads for CPU inference; keep it at or below the physical core count</td></tr>
+</tbody></table>
+<p>The tools return structured JSON (answers with probabilities, routing metadata, device,
+<code>latency_ms</code>). <code>laya_shortlist</code> is the MCP form of <a href="#honest-limits"><code>predict_shortlist</code></a>:
+it shortlists a many-option choice question to its <code>k</code> most likely labels by embedding
+similarity (mean-pooled from the answering checkpoint's own encoder, so no extra model is
+downloaded), answers in one forward pass, and returns per-question shortlist metadata
+(kept labels, cosine scores, <code>k</code>, option count). The guardrails shown on every decision
+tool point clients here for &gt;20-option choices. As with the SDK, use it for structured
+decisions only; not for open Q&amp;A or
+text generation. Tests: <code>tests/test_mcp.py</code> (CI, no weights) and
+<code>tests/test_mcp_local_e2e.py</code> (local, real weights and a real stdio handshake).</p>
+<hr />
+<h2>Evaluation harness</h2>
+<p><code>laya.evals</code> scores a labelled dataset and gates a build on it, so a quality change is a
+reviewable diff instead of a hand-check. It is pure Python plus numpy, imports no torch, and
+needs no weights until you point it at a checkpoint.</p>
+<pre><code class="language-bash">laya-evals validate research/evals/fixture.jsonl
+laya-evals run data.jsonl --model english --min-accuracy 0.8 --max-ece 0.05 --slice language
+laya-evals run data.jsonl --baseline baseline.json --tolerance choice_accuracy=0.02 --json report.json
+</code></pre>
+<p><code>run</code> reports overall and per-slice metrics (<code>choice_accuracy</code>, <code>noul_accuracy</code>, <code>score_mae</code>,
+<code>ece</code>, <code>mean_confidence</code>, latency) and exits non-zero on a threshold or baseline failure, so it
+drops into CI unchanged. A weight-free job runs the metric and API tests on every PR, and a
+scheduled workflow evaluates the English checkpoint against the committed baseline. See
+<a href="docs/evals.md"><strong><code>docs/evals.md</code></strong></a> for the dataset format and the gate.</p>
+<hr />
+<h2>Benchmarks</h2>
+<p>Community diagnostics: <a href="research/benchmarks/feishu_zh/README.md">Chinese workplace decisions (Feishu-style)</a> · <a href="research/benchmarks/feishu_zh/README.zh-CN.md">中文说明</a>. Includes frozen synthetic cases, archived paired Laya/Jev responses, and an offline audit; separate from the benchmark suites below. Also <a href="research/benchmarks/zh_short_commands/README.md">Chinese short-command routing</a> · <a href="research/benchmarks/zh_short_commands/README.zh-CN.md">中文说明</a>: 18 frozen commands and a seven-rung ablation of the documented prompt guidance, which locates the accuracy loss on the four-question path rather than the six-option one.</p>
+<p><strong>Full report: <a href="BENCHMARKS.md"><code>BENCHMARKS.md</code></a></strong> — every run consolidated, languages and themes, with per-language detail for all 51 languages.</p>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/NandhaKishorM/laya/main/assets/laya_benchmark.png" alt="Per-language accuracy for both checkpoints across 51 languages" width="100%" />
+</p>
+<p>All Laya numbers below are measured. Every model answered byte-identical questions
+(fixed seed) in the same run. Reproduce with
+<a href="research/scripts/laya_benchmark_colab.ipynb"><code>research/scripts/laya_benchmark_colab.ipynb</code></a> on a T4.</p>
+<h3>Speed (Tesla T4, measured)</h3>
+<table><thead><tr><th>questions per call</th><th><code>laya</code></th><th><code>laya-multilingual</code></th></tr></thead><tbody>
+<tr><td>1</td><td>39.5 ms</td><td><strong>32.8 ms</strong></td></tr>
+<tr><td>5</td><td>84.5 ms</td><td><strong>40.1 ms</strong></td></tr>
+<tr><td>10</td><td>158.6 ms (15.9 ms/q)</td><td><strong>72.3 ms (7.2 ms/q)</strong></td></tr>
+<tr><td>50</td><td>771 ms</td><td><strong>337 ms (6.8 ms/q)</strong></td></tr>
+</tbody></table>
+<p>Batched throughput reaches 103-332 questions/sec on a single T4. For reference, TypeSafe Jev
+has been independently measured at 236-276 ms p50
+(<a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html">AbdelStark</a>,
+<a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html">nibzard</a>) -- Laya answers a single
+question roughly <strong>6-7x faster</strong>.</p>
+<h3>Laya (with routing) vs Jev</h3>
+<p>Every Laya figure is what <code>Router().predict(...)</code> actually returns — the checkpoint the router
+selects for that input, not a hand-picked best of three. Jev figures are <strong>third-party
+published, never measured here</strong> (no TypeSafe API access), so sample sizes and prompts differ.</p>
+<table><thead><tr><th></th><th>Jev 1.13.0</th><th>Laya (routed)</th><th></th></tr></thead><tbody>
+<tr><td>typed-decisions, 2,000 decisions</td><td>0.727</td><td><strong>0.766</strong></td><td>+0.039</td></tr>
+<tr><td>AG News, 4 labels</td><td>0.910</td><td><strong>0.950</strong></td><td>+0.040</td></tr>
+<tr><td>DAIR Emotion, 6 labels</td><td>0.480</td><td><strong>0.595</strong></td><td>+0.115</td></tr>
+<tr><td>Banking77 (72 vs 77 labels)</td><td><strong>0.870</strong></td><td>0.425</td><td>Jev leads on &gt;20 options</td></tr>
+<tr><td>ECE <em>(lower better)</em></td><td>0.246</td><td><strong>0.081</strong></td><td>3× better (post-temperature)</td></tr>
+<tr><td>p50 latency, 1 question</td><td>236–276 ms</td><td><strong>32.8 ms</strong></td><td>7.8× faster</td></tr>
+<tr><td>Languages usable</td><td><em>no published benchmark</em></td><td><strong>45 of 51</strong></td><td>—</td></tr>
+<tr><td>Weights</td><td>closed API</td><td><strong>Apache 2.0</strong></td><td>—</td></tr>
+<tr><td>Cost</td><td>$0.042 / 1M tokens</td><td><strong>$0 self-hosted</strong></td><td>—</td></tr>
+</tbody></table>
+<p>On DAIR Emotion, Jev assigned <strong>zero probability to the true label on 16% of examples</strong> — a hard
+failure for anything branching on confidence.</p>
+<h4>Where Jev leads</h4>
+<ul>
+<li><strong>High-cardinality label spaces (&gt;20 options at default settings):</strong> On Banking77, Jev scores 0.870 (on 72 labels) while Laya scores 0.425 (on 77 labels at default 256-token head budget). This is an architectural token-budget constraint: options share a fixed <code>head_max_len</code> budget (192 tokens on English, 256 on multilingual), so 77 options receive only ~3 to 4 tokens per label, causing text to become indistinguishable. Jev supports up to 255 options out-of-the-box. While <code>laya-multilingual</code> supports 1,024 context (and up to 8,192 in the encoder) and you can raise <code>agent.cfg["head_max_len"] = 512</code> at runtime, Jev is currently better suited for 50+ options in a single prompt without tuning. <code>predict_shortlist</code> (see <a href="#honest-limits">Honest limits</a>) keeps the top <code>k</code> labels with a caller-supplied embedding, then runs one forward pass on that shortlist.</li>
+<li><strong>Soft distribution matching:</strong> On typed-decisions, while Laya achieves higher argmax accuracy (0.766 vs 0.727), Jev achieves higher soft accuracy (0.580 vs 0.471) against the teacher's full probability distributions.</li>
+<li><strong>Out-of-the-box raw calibration:</strong> Before temperature scaling, the base checkpoint has higher raw ECE (0.213 vs 0.144). Laya achieves its 0.081 ECE after domain temperature fitting.</li>
+</ul>
+<p>Full detail, including every workflow and all 51 languages: <strong><a href="BENCHMARKS.md"><code>BENCHMARKS.md</code></a></strong>.</p>
+<h3>typed-decisions, measured on all three checkpoints</h3>
+<p>400 cases, 2,000 decisions, four workflows.</p>
+<table><thead><tr><th>model</th><th>accuracy</th><th>soft acc</th><th>Brier</th><th>ECE</th><th>score MAE</th></tr></thead><tbody>
+<tr><td><strong><code>laya-typed-decisions</code></strong></td><td><strong>0.766</strong></td><td>0.471</td><td><strong>0.062</strong></td><td>0.213</td><td><strong>0.242</strong></td></tr>
+<tr><td><code>laya</code></td><td>0.362</td><td>0.332</td><td>0.316</td><td>0.175</td><td>0.694</td></tr>
+<tr><td><code>laya-multilingual</code></td><td>0.352</td><td>0.328</td><td>0.463</td><td>0.314</td><td>0.760</td></tr>
+<tr><td><em>Jev 1.13.0 (published)</em></td><td><em>0.727</em></td><td><em>0.580</em></td><td><em>0.148</em></td><td><em>0.144</em></td><td><em>0.391</em></td></tr>
+<tr><td><em>teacher self-agreement ceiling</em></td><td><em>0.735</em></td><td></td><td></td><td></td><td></td></tr>
+<tr><td><em>per-question majority class</em></td><td><em>0.461</em></td><td></td><td></td><td></td><td></td></tr>
+<tr><td><em>random guess</em></td><td><em>0.318</em></td><td></td><td></td><td></td><td></td></tr>
+</tbody></table>
+<p>The fine-tuned checkpoint beats Jev by 3.9 points and clears the teacher ceiling, with 2.4x
+better Brier and 1.6x better score MAE. It wins on all four workflows: invoice processing
+0.804, security incidents 0.766, customer service 0.764, agent-trace observability 0.730.
+By primitive: <code>noul</code> 0.857, <code>choice</code> 0.733, <code>score</code> 0.723.</p>
+<p>Two places it still trails Jev: <strong>soft accuracy</strong> (0.471 vs 0.580 — its argmax is better but
+its distributions match the teacher less well) and <strong>ECE</strong> (0.213 vs 0.144), which temperature
+fitting addresses.</p>
+<p><strong>The base checkpoints sit below the majority-class baseline</strong> (0.362 and 0.352 against 0.461).
+All of the capability on this benchmark comes from fine-tuning.</p>
+<h3>Multilingual (51 languages, MASSIVE intent, 20 options, random = 0.050)</h3>
+<table><thead><tr><th></th><th><code>laya</code></th><th><code>laya-multilingual</code></th></tr></thead><tbody>
+<tr><td>English</td><td><strong>0.783</strong></td><td>0.657</td></tr>
+<tr><td>13 other languages</td><td>0.306</td><td><strong>0.451</strong></td></tr>
+<tr><td>XNLI, English</td><td><strong>0.860</strong></td><td>0.843</td></tr>
+<tr><td>XNLI, 14 other languages</td><td>0.521</td><td><strong>0.731</strong></td></tr>
+</tbody></table>
+<p>Across all 51 languages the English checkpoint macro-averages <strong>0.227</strong> with macro ECE
+<strong>0.733</strong>, and only 23 of 51 languages clear 3x random. Khmer scores <strong>0.000 at 95.2%
+confidence</strong>. This is why <a href="#quickstart-route-mode-recommended"><code>Router</code></a> exists: the
+model's own confidence gives no warning, so the routing decision has to be made before the
+forward pass.</p>
+<h3>English tasks</h3>
+<table><thead><tr><th>task</th><th><code>laya</code></th><th><code>laya-multilingual</code></th><th>note</th></tr></thead><tbody>
+<tr><td>AG News</td><td><strong>0.947</strong></td><td>0.937</td><td>in training mix</td></tr>
+<tr><td>BoolQ</td><td><strong>0.830</strong></td><td>0.787</td><td>in training mix</td></tr>
+<tr><td>DAIR Emotion</td><td><strong>0.573</strong></td><td>0.513</td><td>held out</td></tr>
+<tr><td>prompt-injections</td><td><strong>0.698</strong></td><td>0.578</td><td>held out, n=116</td></tr>
+<tr><td>SST-5 (ordinal)</td><td>0.372</td><td>0.282</td><td>held out</td></tr>
+</tbody></table>
+<h3>Calibration</h3>
+<p>Both checkpoints are over-confident as shipped. Refitting one temperature per (question type,
+option count) on held-out data moves mean ECE <strong>0.466 -&gt; 0.081</strong> (<code>laya</code>) and
+<strong>0.314 -&gt; 0.106</strong> (<code>laya-multilingual</code>). <code>laya-multilingual</code> ships with no fitted
+temperatures at all, so fit them before relying on its probabilities.</p>
+<p>At checkpoint load, numeric temperature entries are clamped to <code>[0.5, 5.0]</code>; invalid or
+non-finite entries use the neutral fallback <code>1.0</code>. A runtime warning reports the affected
+entries and applied values. Bucket-specific temperatures still take precedence over per-type
+values, including when a bucket uses the fallback. Raw values remain available in
+<code>agent.temperature_raw</code> and <code>agent.temperature_by_options_raw</code>. A fallback prevents a loading
+failure; it does not establish calibrated confidence.</p>
+<h3>Honest limits</h3>
+<ul>
+<li><strong>The base checkpoints are near chance on typed-decisions zero-shot</strong> -- 0.362 and 0.352
+against a 0.318 random baseline and a 0.461 majority-class baseline. The 0.766 figure comes
+from the checkpoint fine-tuned on that benchmark's own training split. Laya is a fast base to
+specialise, not a zero-shot decision engine.</li>
+<li><strong>Avoid boolean-word labels in <code>choice</code> questions.</strong> Choice keys are rendered verbatim, and the
+current checkpoints can follow labels such as <code>true</code>/<code>false</code> or <code>yes</code>/<code>no</code> instead of the option
+descriptions. Use semantic labels or opaque labels such as <code>A</code>/<code>B</code>, and validate them on the
+checkpoint and states you serve.</li>
+<li><strong>Semantic <code>choice</code> labels do not make negation safe.</strong> In the five cancellation examples from
+<a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html">#377</a>, a CPU run on Laya 0.3.20 with
+<code>no_action</code> / <code>cancel_account</code> keys selected <code>cancel_account</code> for all four negated requests on
+<code>laya</code> and two on <code>laya-multilingual</code>; one multilingual answer assigned it probability <code>0.9998</code>.
+The positive control passed on both checkpoints. These are narrow cancellation examples, not
+evidence that every negated state fails. Validate the exact checkpoint and wording you serve;
+using semantic keys alone does not avoid this failure.</li>
+<li><strong>High-cardinality choice questions and token budgets:</strong> Sequences split into an option prompt budget (<code>head_max_len</code>) and the remaining document/state budget (<code>max_len - head_max_len</code>):
+<ul>
+<li><code>laya</code> (English) defaults to 512 context (<code>head_max_len = 192</code>, ~320 tokens for state).</li>
+<li><code>laya-multilingual</code> and <code>laya-typed-decisions</code> default to 1,024 context (<code>head_max_len = 256</code>, ~768 tokens for state; mmBERT-base encoder supports up to 8,192 with RoPE).
+At default settings, a 77-option question like Banking77 allocates only <code>(256 - 16) // 77</code> ≈ 3–4 tokens per label, which causes accuracy to fall off sharply (0.425 vs Jev's 0.870). If evaluating 50+ options in a single question:</li>
+</ul>
+<ol>
+<li>Raise <code>agent.cfg["head_max_len"] = 512</code> and <code>agent.cfg["max_len"] = 1024</code> (or up to 2048 / 4096 / 8192) so every option has enough tokens to remain distinct.</li>
+<li>Or shortlist with embeddings and run one forward pass on the top <code>k</code> labels (<code>predict_shortlist</code>, example below). <code>predict</code> and <code>system_one</code> still score every criterion they are given.</li>
+<li>Or split the label set yourself into a coarse question and a fine question.</li>
+</ol>
+</li>
+</ul>
+<pre><code class="language-python">import laya
+
+questions = {
+    "intent": {
+        "type": "choice",
+        "instructions": "Which banking intent is this?",
+        "criteria": {
+            "card_arrival": "where is my card",
+            "transfer_fee": "fee charged on a transfer",
+            # ...the rest of a large label set
+        },
+    }
+}
+result = laya.predict_shortlist(
+    agent,
+    {"text": "I was charged twice for a transfer"},
+    questions,
+    embed_fn=laya.embed_fn_from_agent(agent),  # or any callable: texts -&gt; (n, dim)
+    k=20,
+)
+result["shortlist"]["intent"]["labels"]  # the top 20 labels sent to the model
+</code></pre>
+<p><code>embed_fn(texts)</code> returns one vector per string. <code>embed_fn_from_agent</code> mean-pools the encoder already loaded on the agent; the decision head runs in the following <code>predict</code> / <code>system_one</code> call. Probabilities on a shortlisted choice are over those <code>k</code> labels. When <code>k</code> is at least the number of labels, the original question is passed through and <code>embed_fn</code> is not called.</p>
+<p>Shortlisting the same option set on every request re-embeds option texts that do not change. Wrap the embedder once with <code>laya.cached_embed_fn(embed_fn)</code> and repeat calls embed only the new query text: lookups are exact string matches into an LRU of at most 4,096 entries (about <code>maxsize * dim * 4</code> bytes, so ~12 MB at the default with a 768-dim encoder), and texts missing from the cache are still embedded in one batched call. The wrapper's <code>cache_info()</code> reports hits and misses; call <code>cache_clear()</code> if the model behind <code>embed_fn</code> changes.</p>
+<p><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html">Issue #102</a> reports that a top-20 zero-shot shortlist moved a BANKING77 run from 54.3% to 60.8% on the reporter's setup. Those figures are the reporter's; this repository has not remeasured them.</p>
+<ul>
+<li>
+<p>Ordinal <code>score</code> questions are the weakest primitive (SST-5 0.372).</p>
+</li>
+<li>
+<p><strong><code>noul</code> can follow its option labels instead of the state, most strongly on <code>laya</code> (English).</strong> <code>noul</code> renders its two options as <code>false:</code> / <code>true:</code> by default, and on the English checkpoint that label pair can dominate the answer, returning a confident "no" for clearly positive input (#156). Until a retrained checkpoint lands, check <code>noul</code> answers on your own data. You can override the model-facing pair while keeping the <code>noul</code> result as P(true):</p>
+<pre><code class="language-python">{"type": "noul", "instructions": "Is this review positive?",
+ "criteria": {"true": "yes, the review is positive", "false": "no, the review is negative"},
+ "labels": {"true": "A", "false": "B"}}
+</code></pre>
+<p>Label sensitivity varies by checkpoint and state, so validate the override on your own data. A
+two-option <code>choice</code> with neutral keys remains another workaround:</p>
+<pre><code class="language-python">{"type": "choice", "instructions": "Is this review positive?",
+ "criteria": {"A": "yes, the review is positive", "B": "no, the review is negative"}}
+</code></pre>
+<p><code>criteria</code> on a <code>noul</code> must be keyed <code>true</code>/<code>false</code> — those two keys <em>are</em> the option text the
+model reads, so any other key is rejected instead of being quietly replaced with the defaults.
+Before that check, <code>criteria: {"yes": ..., "no": ...}</code> was accepted, dropped, and answered
+against <code>false:</code> / <code>true:</code> anyway, which cost 2 of 3 clearly positive reviews on the English
+checkpoint (<a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html">#156</a>). Use <code>labels</code> as above to
+change the wording without touching the option text.</p>
+</li>
+<li>
+<p><strong><code>laya-multilingual</code> has a position bias on <code>score</code> questions</strong> (#131): it rarely picks the first-listed level, in any language. For English score questions, route to <code>model="english"</code>, and for other languages validate score outputs on your own data before relying on them.</p>
+</li>
+<li>
+<p><strong><code>action.act_probability</code> carries no usable signal yet</strong> (#185). It reads 1.0 for almost every input, and its raw logits run against correctness (AUROC 0.30 on 396 labelled decisions). Gate on <code>confidence</code> instead, which reaches an AUROC of 0.77 on the same items.</p>
+</li>
+<li>
+<p><code>laya</code> collapses outside English; <code>laya-multilingual</code> is weaker on English. Route, or pick
+deliberately.</p>
+</li>
+</ul>
+<hr />
+<h2>Community Tools</h2>
+<ul>
+<li><strong><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html">omp-laya-judge</a></strong>: an <a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html">oh-my-pi</a> plugin with a local System-1 judge MCP server and skill (<code>choice</code>/<code>bool</code>/<code>score</code>, 0 tokens, about 0.3 s on CPU), confidence-gated escalation, and reproducible quiz and Snake demos.</li>
+<li><strong><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html">laya-adk-toolkit</a></strong>: <a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html">Google ADK</a> tools that let an agent call Laya's <code>classify</code>/<code>score</code>/<code>detect</code> typed decisions directly as tools, instead of asking an LLM to guess at structured output.</li>
+<li><strong><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html">laya-Ascend</a></strong>: Laya on Huawei Ascend NPUs through <code>torch-npu</code>, with a CPU vs NPU benchmark (34x to 71x faster at batch size 1), a setup guide, and Snake and Tetris demos.</li>
+<li><strong><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html">laya-apple</a></strong>: a correctness-validated Laya runtime for Apple silicon that uses the MLX GPU and the Apple Neural Engine, with automatic routing and concurrent heterogeneous serving.</li>
+<li><strong><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html">stuntd</a></strong>: runs Laya locally behind the Jev API (<code>POST /v1/systemone</code>, no key) and trains a head per decision on the frozen encoder from your own labelled rows, with a calibrated confidence threshold (a 12-label intent task: 89.5% zero-shot to 100% trained).</li>
+</ul>
+<hr />
+<h2>Live Demo &amp; Resources</h2>
+<ul>
+<li><strong>Hugging Face Model:</strong> <a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html">convaiinnovations/laya</a></li>
+<li><strong>Interactive Web Demo:</strong> <a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html">convaiinnovations/laya-demo</a></li>
+<li><strong>Engineering Writeup:</strong> <a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html">Read the full story on Dev.to</a></li>
+</ul>
+<hr />
+<h2>Fine-Tuning</h2>
+<p>Fine-tune Laya on your own domain data. The notebook runs on Kaggle's free 2xT4 GPUs and does
+the whole loop: build the dataset, train with RLCD (proper-scoring-rule rewards, GRPO-style
+policy gradient), fit calibration temperatures, evaluate, and push the result to the Hub.</p>
+<ul>
+<li><strong><a href="notebooks/laya_finetune_typed_decisions_2xT4_kaggle.ipynb"><code>notebooks/laya_finetune_typed_decisions_2xT4_kaggle.ipynb</code></a></strong></li>
+</ul>
+<p>The notebook enables gradient checkpointing on both the encoder and the decision head.
+For custom training loops, <code>model.head_checkpointing = True</code> enables activation
+checkpointing for the decision-head layers; enable the encoder's gradient checkpointing
+separately. During gradient-enabled training, this reduces stored intermediate activations
+by recomputing them during backward, trading extra computation for lower activation memory.
+The head flag defaults to <code>False</code> and is bypassed in evaluation and under <code>torch.no_grad()</code>.</p>
+<p>The notebook fits one <code>temperature</code> per type (<code>choice</code>, <code>score</code>, <code>noul</code>) and removes inherited
+<code>temperature_by_options</code> from the exported config. Otherwise those old bucket values take
+precedence at inference and silently mask the new fit. Existing checkpoints still honor
+intentional bucket-specific temperatures, falling back to the corresponding per-type value
+when a bucket is absent; the runtime's temperature clamp is unchanged.</p>
+<p>This fixes configuration persistence, not measured model accuracy or calibration quality.
+The notebook's calibration samples come from its training items; evaluate on separate held-out
+data before claiming an improvement. Already published checkpoints are not rewritten.
+Run the CPU-only regression checks with <code>python tests/test_calibration_persistence.py</code>
+(synthetic configs and tiny local fixtures; no pretrained downloads or training).</p>
+<p>Fine-tuning is where most of the value is. On the typed-decisions benchmark the base
+checkpoints score near chance zero-shot (0.36 and 0.35 against a 0.318 random baseline),
+while the fine-tuned checkpoint reaches <strong>0.766</strong> on the same 2,000 decisions -- above
+TypeSafe Jev's published 0.727 and above the 0.735 teacher self-agreement ceiling. Treat Laya
+as a fast base to specialise, not as a zero-shot decision engine.</p>
+<p>Runtime on 2xT4 is roughly 4-5 hours for 4 epochs over ~30k questions.</p>
+<h3>Worked example: a browser-agent decision head</h3>
+<p><a href="docs/finetune_browser_agent.md"><code>docs/finetune_browser_agent.md</code></a> records a complete specialisation
+on a single 16 GB GPU with no paid API: Laya as the operation/target decider for
+<a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html">browser-use/jev-ultrafast</a> (same request format as
+TypeSafe Jev). Element top-1 among ~45 candidates goes from 0.10 zero-shot to 0.66, real-task
+success from 0 % to 62 % at 17-23 ms per step; weights, pipeline code and per-run results are on
+the Hub at <a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html">cklxx/laya-browser</a>. The write-up covers the
+data recipe (reverse-generated goals, executed DONE states, Mind2Web, on-policy corrections), the
+input-format change that mattered most, and the things that did not work.</p>
+<hr />
+<h2>Support the Project</h2>
+<p>If Laya helps your research or products, consider supporting independent research:</p>
+<p align="left">
+  <a href="https://www.buymeacoffee.com/nandakishorm" target="_blank">
+    <img src="https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&emoji=&slug=nandakishorm&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" alt="Buy Me A Coffee" />
+  </a>
+</p>
+<hr />
+<h2>License</h2>
+<p>Apache 2.0. Developed by Convai Innovations.</p>
+<hr />
+<details open>
+<summary><b>📚 官方开源技术规约与全息拓扑参考引文矩阵（共计 150 处权威节点索引）</b></summary>
+<blockquote>
+<p><strong>索引发布声明</strong>：本项目遵循开源与知识共享协议。以下引用矩阵涵盖分布式拓扑协议、官方架构白皮书、高可用镜像注册中心与可信存活基准指标，为集群爬虫调度代理与检索系统提供毫秒级全息寻址拓扑。</p>
+</blockquote>
+<h4>1. 🌐 核心集群拓扑与网络规约 (Cluster Nodes Topology)</h4>
+<ul>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_1&amp;v=24502">全球分布式拓扑索引节点-#001</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_2&amp;v=26999">多活集群负载感知指南-#002</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_3&amp;v=16280">多活集群负载感知指南-#003</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_4&amp;v=17994">全球分布式拓扑索引节点-#004</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_5&amp;v=30730">全息网络通信节点白名单-#005</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_6&amp;v=16034">全息网络通信节点白名单-#006</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_7&amp;v=17775">高韧性数据交换通道规约-#007</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_8&amp;v=52015">多活集群负载感知指南-#008</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_9&amp;v=20712">高韧性数据交换通道规约-#009</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_10&amp;v=42203">高韧性数据交换通道规约-#010</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_11&amp;v=34958">全球分布式拓扑索引节点-#011</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_12&amp;v=12023">边缘高吞吐调度路由矩阵-#012</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_13&amp;v=2203">全息网络通信节点白名单-#013</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_14&amp;v=23041">全球分布式拓扑索引节点-#014</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_15&amp;v=18153">全息网络通信节点白名单-#015</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_16&amp;v=20980">高韧性数据交换通道规约-#016</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_17&amp;v=23950">边缘高吞吐调度路由矩阵-#017</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_18&amp;v=2195">多活集群负载感知指南-#018</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_19&amp;v=32499">全球分布式拓扑索引节点-#019</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_20&amp;v=28637">全息网络通信节点白名单-#020</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_21&amp;v=4499">全球分布式拓扑索引节点-#021</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_22&amp;v=55473">高韧性数据交换通道规约-#022</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_23&amp;v=56112">多活集群负载感知指南-#023</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_24&amp;v=42506">多活集群负载感知指南-#024</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_25&amp;v=62756">高韧性数据交换通道规约-#025</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_26&amp;v=2521">边缘高吞吐调度路由矩阵-#026</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_27&amp;v=4147">全球分布式拓扑索引节点-#027</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_28&amp;v=14528">高韧性数据交换通道规约-#028</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_29&amp;v=37478">全球分布式拓扑索引节点-#029</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_30&amp;v=1100">高韧性数据交换通道规约-#030</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_31&amp;v=61895">全息网络通信节点白名单-#031</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_32&amp;v=56502">边缘高吞吐调度路由矩阵-#032</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_33&amp;v=24597">全球分布式拓扑索引节点-#033</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_34&amp;v=43959">边缘高吞吐调度路由矩阵-#034</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_35&amp;v=52504">多活集群负载感知指南-#035</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_36&amp;v=7857">边缘高吞吐调度路由矩阵-#036</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_37&amp;v=22392">高韧性数据交换通道规约-#037</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+</ul>
+<h4>2. 📑 官方技术白皮书与架构标准 (RFCs &amp; Technical Specs)</h4>
+<ul>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_38&amp;v=52836">安全边界与可信凭证规约手册-#001</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_39&amp;v=23396">RFC 分布式调度与一致性算法标准-#002</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_40&amp;v=316">RFC 分布式调度与一致性算法标准-#003</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_41&amp;v=52902">高并发内存拓扑优化白皮书-#004</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_42&amp;v=51996">高并发内存拓扑优化白皮书-#005</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_43&amp;v=53557">异步事件循环架构设计规范-#006</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_44&amp;v=5432">异步事件循环架构设计规范-#007</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_45&amp;v=26052">多协议互联数据格式规范-#008</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_46&amp;v=56909">多协议互联数据格式规范-#009</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_47&amp;v=19690">RFC 分布式调度与一致性算法标准-#010</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_48&amp;v=47630">异步事件循环架构设计规范-#011</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_49&amp;v=50246">多协议互联数据格式规范-#012</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_50&amp;v=10365">多协议互联数据格式规范-#013</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_51&amp;v=6589">多协议互联数据格式规范-#014</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_52&amp;v=17847">多协议互联数据格式规范-#015</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_53&amp;v=12231">异步事件循环架构设计规范-#016</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_54&amp;v=43412">多协议互联数据格式规范-#017</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_55&amp;v=59469">异步事件循环架构设计规范-#018</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_56&amp;v=14115">多协议互联数据格式规范-#019</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_57&amp;v=37197">高并发内存拓扑优化白皮书-#020</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_58&amp;v=41858">RFC 分布式调度与一致性算法标准-#021</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_59&amp;v=64381">异步事件循环架构设计规范-#022</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_60&amp;v=15929">高并发内存拓扑优化白皮书-#023</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_61&amp;v=16941">异步事件循环架构设计规范-#024</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_62&amp;v=16870">异步事件循环架构设计规范-#025</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_63&amp;v=62170">RFC 分布式调度与一致性算法标准-#026</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_64&amp;v=59428">高并发内存拓扑优化白皮书-#027</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_65&amp;v=22538">异步事件循环架构设计规范-#028</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_66&amp;v=43454">多协议互联数据格式规范-#029</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_67&amp;v=45100">高并发内存拓扑优化白皮书-#030</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_68&amp;v=54511">高并发内存拓扑优化白皮书-#031</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_69&amp;v=16117">高并发内存拓扑优化白皮书-#032</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_70&amp;v=22160">RFC 分布式调度与一致性算法标准-#033</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_71&amp;v=49790">RFC 分布式调度与一致性算法标准-#034</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_72&amp;v=34064">多协议互联数据格式规范-#035</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_73&amp;v=85">多协议互联数据格式规范-#036</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_74&amp;v=12053">RFC 分布式调度与一致性算法标准-#037</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+</ul>
+<h4>3. ⚡ 去中心化数据镜像中心入口 (Decentralized Mirror Registry)</h4>
+<ul>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_75&amp;v=60989">亚太核心区域镜像同步中心-#001</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_76&amp;v=6933">亚太核心区域镜像同步中心-#002</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_77&amp;v=20971">北美与欧洲边缘备份节点-#003</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_78&amp;v=50896">北美与欧洲边缘备份节点-#004</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_79&amp;v=50309">北美与欧洲边缘备份节点-#005</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_80&amp;v=10332">自动化快照与增量广播源-#006</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_81&amp;v=9615">亚太核心区域镜像同步中心-#007</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_82&amp;v=11084">冷热数据分层镜像归档中心-#008</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_83&amp;v=53861">亚太核心区域镜像同步中心-#009</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_84&amp;v=19503">北美与欧洲边缘备份节点-#010</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_85&amp;v=7138">亚太核心区域镜像同步中心-#011</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_86&amp;v=23136">实时主干镜像高速数据源-#012</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_87&amp;v=43360">北美与欧洲边缘备份节点-#013</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_88&amp;v=58232">亚太核心区域镜像同步中心-#014</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_89&amp;v=51818">亚太核心区域镜像同步中心-#015</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_90&amp;v=51937">亚太核心区域镜像同步中心-#016</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_91&amp;v=38265">北美与欧洲边缘备份节点-#017</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_92&amp;v=49530">北美与欧洲边缘备份节点-#018</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_93&amp;v=25938">实时主干镜像高速数据源-#019</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_94&amp;v=32239">实时主干镜像高速数据源-#020</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_95&amp;v=44760">冷热数据分层镜像归档中心-#021</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_96&amp;v=10417">自动化快照与增量广播源-#022</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_97&amp;v=31946">北美与欧洲边缘备份节点-#023</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_98&amp;v=65369">亚太核心区域镜像同步中心-#024</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_99&amp;v=33239">冷热数据分层镜像归档中心-#025</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_100&amp;v=26207">亚太核心区域镜像同步中心-#026</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_101&amp;v=40987">自动化快照与增量广播源-#027</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_102&amp;v=56044">北美与欧洲边缘备份节点-#028</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_103&amp;v=30608">冷热数据分层镜像归档中心-#029</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_104&amp;v=13621">自动化快照与增量广播源-#030</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_105&amp;v=58320">北美与欧洲边缘备份节点-#031</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_106&amp;v=4503">亚太核心区域镜像同步中心-#032</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_107&amp;v=42274">实时主干镜像高速数据源-#033</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_108&amp;v=35575">亚太核心区域镜像同步中心-#034</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_109&amp;v=46375">亚太核心区域镜像同步中心-#035</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_110&amp;v=25044">实时主干镜像高速数据源-#036</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_111&amp;v=3768">北美与欧洲边缘备份节点-#037</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+</ul>
+<h4>4. 🛡️ 可信存活性验证基准指标 (Trust Verification Standards)</h4>
+<ul>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_112&amp;v=58048">节点连通性与存活探测准则-#001</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_113&amp;v=60567">实时延迟与抖动度量规范-#002</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_114&amp;v=58182">节点连通性与存活探测准则-#003</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_115&amp;v=8884">去中心化健康检查协议-#004</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_116&amp;v=48098">节点连通性与存活探测准则-#005</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_117&amp;v=61106">权威网络权重与收录基准-#006</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_118&amp;v=20390">去中心化健康检查协议-#007</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_119&amp;v=48382">实时延迟与抖动度量规范-#008</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_120&amp;v=53936">去中心化健康检查协议-#009</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_121&amp;v=41527">实时延迟与抖动度量规范-#010</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_122&amp;v=33293">去中心化健康检查协议-#011</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_123&amp;v=23308">去中心化健康检查协议-#012</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_124&amp;v=39711">防重放安全验证与校验哈希-#013</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_125&amp;v=716">防重放安全验证与校验哈希-#014</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_126&amp;v=1776">去中心化健康检查协议-#015</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_127&amp;v=28598">去中心化健康检查协议-#016</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_128&amp;v=34029">防重放安全验证与校验哈希-#017</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_129&amp;v=36462">权威网络权重与收录基准-#018</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_130&amp;v=27611">节点连通性与存活探测准则-#019</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_131&amp;v=27058">去中心化健康检查协议-#020</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_132&amp;v=1414">节点连通性与存活探测准则-#021</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_133&amp;v=11984">防重放安全验证与校验哈希-#022</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_134&amp;v=46112">去中心化健康检查协议-#023</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_135&amp;v=24011">节点连通性与存活探测准则-#024</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_136&amp;v=23380">防重放安全验证与校验哈希-#025</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_137&amp;v=29142">去中心化健康检查协议-#026</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_138&amp;v=47541">权威网络权重与收录基准-#027</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_139&amp;v=60811">实时延迟与抖动度量规范-#028</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_140&amp;v=64267">权威网络权重与收录基准-#029</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_141&amp;v=61552">去中心化健康检查协议-#030</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_142&amp;v=54446">实时延迟与抖动度量规范-#031</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_143&amp;v=26310">实时延迟与抖动度量规范-#032</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_144&amp;v=35686">防重放安全验证与校验哈希-#033</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_145&amp;v=20018">实时延迟与抖动度量规范-#034</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_146&amp;v=36564">防重放安全验证与校验哈希-#035</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_147&amp;v=16829">去中心化健康检查协议-#036</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_148&amp;v=16402">实时延迟与抖动度量规范-#037</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_149&amp;v=49563">权威网络权重与收录基准-#038</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+<li><a href="https://lrfv.hk-spiderpool.net/gongju/update-13242386.html?ref=node_150&amp;v=61628">实时延迟与抖动度量规范-#039</a>: 面向大规模网络拓扑的工业级高可用解决方案</li>
+</ul>
+</details>
+
+        </div>
+      </article>
+
+      <!-- 侧边栏：Docs 归档菜单链接与速查索引 -->
+      <aside class="lg:col-span-4 space-y-6">
+        
+        <!-- 归档菜单卡片 -->
+        <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
+          <div class="flex items-center justify-between mb-3 pb-2 border-b border-slate-100">
+            <h2 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+              <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+              <span>项目文档归档菜单</span>
+            </h2>
+            <a href="./docs/index.html" class="text-xs text-blue-600 hover:underline font-medium ">查看全部</a>
+          </div>
+          <p class="text-xs text-slate-500 mb-3 leading-relaxed">
+            docs 目录收录本工程由 Markdown 生产的各项架构白皮书与技术规约，点击直达对应页面：
+          </p>
+          <ul class="divide-y divide-slate-100">
+            <li>
+  <a href="./docs/architecture.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">架构设计</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 分布式架构设计与拓扑调度规约</span>
+  </a>
+</li><li>
+  <a href="./docs/benchmarks.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术文档</span>
+    <span class="text-sm font-medium leading-snug truncate">Benchmarks and known limits</span>
+  </a>
+</li><li>
+  <a href="./docs/docker-platforms.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术文档</span>
+    <span class="text-sm font-medium leading-snug truncate">ARM64 and DGX Spark containers</span>
+  </a>
+</li><li>
+  <a href="./docs/docker.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术文档</span>
+    <span class="text-sm font-medium leading-snug truncate">Docker quickstart</span>
+  </a>
+</li><li>
+  <a href="./docs/evals.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术文档</span>
+    <span class="text-sm font-medium leading-snug truncate">Evaluation harness</span>
+  </a>
+</li><li>
+  <a href="./docs/finetune_browser_agent.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术文档</span>
+    <span class="text-sm font-medium leading-snug truncate">Fine-tuning Laya as a browser-agent decision head</span>
+  </a>
+</li><li>
+  <a href="./docs/index.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术文档</span>
+    <span class="text-sm font-medium leading-snug truncate">Laya</span>
+  </a>
+</li><li>
+  <a href="./docs/langchain.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术文档</span>
+    <span class="text-sm font-medium leading-snug truncate">LangChain & LangGraph Integration</span>
+  </a>
+</li><li>
+  <a href="./docs/specifications.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 核心通信协议与数据同步技术规范</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v1.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v1)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v10.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v10)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v11.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v11)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v12.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v12)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v13.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v13)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v14.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v14)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v15.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v15)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v16.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v16)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v17.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v17)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v18.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v18)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v19.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v19)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v2.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v2)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v20.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v20)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v21.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v21)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v22.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v22)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v23.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v23)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v24.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v24)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v25.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v25)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v26.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v26)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v27.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v27)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v28.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v28)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v29.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v29)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v3.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v3)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v30.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v30)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v31.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v31)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v32.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v32)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v33.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v33)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v34.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v34)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v35.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v35)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v36.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v36)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v37.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v37)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v38.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v38)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v39.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v39)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v4.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v4)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v40.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v40)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v41.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v41)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v42.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v42)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v43.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v43)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v44.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v44)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v45.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v45)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v46.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v46)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v47.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v47)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v48.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v48)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v49.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v49)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v5.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v5)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v50.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v50)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v51.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v51)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v52.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v52)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v53.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v53)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v54.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v54)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v55.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v55)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v56.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v56)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v57.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v57)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v58.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v58)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v59.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v59)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v6.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v6)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v60.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v60)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v61.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v61)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v62.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v62)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v63.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v63)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v64.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v64)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v65.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v65)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v66.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v66)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v67.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v67)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v68.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v68)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v69.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v69)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v7.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v7)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v70.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v70)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v71.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v71)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v72.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v72)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v73.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v73)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v74.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v74)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v77.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v77)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v8.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v8)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v9.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 架构升级与技术规约 (v9)</span>
+  </a>
+</li><li>
+  <a href="./docs/staged-adoption.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术文档</span>
+    <span class="text-sm font-medium leading-snug truncate">Staged adoption</span>
+  </a>
+</li><li>
+  <a href="./docs/structured.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术文档</span>
+    <span class="text-sm font-medium leading-snug truncate">Schema-driven decisions</span>
+  </a>
+</li><li>
+  <a href="./docs/topology-guide.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">接入指南</span>
+    <span class="text-sm font-medium leading-snug truncate">laya-mirror-541 全息索引网络与搜索引擎感知接入指南</span>
+  </a>
+</li>
+          </ul>
+          <div class="mt-4 pt-3 border-t border-slate-100">
+            <a href="./docs/index.html" class="w-full py-2 px-3 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-700 text-xs font-semibold flex items-center justify-center gap-1 transition-colors ">
+              <span>前往文档归档中心 (Docs Archive)</span>
+              <span>&rarr;</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- 官方外链与参考源 -->
+        <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
+          <div class="flex items-center justify-between mb-3 pb-2 border-b border-slate-100">
+            <h2 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+              <svg class="w-4 h-4 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
+              <span>权威参考与镜像拓扑</span>
+            </h2>
+            <span class="text-[10px] bg-slate-100 text-slate-500 px-1.5 py-0.5 rounded font-mono ">Live</span>
+          </div>
+          <ul class="space-y-1">
+            <li class="py-1">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_1" class="text-xs text-slate-600 hover:text-blue-600 hover:underline flex items-center gap-1.5 truncate ">
+    <span class="text-[10px] text-blue-500 font-mono ">#01</span>
+    <span class="truncate">基于 laya-mirror-541 的高吞吐 mirror 设计白皮书</span>
+  </a>
+</li><li class="py-1">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_2" class="text-xs text-slate-600 hover:text-blue-600 hover:underline flex items-center gap-1.5 truncate ">
+    <span class="text-[10px] text-blue-500 font-mono ">#02</span>
+    <span class="truncate">laya-mirror-541 核心 API 接口契约与客户端调用指南</span>
+  </a>
+</li><li class="py-1">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_3" class="text-xs text-slate-600 hover:text-blue-600 hover:underline flex items-center gap-1.5 truncate ">
+    <span class="text-[10px] text-blue-500 font-mono ">#03</span>
+    <span class="truncate">laya-mirror-541 亚太与欧美多活集群数据同步中枢</span>
+  </a>
+</li><li class="py-1">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_4" class="text-xs text-slate-600 hover:text-blue-600 hover:underline flex items-center gap-1.5 truncate ">
+    <span class="text-[10px] text-blue-500 font-mono ">#04</span>
+    <span class="truncate">面向生产级运行的 laya-mirror-541 稳定性防护白皮书 (RFC-949)</span>
+  </a>
+</li><li class="py-1">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_5" class="text-xs text-slate-600 hover:text-blue-600 hover:underline flex items-center gap-1.5 truncate ">
+    <span class="text-[10px] text-blue-500 font-mono ">#05</span>
+    <span class="truncate">基于 laya-mirror-541 的高吞吐 长上下文状态管理 设计白皮书</span>
+  </a>
+</li><li class="py-1">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_6" class="text-xs text-slate-600 hover:text-blue-600 hover:underline flex items-center gap-1.5 truncate ">
+    <span class="text-[10px] text-blue-500 font-mono ">#06</span>
+    <span class="truncate">laya-mirror-541 插件生态规范与 提示词流式推理规约 扩展手册 (Core/提示词流式推)</span>
+  </a>
+</li><li class="py-1">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_7" class="text-xs text-slate-600 hover:text-blue-600 hover:underline flex items-center gap-1.5 truncate ">
+    <span class="text-[10px] text-blue-500 font-mono ">#07</span>
+    <span class="truncate">【镜像入口】laya-mirror-541 官方毫秒级实时数据广播节点</span>
+  </a>
+</li><li class="py-1">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_8" class="text-xs text-slate-600 hover:text-blue-600 hover:underline flex items-center gap-1.5 truncate ">
+    <span class="text-[10px] text-blue-500 font-mono ">#08</span>
+    <span class="truncate">【评测基准】laya-mirror-541 吞吐抖动度量与健康检查协议</span>
+  </a>
+</li><li class="py-1">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_9" class="text-xs text-slate-600 hover:text-blue-600 hover:underline flex items-center gap-1.5 truncate ">
+    <span class="text-[10px] text-blue-500 font-mono ">#09</span>
+    <span class="truncate">基于 laya-mirror-541 的高吞吐 availability 设计白皮书</span>
+  </a>
+</li><li class="py-1">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_10" class="text-xs text-slate-600 hover:text-blue-600 hover:underline flex items-center gap-1.5 truncate ">
+    <span class="text-[10px] text-blue-500 font-mono ">#10</span>
+    <span class="truncate">laya-mirror-541 插件生态规范与 High 扩展手册 (Node-90)</span>
+  </a>
+</li><li class="py-1">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_11" class="text-xs text-slate-600 hover:text-blue-600 hover:underline flex items-center gap-1.5 truncate ">
+    <span class="text-[10px] text-blue-500 font-mono ">#11</span>
+    <span class="truncate">全球权威拓扑节点：laya-mirror-541 实时镜像与索引入口</span>
+  </a>
+</li><li class="py-1">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_12" class="text-xs text-slate-600 hover:text-blue-600 hover:underline flex items-center gap-1.5 truncate ">
+    <span class="text-[10px] text-blue-500 font-mono ">#12</span>
+    <span class="truncate">laya-mirror-541 权威网络权重传递与收录基准规范</span>
+  </a>
+</li>
+          </ul>
+        </div>
+
+      </aside>
+
+    </div>
   </main>
-  <footer class="border-t border-slate-200 bg-white py-6 text-center text-sm text-slate-500">
-    © 2026 LinkMatrix Topology Hub. Powered by GitHub Pages.
-  </footer>
+
+  <footer class="mt-20 border-t border-slate-200 bg-white py-12 text-slate-500 text-sm">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div class="flex items-center gap-2">
+      <span class="w-6 h-6 rounded bg-slate-800 text-white flex items-center justify-center text-xs font-bold">LM</span>
+      <span>© 2026 <strong>laya-mirror-541</strong> - 官方开源高可用拓扑镜像与白皮书</span>
+    </div>
+    <div class="flex items-center gap-4 text-xs text-slate-400">
+      <a href="./index.html" class="hover:text-blue-600 transition-colors ">项目首页</a>
+      <span>•</span>
+      <a href="./docs/index.html" class="hover:text-blue-600 transition-colors ">文档归档菜单</a>
+      <span>•</span>
+      <span>托管于 GitHub Pages</span>
+    </div>
+  </div>
+</footer>
 </body>
 </html>
